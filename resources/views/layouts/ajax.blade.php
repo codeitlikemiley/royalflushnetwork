@@ -12,7 +12,14 @@
       closeOnClick: false // Closes side-nav on <a> clicks, useful for Angular/Meteor
     }
   );
-   $('.collapsible').collapsible();
+   // $('.collapsible').collapsible();
+   $('.collapsible').collapsible({
+      accordion : true
+    });
+
+   
+
+
    $('.modal-trigger').leanModal({
       dismissible: true, // Modal can be dismissed by clicking outside of the modal
       opacity: .5, // Opacity of modal background
@@ -29,6 +36,9 @@
 
    
    $('.parallax').parallax();
+   $('.slider').slider();
+    
+
 
   // Registration Form Script 
   var pw = $("#pwd1");
@@ -73,6 +83,20 @@
               rsubmit.attr("disabled", true);
               }
   };  // End of Registration Form Script
+
+  // $('.dropdown-button').dropdown({
+  //     inDuration: 300,
+  //     outDuration: 225,
+  //     constrain_width: false, // Does not change width of dropdown to that of the activator
+  //     hover: true, // Activate on hover
+  //     gutter: 0, // Spacing from edge
+  //     belowOrigin: true, // Displays dropdown below the button
+  //     alignment: 'left' // Displays dropdown with edge aligned to the left of button
+  //   }
+  // );
+
+
+
 
   
 

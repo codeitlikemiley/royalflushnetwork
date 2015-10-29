@@ -8,8 +8,8 @@
     @include('layouts.navbar') 
     @include('layouts.loader')
 
-    <!--Content Goes Here-->
-    {{-- <div class="container main"> --}} 
+    <!--Content Goes Here -->
+    {{-- <div class="container main">  --}}
     @yield('content')
     {{-- </div> --}}
 

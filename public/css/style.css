@@ -61,3 +61,104 @@ h2 {
     height: auto;
     padding: 20px 40px;
 }
+
+img.user-image {
+    float: left;
+    width: 50px;
+    height: 50px;
+}
+.img-circle {
+    border-radius: 50%;
+}
+
+
+
+
+
+
+
+
+nav ul a,
+nav .brand-logo {
+  color: #e3f2fd;
+}
+
+p {
+  line-height: 1.5rem;
+}
+
+.button-collapse {
+  color: #e3f2fd;
+}
+
+.parallax-container {
+  min-height: 380px;
+  line-height: 0;
+  height: auto;
+  color: rgba(255,255,255,.9);
+}
+  .parallax-container .section {
+    width: 100%;
+  }
+
+@media only screen and (max-width : 992px) {
+  .parallax-container .section {
+    position: absolute;
+    top: 40%;
+  }
+  #index-banner .section {
+    top: 10%;
+  }
+}
+
+@media only screen and (max-width : 600px) {
+  #index-banner .section {
+    top: 0;
+  }
+}
+
+.icon-block {
+  padding: 0 15px;
+}
+.icon-block .material-icons {
+  font-size: inherit;
+}
+
+footer.page-footer {
+  margin: 0;
+}
+
+#bsh {
+  position:fixed;
+  right: -35px;
+  top: 0px;
+  padding-bottom: 15px;
+  margin-top: 0;
+  z-index: 998;
+
+
+}
+
+/*#search {
+
+}*/
+
+/*#merchie {
+  position:fixed;
+  left: 30px;
+  top: 0px;
+  padding-bottom: 15px;
+  margin-top: 0;
+  z-index: 998;
+  size:8em;
+  height: 64px;
+  line-height: 64px;
+}*/
+
+
+
+
+
+
+
+
