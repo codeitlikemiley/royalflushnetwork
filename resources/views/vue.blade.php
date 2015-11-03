@@ -2,13 +2,20 @@
 
 @section('content')
 
-<div id="appis">
-  <ul>
-    <li v-for="todo in todos">
-      @{{ todo.text }}
-    </li>
-  </ul>
+<div id="users" class="main">
+
+  <ul class="collection">
+      <li class="collection-item" v-for="user in users">Name: @{{ user.name }} </br>Email: @{{ user.email }}</li>
+      
+</ul>
+
+
+
+<pre>@{{ $data | json }}</pre>
+
 </div>
+
+
 
 
 @endsection
