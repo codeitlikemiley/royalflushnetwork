@@ -1,10 +1,24 @@
 new Vue({
-  el: '#appis',
+  el: '#users',
+  
   data: {
-    todos: [
-      { text: 'Learn JavaScript' },
-      { text: 'Learn Vue.js' },
-      { text: 'Build Something Awesome' }
-    ]
+  	users: []
+  	
+  },
+
+  ready: function(){
+  	this.fetchUsers();
+  	
+  },
+
+  methods: {
+  	fetchUsers: function(){
+  		this.$http.get('/api/users', function(users, success){
+  			this.users = users;
+  			
+  		});
+  	}
+
+  	
   }
-})
+});
