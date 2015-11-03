@@ -18,3 +18,15 @@ Route::get('/', function () {
 Route::get('/login', function(){
 	return view('auth.login');
 });
+
+Route::get('/vue', function(){
+	return view('vue');
+});
+
+Route::get('api/users', function(){
+	return App\User::all();
+});
+
+Route::post('api/users', function(){
+	return App\User::create(Request::all());
+});

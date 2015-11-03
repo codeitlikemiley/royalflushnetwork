@@ -12,10 +12,6 @@ I assume that you have this dependencies on your machines. If not, just visit th
   * [Homestead] - A must have
   * [Git] - A must Have
   * [Materialize] - For CSS 
-
-  
-
-
 ### Version
 1.0.0  - Front End Deployed
 

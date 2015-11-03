@@ -22,6 +22,9 @@
       <!-- jQuery is required by Materialize to function -->
       <script type="text/javascript" src="js/jquery.js"></script>
       <script type="text/javascript" src="js/materialize.min.js"></script>
+      <script type="text/javascript" src="js/vue.js"></script>
+      <script type="text/javascript" src="js/vue-resource.js"></script>
+      <script type="text/javascript" src="js/myvue.js"></script>
       
       @include('layouts.ajax')
     </body>
