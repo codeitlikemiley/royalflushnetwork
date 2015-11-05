@@ -29,7 +29,7 @@
 	<div class="input-field col s12">
 	    <i class="mdi-action-lock-outline prefix"></i>
 	    <input id="pwd2" type="password" class="validate"  minlength="8" name="password_confirmation" disabled>
-        <label for="password_confirmation" data-error="PasswordConfirmationDontMatch" data-success="Ok" >Password Confirmation</label>
+        <label for="password_confirmation" data-error="PasswordDontMatch" data-success="Ok" >Password Confirmation</label>
         
 	</div>
 	 <div class="row">
