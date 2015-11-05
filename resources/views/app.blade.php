@@ -6,6 +6,7 @@
     <body>
     <!--Import Navbar-->
     @include('layouts.navbar') 
+   
     @include('layouts.loader')
 
     <!--Content Goes Here -->
