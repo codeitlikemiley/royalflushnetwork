@@ -15,7 +15,7 @@
 		         	    <a class="{{ Session::get('signup') }}" href="#signup">Sign-up</a>
 		            </li>
 	            </ul>
-	            <div class="progress" id="xloader" style="display:none">
+	            <div class="progress" id="loginloader" style="display:none">
       				<div class="indeterminate amber" ></div>
 				</div>
 	    	</div>

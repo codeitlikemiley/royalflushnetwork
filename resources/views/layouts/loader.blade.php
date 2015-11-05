@@ -1,5 +1,3 @@
- <div class="row" id"loaderdiv">
- <div class="progress amber row hide" id="xloader">
-      <div class="indeterminate"></div>
- </div>
- </div>
+<div class="progress" id="pageloader" style="display:none">
+<div class="indeterminate amber" ></div>
+</div>
