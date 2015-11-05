@@ -14,6 +14,9 @@
 		            </li>
 	            </ul>
 	    	</div>
+	    	<div class="progress" id="xloader" style="display:none">
+      		<div class="indeterminate amber" ></div>
+			</div>
 	    	<div id="login" class="col l6 offset-l3 m8 offset-m2 s12 ">
 	    		@include('layouts.forms.login')
 	    	</div>
