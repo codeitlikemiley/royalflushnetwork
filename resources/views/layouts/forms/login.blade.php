@@ -1,3 +1,6 @@
+<div class="progress" id="xloader" style="display:none">
+      <div class="indeterminate amber" ></div>
+</div>
 <form action="login" method="POST" class="col s12 login-form" id="login_form">
 
    <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
