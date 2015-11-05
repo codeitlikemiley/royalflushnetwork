@@ -31,8 +31,10 @@ Route::post('api/users', function(){
 	 App\User::create(Request::all());
 });
 
-Route::get('api/user/{search}', function(Request $request, $search){
+Route::get('api/user/{search}', array('as' => 'search', function(Request $request, $search){
 	$user = Input::get('search');
 	$user = App\User::where('name', 'LIKE', '%'.$search.'%')->get();
 	return $user; // returning a USER sample is Tito
-});
+}));
+
+
