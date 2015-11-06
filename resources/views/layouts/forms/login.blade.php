@@ -25,6 +25,6 @@
 
   <button class="col s6  btn waves-effect waves-light form-submit" type="submit" id="sign_in" name="action">Login <i class="material-icons right">power_settings_new</i></button>
 
-    <a href="#" class="col s6  btn waves-effect waves-light deep-orange darken-4" type="submit" name="action">Forgot Password?</a>
+    <a href="{{ url('password/email')  }}" class="col s6  btn waves-effect waves-light deep-orange darken-4" type="submit" name="action">Forgot Password?</a>
 
 </form>
