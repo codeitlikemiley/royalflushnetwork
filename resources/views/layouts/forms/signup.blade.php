@@ -3,8 +3,8 @@
 <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
 	<div class="input-field col s12">
 	    <i class="mdi-action-account-circle prefix"></i>
-	    <input type="text" class="validate" name="full_name" required="">
-       <label for="full_name" data-error="Error" data-success="Ok">Full Name</label>
+	    <input type="text" class="validate" name="username" required="">
+       <label for="username" data-error="Error" data-success="Ok">Username</label>
 	</div>
 	<div class="input-field col s12">
 	    <i class="mdi-communication-email prefix"></i>

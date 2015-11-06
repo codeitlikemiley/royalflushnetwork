@@ -40,7 +40,7 @@ class AuthController extends Controller
     {
         $data = $request->all();
         $hash = (str_replace('/', '', \Hash::make(str_random(6))));
-        $data['activation_token'] = $hash;
+        $data['activation_code'] = $hash;
         $data['active'] = false;
         $data['status'] = true;
         $createUserRequest = new CreateUserRequest();

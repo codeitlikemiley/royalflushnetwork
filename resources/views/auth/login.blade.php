@@ -2,6 +2,7 @@
 
 @section('content')
 <div class="container main">
+
     <div class="section">
 	    <div class="row">
 	        <div class="col l6 offset-l3 m8 offset-m2 s12 ">

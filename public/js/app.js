@@ -1,59 +1,14 @@
-<script type="text/javascript">
-        (function($){
-  $(function(){       //Start of function
-
+(function($){
+  $(function(){
     $.ajaxSetup({
   headers: {
   'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       }
-  }); // End of AjaxSetup
-
-  
-   $('.button-collapse').sideNav({
-      menuWidth: 300, // Default is 240
-      edge: 'left', // Choose the horizontal origin
-      closeOnClick: false // Closes side-nav on <a> clicks, useful for Angular/Meteor
-    }); //End Button Collapse
+  });
 
 
-   // $('.collapsible').collapsible();
-   $('.collapsible').collapsible({
-      accordion : true
-    });  // End Collapsible
 
-   
-
-
-   $('.modal-trigger').leanModal({
-      dismissible: true, // Modal can be dismissed by clicking outside of the modal
-      opacity: .5, // Opacity of modal background
-      in_duration: 300, // Transition in duration
-      out_duration: 200, // Transition out duration
-      ready: function() { console.log('Open'); }, // Callback for Modal open
-      complete: function() { console.log('Closed'); } // Callback for Modal close
-      });  // End MOdal Trigger
-
-   $('#bsh').click(function(){
-   $('#sidenav-overlay').remove();
-   });   // END Bottomsheet
-
-   
-   $('.parallax').parallax();
-   $('.slider').slider();
-    
-  
-  $('#registration_submit').attr('disabled', true);  
-
-  function ReactivatePassConfirm(){
-        var passwordVal = $('#pwd1').val();
-
-        if(passwordVal.length > 8){
-          $('#pwd2').removeAttr("disabled");
-          }
-      } // End Reactivate
-        
-
-  $('#pwd1').on('blur', function(e){
+ $('#pwd1').on('blur', function(e){
      ReactivatePassConfirm();
   }); 
 
@@ -64,15 +19,9 @@
    $('#pwd2').on('keyup', function(e) {
      ValidatePassword();
    });
-    
-  function ValidatePassword(){
-        var pw = $("#pwd1");
-        var pwc = $("#pwd2");
-        var rsubmit = $("#registration_submit");
-        var passwordVal = pw.val();
-        var checkVal = pwc.val();
+function ValidatePassword(){
+       
         
-        //Validate the values
         console.log(passwordVal == checkVal && checkVal.length > 8);
         if (passwordVal == checkVal && checkVal.length > 8) {
               pwc.attr("class", "valid");
@@ -81,11 +30,12 @@
               pwc.attr("class", "invalid");
               rsubmit.attr("disabled", true);
               }
-      }  // End of Registration Form Script
+      } 
 
 
 
-   function loader(v){
+
+      function loader(v){
       if(v == 'on'){
         $('#login_form').css({
           opacity : 0.2
@@ -97,15 +47,14 @@
         });
         $('#loginloader').hide();
       }
-    }
+    };
 
     function authenticated(url){
       window.location = url;
-    }
+    };
 
-    
-   
-    $('#sign_in').on('click', function(e){
+
+   $('#sign_in').on('click', function(e){
 
             e.preventDefault();
             var login_form = $('#login_form').serializeArray();
@@ -134,9 +83,9 @@
 
                    
               }else if(data == "wrongpass"){           
-                    $('#loginloader').addClass('pink').fadeIn(2000, function(){
+                    $('#loginloader').addClass('orange').fadeIn(2000, function(){
                         $(this).hide();
-                        $(this).removeClass("pink");
+                        $(this).removeClass("orange");
                     });
 
                     Materialize.toast('Re-Type Correct Password', 4000,'',function(){console.log('Password is Incorrect')});
@@ -202,10 +151,15 @@
             });
     });
 
-  
-    
-    
+
 
     });// end of document ready
-})(jQuery);
-      </script>
+
+    
+
+   
+})(jQuery); // end of jQuery name space
+
+
+
+    

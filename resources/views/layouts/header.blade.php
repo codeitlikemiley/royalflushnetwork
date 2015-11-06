@@ -9,8 +9,10 @@
 
       
   <!--Import all Css-->
-  <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
-  <link type="text/css" rel="stylesheet" href="css/style.css"/>
+  {{--<link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>--}}
+  {{--<link type="text/css" rel="stylesheet" href="css/style.css"/>--}}
+  {!! HTML::style('css/materialize.min.css') !!}
+  {!! HTML::style('css/style.css') !!}
 
   <!-- Font  -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">

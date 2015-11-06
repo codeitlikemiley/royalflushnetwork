@@ -16,9 +16,9 @@ class UpdateUsersTable extends Migration
             
             $table->string('activation_code')->after('password');
             $table->boolean('active')
-                ->default(0)->after('activation_code');
+                ->default(false)->after('activation_code');
             $table->boolean('status')
-                ->default(1)->after('active');
+                ->default(true)->after('active');
             $table->tinyInteger('resent')->unsigned()->after('active');
         });
     }

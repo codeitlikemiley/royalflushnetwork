@@ -20,7 +20,7 @@
 <h4>Latest Payout</h4>
 <ul class="collection">
     <li class="collection-item avatar">
-      <img src="img/luffy.jpg" alt="" class="circle">
+        {!! HTML::image('img/luffy.jpg', 'alt text', ['title' => 'the title', 'class' => 'circle']) !!}
       <span class="title">Yuri San</span>
       <p>100$<br>
          30 October 2015
@@ -28,7 +28,7 @@
       <a href="#!" class="secondary-content"><i class="material-icons">attach_money</i></a>
     </li>
     <li class="collection-item avatar">
-      <img src="img/luffy.jpg" alt="" class="circle">
+        {!! HTML::image('img/luffy.jpg', 'alt text', ['title' => 'the title', 'class' => 'circle']) !!}
       <span class="title">Yuri San</span>
       <p>100$<br>
          30 October 2015
@@ -36,7 +36,7 @@
       <a href="#!" class="secondary-content"><i class="material-icons">attach_money</i></a>
     </li>
     <li class="collection-item avatar">
-      <img src="img/luffy.jpg" alt="" class="circle">
+        {!! HTML::image('img/luffy.jpg', 'alt text', ['title' => 'the title', 'class' => 'circle']) !!}
       <span class="title">Yuri San</span>
       <p>100$<br>
          30 October 2015
@@ -44,7 +44,7 @@
       <a href="#!" class="secondary-content"><i class="material-icons">attach_money</i></a>
     </li>
     <li class="collection-item avatar">
-      <img src="img/luffy.jpg" alt="" class="circle">
+        {!! HTML::image('img/luffy.jpg', 'alt text', ['title' => 'the title', 'class' => 'circle']) !!}
       <span class="title">Yuri San</span>
       <p>100$<br>
          30 October 2015
@@ -52,7 +52,7 @@
       <a href="#!" class="secondary-content"><i class="material-icons">attach_money</i></a>
     </li>
     <li class="collection-item avatar">
-      <img src="img/luffy.jpg" alt="" class="circle">
+        {!! HTML::image('img/luffy.jpg', 'alt text', ['title' => 'the title', 'class' => 'circle']) !!}
       <span class="title">Yuri San</span>
       <p>100$<br>
          30 October 2015
