@@ -19,34 +19,36 @@ Route::get('profile', ['as' => 'profile', 'uses' => 'UserController@edit']);
 //show login/signup form
 Route::get('login', ['as' => 'login', 'uses' => 'Auth\AuthController@getLogin']);
 
-//post login form
+//Post Login and Start Session
 Route::post('login', ['as' => 'postLogin', 'uses' => 'Auth\AuthController@authenticate']);
 
-//logut route
+// Log Out and End Session
 Route::get('logout', ['as' => 'logout', 'uses' => 'Auth\AuthController@getLogout']);
 
-//get recovery password form
+//Show Forgot Pass Page
 Route::get('password/email', ['as' => 'password/email', 'uses' => 'Auth\PasswordController@index']);
 
-//send recovery link by email
+//Post Email to be Recovered
 Route::post('password/email', ['as' => 'password/postEmail', 'uses' => 'Auth\PasswordController@sendLink']);
 
-//get new password form
+//Show Password Reset Form
 Route::get('password/reset/{email}/{activation_code}',
     [
         'as' => 'password/reset/',
         'uses' => 'Auth\PasswordController@reset',
     ]);
-//post new password form
+//Grant Request for new password
 Route::post('password/reset', ['as' => 'password/postReset', 'uses' => 'Auth\PasswordController@save']);
 
-//Resend and Vefify Email
-Route::get('/resendEmail', 'Auth\AuthController@resendEmail');
 
-//account activation uses $user->email , $user->activation_code fields
+
+//Activates The User Account
 Route::get('account/activate/{email}/{activation_code}','Auth\AuthController@activate');
-//re-send activation link by email
+//Send Activation Link to New Registered User
 Route::post('activate/link', ['as' => 'account/activate/link', 'uses' => 'Auth\AuthController@sendActivationLink']);
+
+//Ask to Resend a Verification Email for Activation
+Route::get('/resendEmail', 'Auth\AuthController@resendEmail');
 
 
 
