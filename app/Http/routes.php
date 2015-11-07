@@ -50,17 +50,24 @@ Route::post('activate/link', ['as' => 'account/activate/link', 'uses' => 'Auth\A
 //Ask to Resend a Verification Email for Activation
 Route::get('/resendEmail', 'Auth\AuthController@resendEmail');
 
+Route::get('@{link?}', ['as' => 'reflink', 'uses' => 'LinkController@getRefLink']);
 
 
 
 
 
-//Update user account data
-Route::put('profile', ['as' => 'profile/update', 'uses' => 'UserController@update']); // Not working yet
 
-
-//post signup form
+//post signup form - CREATE THIS NOW!
 Route::post('signup', ['as' => 'signup', 'uses' => 'Auth\AuthController@create']); // Not working
+
+
+
+
+// //Update user account data
+// Route::put('profile', ['as' => 'profile/update', 'uses' => 'UserController@update']); // Not working yet
+
+
+
 
 
 

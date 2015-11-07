@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\Profile;
+use App\Link;
 use Auth;
 use Input;
 use Validator;

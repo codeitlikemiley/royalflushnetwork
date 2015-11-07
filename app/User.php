@@ -28,7 +28,9 @@ class User extends Model implements AuthenticatableContract,
      *
      * @var array
      */
-    protected $fillable = ['name', 'email', 'password'];
+    protected $fillable = ['username', 'email', 'password', 'sp_id'];
+
+    
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -36,4 +38,35 @@ class User extends Model implements AuthenticatableContract,
      * @var array
      */
     protected $hidden = ['password', 'remember_token', 'created_at', 'updated_at', 'id'];
+
+
+    public function setPasswordAttribute($value)
+    {
+        if ( ! empty ($value) )
+        {
+            $this->attributes['password'] = \Hash::make($value);    
+        }
+    } //test this if still needed cause i already use Brcypt in password in other file
+
+
+    public function accountIsActive($code) {
+        $user = User::where('activation_code', '=', $code)->first();
+        $user->active = 1;
+        $user->activation_code = '';
+        if($user->save()) {
+            \Auth::login($user);
+        }
+        return true;
+    } // check if this is being used
+
+
+    // LINK RELATION
+
+    public function links()
+    {
+        return $this->hasMany('App\Link');
+
+    }
+
+
 }
