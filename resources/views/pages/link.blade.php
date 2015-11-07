@@ -1,13 +1,33 @@
 @extends('app')
 
 @section('content')
-    <div class="row center">
-    <ul class="teal"> <h2>All Referral Link of the User!</h2>
-    @foreach ($reflinks as $link)
-      <li><h2>{{ $link->link }}</h2></li>
-    @endforeach
-    </ul>
-    </div>
+  
+
+
+
+<ul class="collapsible collapsible-accordion ">
+    <li>
+      <a class="collapsible-header waves-effect waves-light waves-red lighten-5 teal-text "><i class="material-icons left">attach_money</i>All Active Referral Links<i class="mdi-navigation-arrow-drop-down right"></i></a>
+        <div class="collapsible-body">
+            <ul class="teal lighten-5">
+              @foreach ($reflinks as $link)
+              <li class="center">
+              <a href="{{ $link->link }}" class="waves-effect waves-light waves-red lighten-5 teal-text ">{{ $link->link }}</a></li>
+              @endforeach
+            </ul>
+        </div>
+    </li>
+</ul>
+
+
+
+
+
+
+
+
+
+
     <hr>
     <div class="row center">
           <h2>Full Name: {{ $profile->first_name. ' '.$profile->last_name }}</h2>

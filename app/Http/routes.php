@@ -50,7 +50,7 @@ Route::post('activate/link', ['as' => 'account/activate/link', 'uses' => 'Auth\A
 //Ask to Resend a Verification Email for Activation
 Route::get('/resendEmail', 'Auth\AuthController@resendEmail');
 
-Route::get('@{link?}', ['as' => 'reflink', 'uses' => 'LinkController@getRefLink']);
+Route::get('{link?}', ['as' => 'reflink', 'uses' => 'LinkController@getRefLink']);
 
 
 
