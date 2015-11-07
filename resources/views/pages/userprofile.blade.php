@@ -12,7 +12,7 @@
             <ul class="teal lighten-5">
               @foreach ($reflinks as $link)
               <li class="center">
-              <a href="{{ $link->link }}" class="waves-effect waves-light waves-red lighten-5 teal-text ">{{ $link->link }}</a></li>
+              <a href="auth/register/{{ $link->link }}" class="waves-effect waves-light waves-red lighten-5 teal-text ">{{ $link->link }}</a></li>
               <hr>
               @endforeach
             </ul>
@@ -20,9 +20,12 @@
     </li>
 </ul>
 </div>
-
     <div class="row center">
-          <h2>Full Name: {{ $profile->first_name. ' '.$profile->last_name }}</h2>
+          <h2>Full Name: {{ $profile->first_name.' '.$profile->last_name }}</h2>
+    </div>
+    <hr>
+    <div class="row center">
+          <h2>Email: {{ $user->email }}</h2>
     </div>
     <hr>
     <div class="row center">
@@ -78,48 +81,6 @@
           <h2>Username: {{ $user->username }}</h2>
     </div>
     <hr>
-    <div class="row center">
-          <h2>Refferal Link : {{ $link->link }}</h2>
-    </div>
-    <hr>
-    <div class="row center">
-          <h2>EMail: {{ $user->email }}</h2>
-    </div>
-    <hr>  
-    <div class="row center">
-          <h2>Account ID: {{ $link->user_id }}</h2>
-    </div>
-    <hr>
-    @if($link->sp_user_id == null)
-    <div class="row center">
-          <h2>Company Account</h2>
-    </div>
-    @elseif ($link->sp_user_id == !null) 
-      <div class="row center">
-          <h2>Your Sponsor Account ID : {{ $link->sp_link_id }}</h2>
-    </div>
-    @endif
-    <hr>   
-    @if($link->sp_link_id == null)
-    <div class="row center">
-          <h2>No Upline</h2>
-    </div>
-    @elseif ($link->sp_link_id == !null) 
-      <div class="row center">
-          <h2>Your Sponsor's Link : {{ $link->sp_link_id }}</h2>
-    </div>
-    @endif
-    <hr>   
-    @if($link->active == true)
-      <div class="row center">
-          <h2>Link Actived</h2>
-      </div>
-    @elseif($link->active == false)
-      <div class="row center">
-          <h2>Link Not Yet Activated</h2>
-      </div>
-    @endif
-     <hr>
     @if($user->active == true)
       <div class="row center">
           <h2>Email Verified Account</h2>

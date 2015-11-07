@@ -33,13 +33,34 @@ class LinkController extends Controller
         
     }
 
-    public function index()
-    {   
-     
+    public function getUserProfile($user = null)
+    {
+        try{
+        $user = $this->findByUsername($user);
+        $id = $this->findByID($user);
+        $profile = $this->getLinksProfile($id);
+        $reflinks = $this->getAllLinks($id);
+        return view('pages.userprofile')->with(compact(['user','profile', 'reflinks']));
+    }catch(ModelNotFoundException $e) {
+                $message = "Ooops! $user is Not Registered! ";
+                return view('errors.503')->with('message', $message);
+            }
     }
 
-    
+    public function findByUsername($user)
+    {
+        $user = User::where('username', $user)->firstOrFail();
+        return $user; 
+    }
 
+    public function findByID($user)
+    {
+        $id = $user->id;
+        return $id;
+    }
+
+    // route to be used 
+    // Route::get('{link?}', ['as' => 'reflink', 'uses' => 'LinkController@getRefLink']);
 
     public function getRefLink($link = null)
     {
@@ -47,11 +68,12 @@ class LinkController extends Controller
         
 
         try{
-        $id   =   Link::where('link', $link)->firstOrFail()->user_id;
-        $user = User::where('id',$id)->first();
-        $profile = Profile::where('user_id',$id)->first();
+        $link = $this->findByLink($link);
+        $id   =   $this->getUserId($link);
         $reflinks = $this->getAllLinks($id);
-        $link = Link::where('link', $link)->firstOrFail();
+        $user = $this->getLinksOwner($id);
+        $profile = $this->getLinksProfile($id);
+            
 
         return view('pages.link')->with(compact(['link','user','profile', 'reflinks']));
          }
@@ -61,76 +83,35 @@ class LinkController extends Controller
             }
     }
 
+    public function findByLink($link)
+    {
+
+        $link = Link::where('link', $link)->firstOrFail();
+        return $link;
+    }
+
+    public function getUserId($link)
+    {
+        $id = $link->user_id;
+        return $id;
+    }
+
+    public function getLinksOwner($id)
+    {
+        $user = User::where('id',$id)->first();
+        return $user;
+    }
+
+    public function getLinksProfile($id)
+    {
+        $profile = Profile::where('user_id',$id)->first();
+        return $profile;
+    }
+
     public function getAllLinks($id)
     {
         $reflinks = Link::where('user_id',$id)->get();
         return $reflinks;
         
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }
