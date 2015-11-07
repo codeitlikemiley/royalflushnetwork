@@ -58,6 +58,8 @@ Route::get('@{link?}', ['as' => 'reflink', 'uses' => 'LinkController@getRefLink'
 
 
 
+
+
 //post signup form - CREATE THIS NOW!
 Route::post('signup', ['as' => 'signup', 'uses' => 'Auth\AuthController@create']); // Not working
 

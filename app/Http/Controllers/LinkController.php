@@ -50,13 +50,22 @@ class LinkController extends Controller
         $id   =   Link::where('link', $link)->firstOrFail()->user_id;
         $user = User::where('id',$id)->first();
         $profile = Profile::where('user_id',$id)->first();
+        $reflinks = $this->getAllLinks($id);
         $link = Link::where('link', $link)->firstOrFail();
-        return view('pages.link')->with(compact(['link','user','profile']));
+
+        return view('pages.link')->with(compact(['link','user','profile', 'reflinks']));
          }
         catch(ModelNotFoundException $e) {
                 $message = "Ooops! $link is Not Registered! ";
                 return view('errors.503')->with('message', $message);
             }
+    }
+
+    public function getAllLinks($id)
+    {
+        $reflinks = Link::where('user_id',$id)->get();
+        return $reflinks;
+        
     }
 
     /**

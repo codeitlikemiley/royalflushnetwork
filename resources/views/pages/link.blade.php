@@ -1,8 +1,14 @@
 @extends('app')
 
 @section('content')
-
-    
+    <div class="row center">
+    <ul class="teal"> <h2>All Referral Link of the User!</h2>
+    @foreach ($reflinks as $link)
+      <li><h2>{{ $link->link }}</h2></li>
+    @endforeach
+    </ul>
+    </div>
+    <hr>
     <div class="row center">
           <h2>Full Name: {{ $profile->first_name. ' '.$profile->last_name }}</h2>
     </div>
