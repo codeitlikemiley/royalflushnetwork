@@ -10,9 +10,7 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
-class User extends Model implements AuthenticatableContract,
-                                    AuthorizableContract,
-                                    CanResetPasswordContract
+class User extends Model implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract
 {
     use Authenticatable, Authorizable, CanResetPassword;
 
@@ -30,32 +28,30 @@ class User extends Model implements AuthenticatableContract,
      */
     protected $fillable = ['username', 'email', 'password', 'sp_id'];
 
-    
-
     /**
      * The attributes excluded from the model's JSON form.
      *
      * @var array
      */
-    protected $hidden = ['password', 'remember_token', 'created_at', 'updated_at', 'id'];
-
+    protected $hidden = ['password', 'remember_token', 'created_at', 'updated_at', 'id', 'activation_code', 'resent', 'status', 'active', 'sp_id', 'email'];
 
     public function setPasswordAttribute($value)
     {
-        if ( ! empty ($value) )
-        {
-            $this->attributes['password'] = \Hash::make($value);    
+        if (!empty($value)) {
+            $this->attributes['password'] = \Hash::make($value);
         }
     } //test this if still needed cause i already use Brcypt in password in other file
 
 
-    public function accountIsActive($code) {
-        $user = User::where('activation_code', '=', $code)->first();
+    public function accountIsActive($code)
+    {
+        $user = self::where('activation_code', '=', $code)->first();
         $user->active = 1;
         $user->activation_code = '';
-        if($user->save()) {
+        if ($user->save()) {
             \Auth::login($user);
         }
+
         return true;
     } // check if this is being used
 
@@ -65,8 +61,10 @@ class User extends Model implements AuthenticatableContract,
     public function links()
     {
         return $this->hasMany('App\Link');
-
     }
 
-
+    public function profile()
+    {
+        return $this->hasOne('App\Profile');
+    }
 }
