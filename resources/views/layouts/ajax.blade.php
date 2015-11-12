@@ -1,5 +1,5 @@
 <script type="text/javascript">
-        (function($){
+(function($){
   $(function(){       //Start of function
 
     $.ajaxSetup({
@@ -22,11 +22,11 @@
     });  // End Collapsible
 
    
-
+   // $('.tooltipped').tooltip({delay: 50});
 
    $('.modal-trigger').leanModal({
       dismissible: true, // Modal can be dismissed by clicking outside of the modal
-      opacity: .5, // Opacity of modal background
+      opacity: '.5', // Opacity of modal background
       in_duration: 300, // Transition in duration
       out_duration: 200, // Transition out duration
       ready: function() { console.log('Open'); }, // Callback for Modal open
@@ -40,6 +40,17 @@
    
    $('.parallax').parallax();
    $('.slider').slider();
+   $('select').material_select();
+   $( "#q" ).autocomplete({
+    source: "search/autocomplete",
+    minLength: 3,
+    autoFocus: true,
+    select: function(event, ui) {
+      $('#q').val(ui.item.value);
+
+    }
+  });
+    
     
   
   $('#registration_submit').attr('disabled', true);  
@@ -122,7 +133,7 @@
                         $(this).removeClass("red");
                     });
                     
-                    Materialize.toast('Invalid Credentials', 4000,'',function(){console.log('Invalid Credentials')});
+                    Materialize.toast('Invalid Credentials', 4000,'',function(){console.log('Invalid Credentials');});
                    
                     $( "input[name='email']" ).val('');
                     $('#login_email').removeClass("valid");
@@ -139,7 +150,7 @@
                         $(this).removeClass("pink");
                     });
 
-                    Materialize.toast('Re-Type Correct Password', 4000,'',function(){console.log('Password is Incorrect')});
+                    Materialize.toast('Re-Type Correct Password', 4000,'',function(){console.log('Password is Incorrect');});
 
                     $( "input[name='email']" ).val();
                     $( "input[name='password']" ).val('');
@@ -152,7 +163,7 @@
                         $(this).removeClass("yellow");  
                     });
 
-                    Materialize.toast('Verify Your Email!', 4000,'',function(){console.log('Verify Your Email!')});
+                    Materialize.toast('Verify Your Email!', 4000,'',function(){console.log('Verify Your Email!');});
 
                     authenticated('profile');
 
@@ -162,7 +173,7 @@
                         $(this).removeClass("black");
                     });
 
-                    Materialize.toast('Account is Banned!', 4000,'',function(){console.log('Account is Banned!')});
+                    Materialize.toast('Account is Banned!', 4000,'',function(){console.log('Account is Banned!');});
 
                     $( "input[name='email']" ).val();
       
@@ -176,7 +187,7 @@
                         $(this).removeClass("green");
                     });
 
-                    Materialize.toast('Welcome Back!', 4000,'',function(){console.log('Welcome Back!')});
+                    Materialize.toast('Welcome Back!', 4000,'',function(){console.log('Welcome Back!');});
 
                     authenticated('profile');
 
@@ -186,7 +197,7 @@
                         $(this).removeClass("grey");
                     });
 
-                    Materialize.toast('OOPS! Something Went Wrong!', 4000,'',function(){console.log('OOPS! Something Went Wrong!')});
+                    Materialize.toast('OOPS! Something Went Wrong!', 4000,'',function(){console.log('OOPS! Something Went Wrong!');});
                     
                     $( "input[name='email']" ).val('');
                     $('#login_email').removeClass("valid");
@@ -207,5 +218,5 @@
     
 
     });// end of document ready
-})(jQuery);
-      </script>
+})(jQuery);     
+</script>

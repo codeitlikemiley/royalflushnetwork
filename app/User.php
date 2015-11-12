@@ -35,6 +35,11 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      */
     protected $hidden = ['password', 'remember_token', 'created_at', 'updated_at', 'id', 'activation_code', 'resent', 'status', 'active', 'sp_id', 'email'];
 
+    public static function findByUsername($username)
+    {
+        return self::where('username', $username)->firstOrFail();
+    }
+
     public function setPasswordAttribute($value)
     {
         if (!empty($value)) {

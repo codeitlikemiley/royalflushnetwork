@@ -8,18 +8,21 @@
 <ul class="collapsible collapsible-accordion ">
     <li>
       <a class="collapsible-header waves-effect waves-light waves-red lighten-5 teal-text "><i class="material-icons left">attach_money</i>Select Sponsor's Link<i class="mdi-navigation-arrow-drop-down right"></i></a>
+        @if($reflinks !== null)
         <div class="collapsible-body">
             <ul class="teal lighten-5">
               @foreach ($reflinks as $link)
               <li class="center">
-              <a href="auth/register/{{ $link->link }}" class="waves-effect waves-light waves-red lighten-5 teal-text ">{{ $link->link }}</a></li>
+              <a href="{{ $link->link }}" class="waves-effect waves-light waves-red lighten-5 teal-text ">{{ $link->link }}</a></li>
               <hr>
               @endforeach
             </ul>
         </div>
+        @endif
     </li>
 </ul>
 </div>
+    @if($profile !== null)
     <div class="row center">
           <h2>Full Name: {{ $profile->first_name.' '.$profile->last_name }}</h2>
     </div>
@@ -76,6 +79,7 @@
           <h2>Country :{{ $profile->country }}</h2>
          
     </div>
+   @endif 
     <hr>
     <div class="row center">
           <h2>Username: {{ $user->username }}</h2>

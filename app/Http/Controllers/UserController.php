@@ -15,25 +15,26 @@ class UserController extends Controller
     }
 
     /**
-    * Show the form for editing the specified resource.
-    *
-    * @param int $id
-    *
-    * @return Response
-    */
+     * Show the form for editing the specified resource.
+     *
+     * @param int $id
+     *
+     * @return Response
+     */
     public function edit()
     {
         $user = Auth::user();
+
         return \View::make('pages.profile', compact('user'));
     }
 
     /**
-    * Update the specified resource in storage.
-    *
-    * @param int $id
-    *
-    * @return Response
-    */
+     * Update the specified resource in storage.
+     *
+     * @param int $id
+     *
+     * @return Response
+     */
     public function update(Request $request)
     {
         $user = Auth::user();
@@ -45,16 +46,17 @@ class UserController extends Controller
                 ->withInput();
         }
         $user->update($request->all());
+
         return \View::make('profile.updated');
     }
 
     /**
-    * return validation rules
-    *
-    * @param $user
-    *
-    * @return array
-    */
+     * return validation rules.
+     *
+     * @param $user
+     *
+     * @return array
+     */
     public function getRules($user)
     {
         return $rules = [

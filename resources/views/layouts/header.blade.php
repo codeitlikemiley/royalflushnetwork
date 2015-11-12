@@ -5,15 +5,14 @@
   <meta name="csrf-token" content={{ csrf_token() }}/>
 
   <!-- Title Tag  -->      
-  <title>Hellow Bitch!</title>
+  <title>Hellow Bitch! >;)</title>
 
       
   <!--Import all Css-->
-  {{--<link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>--}}
-  {{--<link type="text/css" rel="stylesheet" href="css/style.css"/>--}}
-  {!! HTML::style('css/materialize.min.css') !!}
+  {!! HTML::style('https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.2/css/materialize.min.css') !!}
   {!! HTML::style('css/style.css') !!}
-
+  {!! HTML::style('https://code.jquery.com/ui/1.11.4/themes/redmond/jquery-ui.css') !!}
+  
   <!-- Font  -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 

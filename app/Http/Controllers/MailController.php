@@ -1,6 +1,6 @@
 <?php
 
-namespace app\Http\Controllers;
+namespace App\Http\Controllers;
 
 use App\User;
 
@@ -21,8 +21,8 @@ class MailController extends Controller
     }
 
     /**
-    * send the registration email.
-    */
+     * send the registration email.
+     */
     public function registered(User $user)
     {
         $template = ('mail.registered');
@@ -31,8 +31,8 @@ class MailController extends Controller
     }
 
     /**
-    * send the activation email.
-    */
+     * send the activation email.
+     */
     public function activated(User $user)
     {
         $template = ('mail.activated');
@@ -41,8 +41,8 @@ class MailController extends Controller
     }
 
     /**
-    * send the password reset email.
-    */
+     * send the password reset email.
+     */
     public function passwordLink(User $user)
     {
         $template = ('mail.restore');
@@ -51,10 +51,10 @@ class MailController extends Controller
     }
 
     /**
-    * return the required data for the sign up email.
-    *
-    * @return array
-    */
+     * return the required data for the sign up email.
+     *
+     * @return array
+     */
     public function getSignupData($user)
     {
         $data = array(
@@ -64,14 +64,15 @@ class MailController extends Controller
             'title' => 'Thanks for you registration',
             'email' => $user->email,
         );
+
         return $data;
     }
 
     /**
-    * return the required data for the activation email.
-    *
-    * @return array
-    */
+     * return the required data for the activation email.
+     *
+     * @return array
+     */
     public function getActivationData($user)
     {
         $data = array(
@@ -80,14 +81,15 @@ class MailController extends Controller
             'title' => 'Welcome to our platform',
             'email' => $user->email,
         );
+
         return $data;
     }
 
     /**
-    * return the required data for the password reset email.
-    *
-    * @return array
-    */
+     * return the required data for the password reset email.
+     *
+     * @return array
+     */
     public function getResetData($user)
     {
         $data = array(
@@ -97,9 +99,9 @@ class MailController extends Controller
             'title' => 'Password reset',
             'email' => $user->email,
         );
+
         return $data;
     }
-
 
     public function passwordResend(User $user)
     {
@@ -108,8 +110,7 @@ class MailController extends Controller
         $this->send($user, $template, $data);
     }
 
-
-     public function getResendData($user)
+    public function getResendData($user)
     {
         $data = array(
             'subject' => 'Password Activation Resend',
@@ -118,7 +119,7 @@ class MailController extends Controller
             'title' => 'Password Resend',
             'email' => $user->email,
         );
+
         return $data;
     }
-
 }

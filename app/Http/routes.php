@@ -1,5 +1,6 @@
 <?php
 
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -32,18 +33,12 @@ Route::get('password/email', ['as' => 'password/email', 'uses' => 'Auth\Password
 Route::post('password/email', ['as' => 'password/postEmail', 'uses' => 'Auth\PasswordController@sendLink']);
 
 //Show Password Reset Form
-Route::get('password/reset/{email}/{activation_code}',
-    [
-        'as' => 'password/reset/',
-        'uses' => 'Auth\PasswordController@reset',
-    ]);
+Route::get('password/reset/{email}/{activation_code}', ['as' => 'password/reset/', 'uses' => 'Auth\PasswordController@reset']);
 //Grant Request for new password
 Route::post('password/reset', ['as' => 'password/postReset', 'uses' => 'Auth\PasswordController@save']);
 
-
-
 //Activates The User Account
-Route::get('account/activate/{email}/{activation_code}','Auth\AuthController@activate');
+Route::get('account/activate/{email}/{activation_code}', 'Auth\AuthController@activate');
 //Send Activation Link to New Registered User
 Route::post('activate/link', ['as' => 'account/activate/link', 'uses' => 'Auth\AuthController@sendActivationLink']);
 
@@ -51,30 +46,20 @@ Route::post('activate/link', ['as' => 'account/activate/link', 'uses' => 'Auth\A
 Route::get('/resendEmail', 'Auth\AuthController@resendEmail');
 
 // Route::get('{link?}', ['as' => 'reflink', 'uses' => 'LinkController@getRefLink']);
-
-Route::get('@{user?}', ['as' => 'username', 'uses' => 'LinkController@getUserProfile']);
-
-
-
-
-
-
-
-//post signup form - CREATE THIS NOW!
-Route::post('signup', ['as' => 'signup', 'uses' => 'Auth\AuthController@create']); // Not working
+Route::get('materialized', function () {
+    return view('materialized');
+});
+// Route For Looking Sponsor By Username
+Route::post('searchUser', 'SearchController@searchUser');
+// Route For AutoComplete
+Route::get('search/autocomplete', 'SearchController@autocomplete');
 
 
+Route::post('signup', ['as' => 'signup', 'uses' => 'Auth\AuthController@create']);
+Route::get('{link?}', ['as' => 'links', 'uses' => 'LinkController@getRefLink']);
 
-
-// //Update user account data
+// Update user account data
 // Route::put('profile', ['as' => 'profile/update', 'uses' => 'UserController@update']); // Not working yet
-
-
-
-
-
-
-
 
 
 //Route::get('/vue', function(){
@@ -89,19 +74,5 @@ Route::post('signup', ['as' => 'signup', 'uses' => 'Auth\AuthController@create']
 //	 App\User::create(Request::all());
 //});
 //
-//Route::get('api/user/{search}', array('as' => 'search', function(Request $request, $search){
-//	$user = Input::get('search');
-//	$user = App\User::where('name', 'LIKE', '%'.$search.'%')->get();
-//	return $user; // returning a USER sample is Tito
-//}));
 
-
-
-
-
-
-
-
-//Route::get('/activate/{code}', 'Auth\AuthController@activateAccount');
-
-
+//Route::get('/activate/{code}', 'Auth\AuthController@activateAccount

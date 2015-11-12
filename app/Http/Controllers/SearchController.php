@@ -2,24 +2,40 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
 use Input;
+use DB;
+use Response;
+use App\User;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Redirect;
+use URL;
 
 class SearchController extends Controller
 {
-  
+    public function autocomplete()
+    {
+        $term = e(Input::get('term'));
+        $results = array();
+        $queries = DB::table('users')
+        ->where('username', 'LIKE', '%'.$term.'%')
+        ->take(5)->get();
 
-    public function search(Request $request)
-{
-    // Gets the query string from our form submission 
-    $query = Request::input('search');
-    // Returns an array of users that have the query string located somewhere within 
-    // our users name. Paginates them so we can break up lots of search results.
-    $users = DB::table('users')->where('name', 'LIKE', '%' . $query . '%')->paginate(10);
-        
-    // returns a view and passes the view the list of users and the original query.
-    return view('pages.search', compact('users', 'query'));
- }
+        foreach ($queries as $query) {
+            $results[] = ['id' => $query->id, 'value' => $query->username];
+        }
+
+        return Response::json($results);
+    }
+
+    public function searchUser()
+    {
+        try {
+            $username = Input::get('q');
+            $userdata = User::findByUsername($username)->load('links', 'profile');
+
+            return view('pages.findSponsor')->with('userdata', $userdata);
+        } catch (ModelNotFoundException $e) {
+            return Redirect::to(URL::previous())->withInput();
+        }
+    }
 }

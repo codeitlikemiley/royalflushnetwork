@@ -2,7 +2,7 @@
 
 @section('content')
   
-
+{{-- Bug Related to Last Link is the Only One Being Shown Fix this --}}
 <div class="row">
 
 <ul class="collapsible collapsible-accordion ">
@@ -20,7 +20,7 @@
     </li>
 </ul>
 </div>
-
+    @if($profile !== null)
     <div class="row center">
           <h2>Full Name: {{ $profile->first_name. ' '.$profile->last_name }}</h2>
     </div>
@@ -71,9 +71,10 @@
     <hr>
 <div class="row center">
           <h2>Country :{{ $profile->country }}</h2>
-         
+    
     </div>
     <hr>
+      @endif   
     <div class="row center">
           <h2>Username: {{ $user->username }}</h2>
     </div>
