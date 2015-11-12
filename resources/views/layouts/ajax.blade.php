@@ -128,6 +128,13 @@
       window.location = url;
     }
     
+    $( "input[name='q']" ).on( "focus", function(){
+        $( "input[name='q']" ).css( "color", "#e57373" );
+        $( "input[name='q']" ).val('');
+    });
+
+    
+
     $("#search_form").submit(function(e){
                 e.preventDefault();
                 var url = $('#search_form').attr('action');
@@ -141,26 +148,28 @@
                         success: function(data){
                           
                         pageloader('off'); 
-                        $('#pageloader').addClass('green').fadeIn(2000, function(){
+                        $('#pageloader').addClass('teal lighten-2').fadeIn(2000, function(){
                           $(this).hide();
-                          $(this).removeClass("green");
+                          $(this).removeClass("teal lighten-2");
                         });
 
                         console.log(data);
 
                         $( "input[name='q']" ).val();
+                        $( "input[name='q']" ).css( "color", "#4db6ac" );
                         //add here logic to populate page with data
                         },
                         error: function(data){
                           
                         pageloader('off');
 
-                        $('#pageloader').addClass('red').fadeIn(2000, function(){
+                        $('#pageloader').addClass('red accent-4').fadeIn(2000, function(){
                           $(this).hide();
-                          $(this).removeClass("red");
+                          $(this).removeClass('red accent-4');
                         });
 
                         $( "input[name='q']" ).val('We Cant Find Your Sponsor, Search Again!');
+                        $( "input[name='q']" ).css( "color", "#d50000" );
                         }
                       });
 
