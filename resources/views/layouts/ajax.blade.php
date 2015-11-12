@@ -130,10 +130,11 @@
     
     $( "input[name='q']" ).on( "focus", function(){
         $( "input[name='q']" ).css( "color", "#e57373" );
-        $( "input[name='q']" ).val('');
+        $( "input[name='q']" ).val();
+        $( ".ui-autocomplete" ).show();
     });
 
-    
+     
 
     $("#search_form").submit(function(e){
                 e.preventDefault();
