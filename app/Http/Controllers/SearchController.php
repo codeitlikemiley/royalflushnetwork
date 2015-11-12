@@ -24,7 +24,7 @@ class SearchController extends Controller
 
         return Response::json($results);
     }
-
+    
     public function searchUser()
     {
         try {

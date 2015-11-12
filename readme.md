@@ -99,11 +99,19 @@ $ 127.0.0.1 rfndotnet.dev
 
 ### If Errors encountered Please Submit an Issue
 [NodeJs]: <http://nodejs.org>
+
 [Bower]: <http://bower.io>
+
 [Gulp]: <http://gulpjs.com>
+
 [Composer]: <https://getcomposer.org>
+
 [Virtual Box]: <https://www.virtualbox.org/wiki/Download_Old_Builds_4_3>
+
 [Vagrant] <http://www.vagrantup.com/downloads.html>
+
 [Homestead] <https://atlas.hashicorp.com/laravel/boxes/homestead>
+
 [Git] <https://git-scm.com/>
+
 [Materialize] <http://materializecss.com>
