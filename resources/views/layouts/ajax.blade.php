@@ -157,6 +157,8 @@
                         console.log(data);
 
                         $( "input[name='q']" ).val();
+                        var user = $( "input[name='q']" ).val();
+                        Materialize.toast('Your Sponsor '+user+' is Found!', 4000,'',function(){console.log('User Found');});
                         $( "input[name='q']" ).css( "color", "#4db6ac" );
                         //add here logic to populate page with data
                         },
@@ -168,7 +170,7 @@
                           $(this).hide();
                           $(this).removeClass('red accent-4');
                         });
-
+                        
                         $( "input[name='q']" ).val('We Cant Find Your Sponsor, Search Again!');
                         $( "input[name='q']" ).css( "color", "#d50000" );
                         }
