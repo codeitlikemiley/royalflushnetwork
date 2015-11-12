@@ -110,12 +110,63 @@
       }
     }
 
+    function pageloader(v){
+      if(v == 'on'){
+        $('#search_form').css({
+          opacity : 0.2
+        });
+        $('#pageloader').show();
+      }else{
+        $('#search_form').css({
+          opacity : 1
+        });
+        $('#pageloader').hide();
+      }
+    }
+
     function authenticated(url){
       window.location = url;
     }
-
     
-   
+    $("#search_form").submit(function(e){
+                e.preventDefault();
+                var url = $('#search_form').attr('action');
+                var search_form = $('#search_form').serializeArray();
+                pageloader('on');  
+                $.ajax({
+                        url: url,
+                        type: 'post',
+                        dataType: 'json',
+                        data: search_form,
+                        success: function(data){
+                          
+                        pageloader('off'); 
+                        $('#pageloader').addClass('green').fadeIn(2000, function(){
+                          $(this).hide();
+                          $(this).removeClass("green");
+                        });
+
+                        console.log(data);
+
+                        $( "input[name='q']" ).val();
+                        //add here logic to populate page with data
+                        },
+                        error: function(data){
+                          
+                        pageloader('off');
+
+                        $('#pageloader').addClass('red').fadeIn(2000, function(){
+                          $(this).hide();
+                          $(this).removeClass("red");
+                        });
+
+                        $( "input[name='q']" ).val('We Cant Find Your Sponsor, Search Again!');
+                        }
+                      });
+
+                
+        });
+
     $('#sign_in').on('click', function(e){
 
             e.preventDefault();

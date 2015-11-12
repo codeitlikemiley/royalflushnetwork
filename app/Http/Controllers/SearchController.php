@@ -7,8 +7,6 @@ use DB;
 use Response;
 use App\User;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Redirect;
-use URL;
 
 class SearchController extends Controller
 {
@@ -33,9 +31,9 @@ class SearchController extends Controller
             $username = Input::get('q');
             $userdata = User::findByUsername($username)->load('links', 'profile');
 
-            return view('pages.findSponsor')->with('userdata', $userdata);
+            return Response::json(['data' => $userdata], 200);
         } catch (ModelNotFoundException $e) {
-            return Redirect::to(URL::previous())->withInput();
+            return Response::json(['data' => 'user not found'], 404);
         }
     }
 }
