@@ -274,6 +274,16 @@
             });
     });
 
+    $('div.latest_payouts').jNewsbar({
+    position : 'bottom',
+    effect : 'slideDown',
+    animSpeed: 500,
+    pauseTime : 1000,
+    toggleItems : 1,
+    pauseOnHover : false,
+    theme : "teal-lighten-2"
+    });
+
   
     
     
