@@ -29,7 +29,8 @@
     </div>
     <div class="footer-copyright">
       <div class="container">
-      All Rights Reserved © 2015 Copyright  <a class="brown-text text-lighten-3" href="#">Royal Flush Network</a>
+       Copyright © 2015 All Rights Reserved <a class="brown-text text-lighten-3" href="#">Royal Flush Network ™</a>
       </div>
     </div>
   </footer>
+  
