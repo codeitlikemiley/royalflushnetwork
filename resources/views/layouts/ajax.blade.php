@@ -20,7 +20,7 @@
    $('.collapsible').collapsible({
       accordion : true
     });  // End Collapsible
-
+  
    
    // $('.tooltipped').tooltip({delay: 50});
 
@@ -284,7 +284,7 @@
     effect : 'slideDown',
     animSpeed: 500,
     pauseTime : 1000,
-    toggleItems : 1,
+    toggleItems : 10,
     pauseOnHover : false,
     theme : "teal-lighten-2"
     });
