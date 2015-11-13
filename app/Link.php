@@ -8,9 +8,9 @@ class Link extends Model
 {
     protected $table = 'links';
 
-    protected $fillable = ['link', 'sp_link_id'];
+    protected $fillable = ['link'];
 
-    protected $hidden = ['user_id', 'id', 'sp_user_id', 'sp_link_id', 'active', 'date_activated', 'created_at', 'updated_at'];
+    protected $hidden = ['user_id','date_activated', 'created_at', 'updated_at'];
 
     //USER RELATIONSHIP
     public function user()

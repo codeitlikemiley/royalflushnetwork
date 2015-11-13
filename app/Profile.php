@@ -13,7 +13,7 @@ class Profile extends Model
 
     protected $fillable = ['profile_pic', 'about_me', 'display_name', 'contact_no', 'address', 'city', 'province_state', 'zip_code', 'country'];
 
-    protected $hidden = ['id', 'first_name', 'last_name', 'user_id', 'id', 'contact_no', 'address', 'province_state', 'zip_code', 'created_at', 'updated_at'];
+    protected $hidden = ['id','user_id', 'address', 'province_state', 'zip_code', 'created_at', 'updated_at'];
 
     // USER RELATION
     public function user()
