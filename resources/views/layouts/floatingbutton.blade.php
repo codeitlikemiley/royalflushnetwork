@@ -1,5 +1,5 @@
 {{-- Navigation Floating Button --}}
-  <div class="fixed-action-btn  click-to-toggle" style="bottom: 50px; right: 50px; z-index: 1002;">
+  <div class="fixed-action-btn  click-to-toggle" style="bottom: 40px; right: 50px; z-index: 996;">
     <a class="btn-floating btn-large red">
       <i class="material-icons">navigation</i>
     </a>

@@ -2,7 +2,7 @@
 <div id="home"></div>
 
 <div class="navbar-fixed">
-  <nav >
+  <nav>
     <div class="nav-wrapper">
       {{-- NavBar Logo Section --}}
       <a id="logo-container" href="#" class="brand-logo center fixed">

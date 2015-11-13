@@ -33,7 +33,7 @@ h2 {
   padding: 0 15px;
 }
 
-.login-form, .singup-form{
+.login-form, .signup-form{
 	margin-top: 1em;
 	background-color: #fff;
 }
@@ -142,7 +142,7 @@ footer.page-footer {
 .jnews-teal-lighten-2{
   background-color: #4db6ac;
   border-color: #ffebee;
-  z-index: 1003;
+  z-index: 997;
 }
 .jnews-teal-lighten-2, .jnews-teal-lighten-2 h2, .jnews-teal-lighten-2 a{
   color: #ffffff;
@@ -153,7 +153,6 @@ footer.page-footer {
 .jnews-teal-lighten-2 .jnewsbar-navigate a{
   
 }
-
 
 
 
@@ -173,6 +172,15 @@ footer.page-footer {
     color: #e57373;
 
 
+}
+
+#userbtn{
+  position:fixed;
+  top: 20px; 
+  right: 50px; 
+  padding-bottom: 15px;
+  padding-top: 15px;  
+  z-index: 998;
 }
 
 
