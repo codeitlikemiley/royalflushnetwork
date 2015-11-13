@@ -11,7 +11,7 @@
   <!--Import all Css-->
   {!! HTML::style('https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.2/css/materialize.min.css') !!}
   {!! HTML::style('css/style.css') !!}
-  {!! HTML::style('https://code.jquery.com/ui/1.11.4/themes/redmond/jquery-ui.css') !!}
+  {{-- {!! HTML::style('https://code.jquery.com/ui/1.11.4/themes/blitzer/jquery-ui.css') !!} --}}
   {!! HTML::style('vendor/jnewsbar/css/jNewsbar.css') !!}
   
   <!-- Font  -->

@@ -134,6 +134,9 @@
         $( ".ui-autocomplete" ).show();
     });
 
+    $( "input[name='q']" ).change(function(){
+      $( ".ui-autocomplete" ).empty();
+    });
      
 
     $("#search_form").submit(function(e){

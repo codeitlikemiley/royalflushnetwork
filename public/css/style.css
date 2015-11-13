@@ -142,6 +142,7 @@ footer.page-footer {
 .jnews-teal-lighten-2{
   background-color: #4db6ac;
   border-color: #ffebee;
+  z-index: 998;
 }
 .jnews-teal-lighten-2, .jnews-teal-lighten-2 h2, .jnews-teal-lighten-2 a{
   color: #ffffff;
@@ -152,6 +153,25 @@ footer.page-footer {
 .jnews-teal-lighten-2 .jnewsbar-navigate a{
   
 }  
+
+
+.ui-widget-content {
+    border: 1px solid #ffebee;
+    background: #ffffff;
+    color: #e57373;
+    font-size: 30px;
+    text-indent: 4rem;
+
+}
+
+.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus {
+    border: 1px solid #e1f5fe;
+    background: #e0f2f1;
+    font-weight: normal;
+    color: #e57373;
+
+
+}
 
 
 
