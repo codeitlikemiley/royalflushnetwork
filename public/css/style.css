@@ -6,6 +6,46 @@
  * Made By MaterializeCSS.com
  */
 
+@font-face {
+  font-family: "RF-fonts";
+  src: url("../font/rfn/Qwigley-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal; 
+}
+
+@font-face {
+  font-family: "N-fonts";
+  src: url("../font/rfn/steelfis.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal; 
+}
+
+.rffont {
+  font-family: "RF-fonts";  
+  font-size: 1.8em;
+  font-style: normal;
+  color: #ffffff;
+
+}
+
+.normalscript {
+  
+  margin-top: -4px;
+
+}
+
+.nfont {
+  font-family: "N-fonts";
+  font-size: .25em;
+  color: #ffffff;
+}
+
+.superscript {
+  position: absolute;
+  top: -14px;
+  right:-35px;
+}
+
 main {
     flex: 1 0 auto;
   }

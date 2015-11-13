@@ -4,7 +4,7 @@
       {{-- NavBar Logo Section --}}
       <a id="logo-container" href="#" class="brand-logo center fixed">
        
-       <h4 class="">RF<span class="">N</span></h4>
+       <h4 class="rffont normalscript">RoyalFlush<span class="nfont superscript">NETWORK</span></h4>
         {{--  <img src="img/rfnlogo.001.png" alt="RFN"> --}}
       </a>
 
