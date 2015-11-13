@@ -29,7 +29,7 @@
     </div>
     <div class="footer-copyright">
       <div class="container">
-      Made by <a class="brown-text text-lighten-3" href="http://materializecss.com">Materialize</a>
+      All Rights Reserved © 2015 Copyright  <a class="brown-text text-lighten-3" href="#">Royal Flush Network</a>
       </div>
     </div>
   </footer>

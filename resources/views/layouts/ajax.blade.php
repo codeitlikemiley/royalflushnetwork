@@ -26,7 +26,7 @@
 
    $('.modal-trigger').leanModal({
       dismissible: true, // Modal can be dismissed by clicking outside of the modal
-      opacity: '.5', // Opacity of modal background
+      opacity: '.6', // Opacity of modal background
       in_duration: 300, // Transition in duration
       out_duration: 200, // Transition out duration
       ready: function() { console.log('Open'); }, // Callback for Modal open
@@ -40,7 +40,7 @@
    
    $('.parallax').parallax();
    $('.slider').slider();
-   $('select').material_select();
+   // $('select').material_select();
    $( "#q" ).autocomplete({
     source: "search/autocomplete",
     minLength: 3,
@@ -284,7 +284,7 @@
     effect : 'slideDown',
     animSpeed: 500,
     pauseTime : 1000,
-    toggleItems : 10,
+    toggleItems : 11,
     pauseOnHover : false,
     theme : "teal-lighten-2"
     });

@@ -5,7 +5,7 @@
     </a>
     <ul>
       
-      <li><a href="#home" class="btn-floating red"><i class="material-icons">flight_takeoff</i></a></li>
+      <li><a href="#" class="btn-floating red"><i class="material-icons">flight_takeoff</i></a></li>
 
       <li><a href="#q" class="btn-floating yellow darken-1"><i class="material-icons">shopping_cart</i></a></li>
 

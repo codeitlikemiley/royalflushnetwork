@@ -1,13 +1,10 @@
-{{-- The Purpose of this Div is For Scrolling Back Up --}}
-<div id="home"></div>
-
 <div class="navbar-fixed">
   <nav>
     <div class="nav-wrapper">
       {{-- NavBar Logo Section --}}
       <a id="logo-container" href="#" class="brand-logo center fixed">
        
-       <h4 class="">Royal Flush <span class="">Network</span></h4>
+       <h4 class="">RF<span class="">N</span></h4>
         {{--  <img src="img/rfnlogo.001.png" alt="RFN"> --}}
       </a>
 
