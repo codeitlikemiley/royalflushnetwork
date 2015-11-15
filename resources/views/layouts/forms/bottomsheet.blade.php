@@ -8,8 +8,8 @@
             <div class="card blue-grey darken-1">
                 <div id="profile_card" class="card-content white-text">
                     <img src="http://labs.qnimate.com/portfolio-materialize/images/profile.png" width="64" height="64">
-                    <p>Mr Powers!</p>
-                    <p>No Sponsor</p>
+                    <p>Search For Sponsor</p>
+                    <p>No SPONSOR No Registration Allowed!</p>
                 </div>
             </div>
             <ul class="collapsible collapsible-accordion ">
@@ -53,7 +53,7 @@ On the far side."
 
 {{-- Load Here All The Performance of a User --}}
 <div class="col s12 m4 l4">
-        <h5>Recent Activities</h5>
+        <h5><i class="material-icons">star</i>Current Rank<i class="material-icons">star</i></h5>
 
             <ul class="collapsible">
 

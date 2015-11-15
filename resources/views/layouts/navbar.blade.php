@@ -1,6 +1,6 @@
 <div class="navbar-fixed">
   <nav>
-    <div class="nav-wrapper">
+    <div class="nav-wrapper red darken-4">
       {{-- NavBar Logo Section --}}
       <a id="logo-container" href="#" class="brand-logo center fixed">
        
