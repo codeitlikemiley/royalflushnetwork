@@ -137,7 +137,7 @@
     $( "input[name='q']" ).change(function(){
       $( ".ui-autocomplete" ).empty();
     });
-     
+    $('select').material_select();
 
     $("#search_form").submit(function(e){
                 e.preventDefault();
@@ -150,20 +150,43 @@
                         dataType: 'json',
                         data: search_form,
                         success: function(data){
-                          
+                        // stop the loader  
                         pageloader('off'); 
                         $('#pageloader').addClass('teal lighten-2').fadeIn(2000, function(){
                           $(this).hide();
                           $(this).removeClass("teal lighten-2");
                         });
+                        // initiate links object
+                        var links = data.userdata.links
+                        // remove any existing option in select
+                        $('select').children().remove();
+                        $('select').material_select('destroy');
+                        // interate thru all links
+                        for (var i = 0; i < links.length; i++) {
+                          // append all links in options
+                          $("#powerselect").append('<option value="' + links[i].link + '">' + links[i].link  + '</option>');
+                          // log all links
+                          console.log(links[i].link);
+                          
+                        };
+                        // re initiate again select
+                        $('select').material_select();
+                        
 
-                        console.log(data);
-
+                        // fill the input value with search value
                         $( "input[name='q']" ).val();
+
+
                         var user = $( "input[name='q']" ).val();
+
+                        // Show Toast Message
                         Materialize.toast('Your Sponsor '+user+' is Found!', 4000,'',function(){console.log('User Found');});
+
+                        // Make Font Color pink
                         $( "input[name='q']" ).css( "color", "#4db6ac" );
-                        //add here logic to populate page with data
+
+
+                        //add More logic to populate page with data
                         },
                         error: function(data){
                           
@@ -181,6 +204,8 @@
 
                 
         });
+
+
 
     $('#sign_in').on('click', function(e){
 

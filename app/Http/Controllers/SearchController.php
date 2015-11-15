@@ -31,9 +31,9 @@ class SearchController extends Controller
             $username = Input::get('q');
             $userdata = User::findByUsername($username)->load('links', 'profile');
 
-            return Response::json(['data' => $userdata], 200);
+            return Response::json(['userdata' => $userdata], 200);
         } catch (ModelNotFoundException $e) {
-            return Response::json(['data' => 'user not found'], 404);
+            return Response::json(['error' => 'user not found'], 404);
         }
     }
 }

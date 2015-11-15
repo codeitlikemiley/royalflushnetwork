@@ -27,6 +27,7 @@
     <!--Import all Javascript-->
     {!! HTML::script('js/jquery.js') !!}
     {!! HTML::script('https://code.jquery.com/ui/1.11.4/jquery-ui.js') !!}
+    <!--Check the Update of materialize fix for select option-->
     {!! HTML::script('https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.2/js/materialize.min.js') !!}
     {!! HTML::script('vendor/jnewsbar/js/jNewsbar.jquery.min.js') !!}
 
