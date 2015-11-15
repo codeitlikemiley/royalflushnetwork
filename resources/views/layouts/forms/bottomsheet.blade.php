@@ -5,7 +5,7 @@
 <div class="col s12 m4 l4">
             <h4>Your Sponsor's Profile</h4>
             <div class="card blue-grey darken-1">
-                <div class="card-content white-text">
+                <div id="profile_card"class="card-content white-text">
                     <img src="http://labs.qnimate.com/portfolio-materialize/images/profile.png" width="64" height="64">
                     <p>Uriah Galang</p>
                     <p>Diamond Director</p>

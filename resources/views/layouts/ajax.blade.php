@@ -2,6 +2,7 @@
 (function($){
   $(function(){       //Start of function
 
+    // add x-csrf token
     $.ajaxSetup({
   headers: {
   'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -9,6 +10,7 @@
   }); // End of AjaxSetup
 
   
+  // initialize sidenav button
    $('.button-collapse').sideNav({
       menuWidth: 300, // Default is 240
       edge: 'left', // Choose the horizontal origin
@@ -16,14 +18,13 @@
     }); //End Button Collapse
 
 
-   // $('.collapsible').collapsible();
+   // initialized collapsible
    $('.collapsible').collapsible({
       accordion : true
     });  // End Collapsible
   
    
-   // $('.tooltipped').tooltip({delay: 50});
-
+   // modal trigger for bottomsheet
    $('.modal-trigger').leanModal({
       dismissible: true, // Modal can be dismissed by clicking outside of the modal
       opacity: '.6', // Opacity of modal background
@@ -37,24 +38,18 @@
    $('#sidenav-overlay').remove();
    });   // END Bottomsheet
 
-   
+   // initialize parallax
    $('.parallax').parallax();
+   // initialize slider
    $('.slider').slider();
-   // $('select').material_select();
-   $( "#q" ).autocomplete({
-    source: "search/autocomplete",
-    minLength: 3,
-    autoFocus: true,
-    select: function(event, ui) {
-      $('#q').val(ui.item.value);
 
-    }
-  });
-    
-    
   
-  $('#registration_submit').attr('disabled', true);  
+    
+    
+  // disable registration form button
+  // $('#registration_submit').attr('disabled', true);  
 
+  // validation function for pass
   function ReactivatePassConfirm(){
         var passwordVal = $('#pwd1').val();
 
@@ -63,7 +58,7 @@
           }
       } // End Reactivate
         
-
+  // registration password
   $('#pwd1').on('blur', function(e){
      ReactivatePassConfirm();
   }); 
@@ -95,7 +90,7 @@
       }  // End of Registration Form Script
 
 
-
+    // login.blade.php loader for login and signup
    function loader(v){
       if(v == 'on'){
         $('#login_form').css({
@@ -110,6 +105,7 @@
       }
     }
 
+    // page loader whole page
     function pageloader(v){
       if(v == 'on'){
         $('#search_form').css({
@@ -124,10 +120,24 @@
       }
     }
 
+    // get root url function
     function authenticated(url){
       window.location = url;
     }
     
+
+     // ajax call for autocomplete
+   $( "#q" ).autocomplete({
+    source: "search/autocomplete",
+    minLength: 3,
+    autoFocus: true,
+    select: function(event, ui) {
+      $('#q').val(ui.item.value);
+
+    }
+  });
+
+    // autocomplete added behavior 
     $( "input[name='q']" ).on( "focus", function(){
         $( "input[name='q']" ).css( "color", "#e57373" );
         $( "input[name='q']" ).val();
@@ -137,8 +147,12 @@
     $( "input[name='q']" ).change(function(){
       $( ".ui-autocomplete" ).empty();
     });
+
+    // initialize select 
     $('select').material_select();
 
+
+    // ajax call for search sponsor
     $("#search_form").submit(function(e){
                 e.preventDefault();
                 var url = $('#search_form').attr('action');
@@ -156,23 +170,22 @@
                           $(this).hide();
                           $(this).removeClass("teal lighten-2");
                         });
-                        // initiate links object
-                        var links = data.userdata.links
-                        // remove any existing option in select
-                        $('select').children().remove();
-                        $('select').material_select('destroy');
-                        // interate thru all links
-                        for (var i = 0; i < links.length; i++) {
-                          // append all links in options
-                          $("#powerselect").append('<option value="' + links[i].link + '">' + links[i].link  + '</option>');
-                          // log all links
-                          console.log(links[i].link);
-                          
-                        };
-                        // re initiate again select
-                        $('select').material_select();
-                        
 
+                        
+                        //initiate profile object
+                        var pic = data.userdata.profile.profile_pic;
+                        
+                        var dname = data.userdata.profile.display_name;
+                        // user data
+                        
+                        var username = data.userdata.username;
+
+                        var premium = "FREEMIUM";
+                        var active = data.userdata.links[0].active;
+                        // initiate links object
+                        var links = data.userdata.links;
+                       
+                        
                         // fill the input value with search value
                         $( "input[name='q']" ).val();
 
@@ -184,6 +197,40 @@
 
                         // Make Font Color pink
                         $( "input[name='q']" ).css( "color", "#4db6ac" );
+
+
+                        if(active > 0){
+                        premium = "PREMIUM VIP";
+                        }
+          
+                        // remove image
+                        $('div#userbtn > a > img').remove();
+                        // append image
+                        $('div#userbtn > a').append('<img src="' + pic + '" width="55" height="55" class=" circle" tyle="z-index: 1001"/>');
+
+                        $('div#profile_card > img').remove();
+                        $('div#profile_card').append('<img src="' + pic + '" width="64" height="64" class=" circle" tyle="z-index: 1001"/>');
+                        $('div#profile_card > p').remove();
+                        $('div#profile_card').append('<p>' + dname + '</p>');
+                        $('div#profile_card').append('<p>' + premium + '</p>');
+
+                        // this code below wont re-populate if no image is set in a user
+                        
+                        // remove any existing option in select
+                        $('select').children().remove();
+                        $('select').material_select('destroy');
+                        // interate thru all links
+                        for (var i = 0; i < links.length; i++) {
+                          // append all links in options
+                          $("#powerselect").append('<option value="' + links[i].link + '">' + links[i].link  + '</option>');
+                          // log all links
+                          // console.log(links[i].link);
+                          
+                        };
+                        // re initiate again select
+                        $('select').material_select();
+                        
+
 
 
                         //add More logic to populate page with data
@@ -206,7 +253,7 @@
         });
 
 
-
+    // ajax call for login
     $('#sign_in').on('click', function(e){
 
             e.preventDefault();
@@ -304,6 +351,7 @@
             });
     });
 
+    // newsbar initialize
     $('div.latest_payouts').jNewsbar({
     position : 'bottom',
     effect : 'slideDown',
