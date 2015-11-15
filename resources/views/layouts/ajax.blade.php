@@ -17,6 +17,7 @@
       closeOnClick: false // Closes side-nav on <a> clicks, useful for Angular/Meteor
     }); //End Button Collapse
 
+  
 
    // initialized collapsible
    $('.collapsible').collapsible({
@@ -173,17 +174,19 @@
 
                         
                         //initiate profile object
-                        var pic = data.userdata.profile.profile_pic;
+                        var pic = data.userdata.profile.profile_pic
                         
-                        var dname = data.userdata.profile.display_name;
+                        var dname = data.userdata.profile.display_name
                         // user data
                         
-                        var username = data.userdata.username;
+                        var about_me = data.userdata.profile.about_me
+                        
+                        var username = data.userdata.username
 
                         var premium = "FREEMIUM";
-                        var active = data.userdata.links[0].active;
+                        var active = data.userdata.links[0].active
                         // initiate links object
-                        var links = data.userdata.links;
+                        var links = data.userdata.links
                        
                         
                         // fill the input value with search value
@@ -202,6 +205,10 @@
                         if(active > 0){
                         premium = "PREMIUM VIP";
                         }
+
+                        if(about_me == null){
+                          about_me ="Im Here to Help You Succeed!";
+                        }
           
                         // remove image
                         $('div#userbtn > a > img').remove();
@@ -213,6 +220,26 @@
                         $('div#profile_card > p').remove();
                         $('div#profile_card').append('<p>' + dname + '</p>');
                         $('div#profile_card').append('<p>' + premium + '</p>');
+
+                        // reset the loading of sponsorlink
+                        $('#sploadlinks > li').remove();
+                        $('#sploadlinks > hr').remove();
+                        
+                        // attach link to the collapsible
+                        for (var i = 0; i < links.length; i++) {
+                          // append all links in options
+                          $("#sploadlinks").append('<li style="text-indent: 4rem;"><a href="' + links[i].link + '" class="teal-text collection-item">' + links[i].link  + '<i class="material-icons right">send</i></a></li><hr>');
+                          
+                        }
+
+                        $('#about_me').empty();
+                        $('#about_me').append('<p>' + about_me + '</p>');
+
+
+                        
+                        
+
+                        
 
                         // this code below wont re-populate if no image is set in a user
                         
@@ -226,7 +253,7 @@
                           // log all links
                           // console.log(links[i].link);
                           
-                        };
+                        }
                         // re initiate again select
                         $('select').material_select();
                         

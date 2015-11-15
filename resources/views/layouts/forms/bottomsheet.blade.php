@@ -8,67 +8,46 @@
             <div class="card blue-grey darken-1">
                 <div id="profile_card" class="card-content white-text">
                     <img src="http://labs.qnimate.com/portfolio-materialize/images/profile.png" width="64" height="64">
-                    <p>Uriah Galang</p>
-                    <p>President/CEO</p>
+                    <p>Mr Powers!</p>
+                    <p>No Sponsor</p>
                 </div>
             </div>
-            <div class="card-action">
-                  <a href="https://www.facebook.com/uriah.haki" class="btn tooltipped" right data-position="top" data-delay="50" data-tooltip="Add Me in Facebook">Add As Friend</a>                
-            </div>
+            <ul class="collapsible collapsible-accordion ">
+                <li>
+                  <a class="collapsible-header waves-effect waves-light waves-red lighten-5 teal-text "><i class="material-icons left">attach_money</i>Select Sponsor's Link<i class="mdi-navigation-arrow-drop-down right"></i></a>
+                <div class="collapsible-body">
+                      <ul class="teal lighten-5" id="sploadlinks">
+                      {{-- To be Populated Upon Search  --}}
+                      </ul>
+                </div>
+                </li>
+            </ul>
     </div>
 
 
-{{-- Load Here All the Sponsors Link? --}}
+{{-- Load About Me Section --}}
 <div class="col s12 m4 l4">
+<h4>About Me:</h4>
+<div class="divider"></div>
+<p id="about_me">
+"Would you like me to give you 
+a formula for success? 
+It's quite simple, really. 
+Double your rate of failure 
+You're thinking of failure 
+as the enemy of success. 
+But it isn't at all 
+You can be discouraged by failure-or
+you can learn from it. 
+So go ahead and make mistakes.
+Make all you can. 
+Because, remember 
+that's where you'll find success.
+On the far side." 
+    
+</p>
+<div class="divider"></div>
 
-    <h4>Sponsor's Links</h4>
-        <ul class="collection">
-
-            <li class="collection-item avatar">
-                {!! HTML::image('img/luffy.jpg', 'alt text', ['title' => 'the title', 'class' => 'circle']) !!}
-                <span class="title">Yuri San</span>
-                <p>100$<br>
-                 30 October 2015
-                </p>
-                <a href="#!" class="secondary-content"><i class="material-icons">attach_money</i></a>
-            </li>
-
-            <li class="collection-item avatar">
-                {!! HTML::image('img/luffy.jpg', 'alt text', ['title' => 'the title', 'class' => 'circle']) !!}
-                <span class="title">Yuri San</span>
-                <p>100$<br>
-                 30 October 2015
-                </p>
-                <a href="#!" class="secondary-content"><i class="material-icons">attach_money</i></a>
-            </li>
-
-            <li class="collection-item avatar">
-                {!! HTML::image('img/luffy.jpg', 'alt text', ['title' => 'the title', 'class' => 'circle']) !!}
-                <span class="title">Yuri San</span>
-                <p>100$<br>
-                 30 October 2015
-                </p>
-                <a href="#!" class="secondary-content"><i class="material-icons">attach_money</i></a>
-            </li>
-
-            <li class="collection-item avatar">
-                {!! HTML::image('img/luffy.jpg', 'alt text', ['title' => 'the title', 'class' => 'circle']) !!}
-                <span class="title">Yuri San</span>
-                <p>100$<br>
-                 30 October 2015
-                </p>
-                <a href="#!" class="secondary-content"><i class="material-icons">attach_money</i></a>
-            </li>
-
-            <li class="collection-item avatar">
-                {!! HTML::image('img/luffy.jpg', 'alt text', ['title' => 'the title', 'class' => 'circle']) !!}
-                <span class="title">Yuri San</span>
-                <p>100$<br>
-                 30 October 2015
-               </p>
-                <a href="#!" class="secondary-content"><i class="material-icons">attach_money</i></a>
-            </li>
-        </ul>
 </div>
 
 
@@ -123,6 +102,7 @@
 
 
 </div>
+
 
 
 
