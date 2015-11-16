@@ -228,9 +228,12 @@
                         // attach link to the collapsible
                         for (var i = 0; i < links.length; i++) {
                           // append all links in options
-                          $("#sploadlinks").append('<li style="text-indent: 4rem;"><a href="' + links[i].link + '" class="teal-text collection-item">' + links[i].link  + '<i class="material-icons right">send</i></a></li><hr>');
+                          $("#sploadlinks").append('<li style="text-indent: 4rem;"><a href="' + links[i].link + '" class="teal-text">' + links[i].link  + '<i class="material-icons right">send</i></a></li><hr>');
                           
                         }
+                        $('.collapsible').collapsible({
+                        accordion : true
+                        });
 
                         $('#about_me').empty();
                         $('#about_me').append('<p>' + about_me + '</p>');
@@ -388,6 +391,9 @@
     pauseOnHover : false,
     theme : "teal-lighten-2"
     });
+
+
+
 
   
     

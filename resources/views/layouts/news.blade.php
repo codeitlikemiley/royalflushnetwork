@@ -5,7 +5,7 @@
 <span class="date">| {{ date_timestamp }}</span>
 </li> --}}
 
-<div class="latest_payouts light-blue darken-4">
+<div class="latest_payouts red darken-4">
 <h2>Latest Payouts</h2>
 <ul>
 
