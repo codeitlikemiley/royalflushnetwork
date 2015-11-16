@@ -220,6 +220,7 @@
                         $('div#profile_card > img').remove();
                         $('div#profile_card').append('<img src="' + pic + '" width="64" height="64" class=" circle" tyle="z-index: 1001"/>');
                         $('div#profile_card > p').remove();
+                        $('div#profile_card > span').remove();
                         $('div#profile_card').append('<p>' + dname + '</p>');
                         $('div#profile_card').append('<span class="right">' + mobileno + '</span>');
                         $('div#profile_card').append('<span class="amber bold">' + premium + '</span>');

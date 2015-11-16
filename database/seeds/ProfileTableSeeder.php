@@ -25,6 +25,8 @@ class ProfileTableSeeder extends Seeder
             'province_state' => 'Zambales',
             'zip_code' => '2200',
             'country' => 'Philippines',
+            'created_at' => \Carbon\Carbon::now(),
+            'updated_at' => \Carbon\Carbon::now(),
         ]);
     }
 }

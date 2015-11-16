@@ -35,6 +35,14 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      */
     protected $hidden = ['id' ,'password', 'remember_token', 'updated_at', 'activation_code', 'resent', 'status', 'active', 'sp_id', 'email'];
 
+    protected $dates = ['created_at', 'updated_at'];
+
+    protected $casts = [
+        'active' => 'boolean',
+        'status' => 'boolean',
+
+    ];
+
     public static function findByUsername($username)
     {
         return self::where('username', $username)->firstOrFail();
@@ -45,21 +53,15 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         if (!empty($value)) {
             $this->attributes['password'] = \Hash::make($value);
         }
-    } //test this if still needed cause i already use Brcypt in password in other file
+    } // Mutators Setter before password is save in db
 
+    
 
-    public function accountIsActive($code)
+    public function setUsernameAttribute($value)
     {
-        $user = self::where('activation_code', '=', $code)->first();
-        $user->active = 1;
-        $user->activation_code = '';
-        if ($user->save()) {
-            \Auth::login($user);
-        }
-
-        return true;
-    } // check if this is being used
-
+        $this->attributes['username'] = strtolower($value);
+        // always set the string to lowercase
+    }
 
     // LINK RELATION
 

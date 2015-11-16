@@ -22,11 +22,11 @@ class CreateUserRequest extends Request
     public function rules()
     {
         return [
-                'sponsor_link' => 'exists:links,link',
+                'sponsor_link' => 'exists:links,link|required',
                 'username' => 'alpha_num|required|between:6,30|unique:users',
 				'first_name' => 'required|between:2,30',
 				'last_name' => 'required|between:2,30',
-				'display_name' => 'max:30',
+				'display_name' => 'required|max:30',
 				'email' => 'required|email|max:60|unique:users',
 				'password' => 'required|confirmed|min:8',
 				'agree' => 'required'

@@ -16,6 +16,7 @@ class LinkTableSeeder extends Seeder
             'link' => 'masterpowers',
             'user_id'   => 1,
             'sp_link_id' =>  null,
+            'sp_user_id' => null,
             'active' => true,
             'date_activated' => \Carbon\Carbon::now(),
             'created_at' => \Carbon\Carbon::now(),
