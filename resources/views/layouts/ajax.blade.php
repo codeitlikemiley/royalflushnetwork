@@ -19,7 +19,7 @@
 
   
 
-   // initialized collapsible
+   // initialized collapsible 1st instance
    $('.collapsible').collapsible({
       accordion : true
     });  // End Collapsible
@@ -231,6 +231,8 @@
                           $("#sploadlinks").append('<li style="text-indent: 4rem;"><a href="' + links[i].link + '" class="teal-text">' + links[i].link  + '<i class="material-icons right">send</i></a></li><hr>');
                           
                         }
+
+                        // re-initialize collapsible on call instance
                         $('.collapsible').collapsible({
                         accordion : true
                         });
@@ -391,6 +393,11 @@
     pauseOnHover : false,
     theme : "teal-lighten-2"
     });
+
+    // This Ensure that Collapsible Will Work on Other Page
+   $('.collapsible').collapsible({
+      accordion : true
+    });  // End Collapsible
 
 
 
