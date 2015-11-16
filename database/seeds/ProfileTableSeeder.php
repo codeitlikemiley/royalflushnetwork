@@ -15,6 +15,7 @@ class ProfileTableSeeder extends Seeder
             'user_id' => 1,
             'first_name' => 'Uriah',
             'last_name'   => 'Galang',
+            'profile_pic' => 'img/avatar.png',
 
             'about_me' => 'Im Your Admin',
             'display_name' => 'Super Mario Bros.',

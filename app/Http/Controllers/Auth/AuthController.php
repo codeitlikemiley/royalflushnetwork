@@ -38,13 +38,26 @@ class AuthController extends Controller
        $this->mail = $mail;
     }
 
+    private function lockoutTime() 
+    {
+    return property_exists($this, 'lockoutTime') ? $this->lockoutTime : 60;
+    }
+
+    protected function maxLoginAttempts()
+    {
+    return property_exists($this, 'maxLoginAttempts') ? $this->maxLoginAttempts : 2;
+    }
+
     protected function create(Request $request)
     {
         $data = $request->all();
-        $hash = (str_replace('/', '', \Hash::make(str_random(6))));
-        $data['activation_code'] = $hash;
+        
+        $activation_code = str_random(60) . $request->input('email');
+        $data['activation_code'] = $activation_code;
         $data['active'] = false;
         $data['status'] = true;
+
+        // Validator Instance
         $createUserRequest = new CreateUserRequest();
         $validator = Validator::make($data, $createUserRequest->rules());
         if ($validator->fails()) {
@@ -53,9 +66,40 @@ class AuthController extends Controller
                 ->withInput()
                 ->with('signup', 'active');
         }
-        $user = User::create($data);
+        // if validation pass do create user , link and profile
+        $link =  Input::get('sponsor_link');
+        $sponsor = Link::where('link', $link)->firstOrFail();
+        
+
+
+        $user = new User;
+        $user->username = $request->input('username');
+        $user->email = $request->input('email');
+        $user->password = $request->input('password');
+        $user->sp_id = $sponsor->user_id;
+        $user->activation_code = $data['activation_code'];
+        $user->active = $data['active'];
+        $user->status = $data['status'];
+        $user->save();
+
+        // Creates the user_id in the profile
+        $url = asset('img/avatar.png');
+        $profile = new Profile;
+        $profile->first_name = $request->input('first_name');
+        $profile->last_name = $request->input('last_name');
+        $profile->display_name = $request->input('display_name');
+        $profile->profile_pic = $url;
+        $user->profile()->save($profile);
+
+        // Creates the user_id in the link
+        $link = new Link;
+        $link->link = $request->input('username');
+        $link->sp_link_id = $sponsor->id;
+        $link->sp_user_id = $sponsor->user_id;
+        $user->links()->save($link);
         $this->mail->registered($user);
         return \View::make('auth.success');
+
 
     }
 

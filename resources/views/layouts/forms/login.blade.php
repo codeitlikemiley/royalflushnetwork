@@ -1,6 +1,16 @@
 {{-- <div class="progress" id="xloader" style="display:none">
       <div class="indeterminate amber" ></div>
 </div> --}}
+@if (count($errors) > 0)
+    <div class="alert alert-danger">
+        <strong>Whoops!</strong> There were some problems with your input.<br><br>
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 <form action="login" method="POST" class="col s12 login-form" id="login_form">
 
    <input type="hidden" name="_token" value="{{ csrf_token() }}"/>

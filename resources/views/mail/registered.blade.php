@@ -81,7 +81,7 @@
 <td class="content-block" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;" valign="top">
 {!! $body !!}</br>
 
-<a href="{{ url('account/activate', ['email' => $email, 'activation_token' => $activation_token]) }}">Activate Your Account</a>
+<a href="{{ url('account/activate', ['email' => $email, 'activation_token' => $activation_code]) }}">Activate Your Account</a>
 </td>
 </tr>
 </table>

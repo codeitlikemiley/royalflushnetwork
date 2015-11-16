@@ -22,6 +22,7 @@ class CreateUserRequest extends Request
     public function rules()
     {
         return [
+                'sponsor_link' => 'exists:links,link',
                 'username' => 'alpha_num|required|between:6,30|unique:users',
 				'first_name' => 'required|between:2,30',
 				'last_name' => 'required|between:2,30',

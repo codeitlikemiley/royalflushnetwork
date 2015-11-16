@@ -1,5 +1,15 @@
 
-<form action="signup" method="POST" class="col s12 login-form" id="registration_form" >
+@if (count($errors) > 0)
+          <div class="alert alert-danger">
+            <strong>{{ Lang::get('auth.whoops') }}</strong>{{ Lang::get('auth.someProblems') }}<br><br>
+            <ul>
+              @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+              @endforeach
+            </ul>
+          </div>
+        @endif
+<form action="signup" method="POST" class="col s12 login-form" id="registration_form">
 <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
 		
 		<div class="input-field col s11 offset-s1">
@@ -12,7 +22,7 @@
  
         <div class="input-field col s6">
         <i class="material-icons prefix">account_circle</i>
-    	  <input id="first_name" type="text" class="validate" name="last_name" class="validate" required="">
+    	  <input id="first_name" type="text" class="validate" name="first_name" class="validate" required="">
           <label for="first_name">First Name</label>
         </div>
         <div class="input-field col s6">
@@ -59,7 +69,23 @@
         <label for="password_confirmation" data-error="PasswordDontMatch" data-success="" >Password Confirmation</label>
         
 	</div>
-	 <div class="row">
+  
+	 <div class="row col s11 offset-s1">
+      <input type="checkbox" id="agree" name="agree"/>
+      <label for="agree">Do You Agree On Our <a class="modal-trigger" data-target="tos">Terms and Condition</a>?</label>
 	 </div>
     <button class="col s6 offset-s3 btn waves-effect waves-light form-submit" type="submit" name="action" id="registration_submit">Sign-up</button>
     </form>
+
+<div id="tos" class="modal modal-fixed-footer">
+    <div class="modal-content">
+      <h4>Terms and Condition</h4>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class=" modal-action modal-close waves-effect waves-red btn-flat">Close</a>
+    </div>
+  </div>
