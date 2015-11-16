@@ -19,10 +19,6 @@
 
   
 
-   // initialized collapsible 1st instance
-   $('.collapsible').collapsible({
-      accordion : true
-    });  // End Collapsible
   
    
    // modal trigger for bottomsheet
@@ -175,6 +171,8 @@
                         
                         //initiate profile object
                         var pic = data.userdata.profile.profile_pic
+
+                        var mobileno = data.userdata.profile.contact_no
                         
                         var dname = data.userdata.profile.display_name
                         // user data
@@ -209,6 +207,10 @@
                         if(about_me == null){
                           about_me ="Im Here to Help You Succeed!";
                         }
+
+                        if(mobileno == null){
+                          mobileno = " ";
+                        }
           
                         // remove image
                         $('div#userbtn > a > img').remove();
@@ -219,8 +221,12 @@
                         $('div#profile_card').append('<img src="' + pic + '" width="64" height="64" class=" circle" tyle="z-index: 1001"/>');
                         $('div#profile_card > p').remove();
                         $('div#profile_card').append('<p>' + dname + '</p>');
-                        $('div#profile_card').append('<p>' + premium + '</p>');
-
+                        $('div#profile_card').append('<span class="right">' + mobileno + '</span>');
+                        $('div#profile_card').append('<span class="amber bold">' + premium + '</span>');
+                        
+                        $('.collapsible').collapsible({
+                        accordion : true
+                        });
                         // reset the loading of sponsorlink
                         $('#sploadlinks > li').remove();
                         $('#sploadlinks > hr').remove();
@@ -394,10 +400,7 @@
     theme : "teal-lighten-2"
     });
 
-    // This Ensure that Collapsible Will Work on Other Page
-   $('.collapsible').collapsible({
-      accordion : true
-    });  // End Collapsible
+
 
 
 
