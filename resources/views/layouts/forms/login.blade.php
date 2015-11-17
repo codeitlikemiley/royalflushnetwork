@@ -21,7 +21,7 @@
     </div>
   </div>
   <div class="row">
-  <div class="g-recaptcha"  data-sitekey="{{ env('RE_CAP_SITE') }}">
+  <div class="g-recaptcha">
     
   </div>
   </div>

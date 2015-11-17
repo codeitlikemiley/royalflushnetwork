@@ -69,12 +69,20 @@
         <label for="password_confirmation" data-error="PasswordDontMatch" data-success="" >Password Confirmation</label>
         
 	</div>
-  
+  <div class="row">
 	 <div class="row col s11 offset-s1">
       <input type="checkbox" id="agree" name="agree"/>
       <label for="agree">Do You Agree On Our <a class="modal-trigger" data-target="tos">Terms and Condition</a>?</label>
 	 </div>
-    <button class="col s6 offset-s3 btn waves-effect waves-light form-submit" type="submit" name="action" id="registration_submit">Sign-up</button>
+   </div>
+   <div class="row">
+   <div class="g-recaptcha">
+    
+   </div>
+   </div>
+   <div class="row">
+    <button class="col s6 offset-s3 btn waves-effect waves-light form-submit" type="submit" name="action" id="registration_submit">Register An Account</button>
+    </div>
     </form>
 
 <div id="tos" class="modal modal-fixed-footer">

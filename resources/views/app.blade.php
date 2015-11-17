@@ -31,7 +31,15 @@
     {!! HTML::script('js/matest.min.js') !!}
     {!! HTML::script('vendor/jnewsbar/js/jNewsbar.jquery.min.js') !!}
     {!! HTML::script('js/login.js') !!}
-    {!! HTML::script('https://www.google.com/recaptcha/api.js') !!}
+    {{-- {!! HTML::script('https://www.google.com/recaptcha/api.js') !!} --}}
+    <script src="https://www.google.com/recaptcha/api.js?onload=CaptchaCallback&render=explicit" async defer></script>
+    <script type="text/javascript">
+    var CaptchaCallback = function(){
+    $('.g-recaptcha').each(function(index, el) {
+        grecaptcha.render(el, {'sitekey' : '{{ env('RE_CAP_SITE') }}'});
+    });
+};
+    </script>
     <!--Under Test JS-->
     {{-- {!! HTML::script('js/vue.js') !!} --}}
     {{-- {!! HTML::script('js/vue-resource.js') !!} --}}
