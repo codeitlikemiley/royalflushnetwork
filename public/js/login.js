@@ -42,7 +42,7 @@ $(document).ready(function() {
                 success:function(data)
                 {
                     loader('off');
-                    console.log(data);
+                    
                     if(data.success === false){
                     $.each(data.errors, function(index, error) 
                     {

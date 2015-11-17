@@ -24,6 +24,7 @@ class LoginRequest extends Request
         return [
             'email' => 'required|exists:users,email',
             'password' => 'required|min:8',
+            'g-recaptcha-response' => 'required'
         ];
     }
 
@@ -39,6 +40,7 @@ class LoginRequest extends Request
             'password.min' => 'The Password You Entered is Too Short!',
             'password.required' => 'You Cant Log Without a Password!',
             'email.required' => 'You Cant Log In Without an Email!',
+            'g-recaptcha-response.required' => 'You Forgot to Answer Captcha!'
         ];
     }
 }

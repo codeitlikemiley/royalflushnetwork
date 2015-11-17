@@ -20,7 +20,12 @@
  
     </div>
   </div>
-
+  <div class="row">
+  <div class="g-recaptcha"  data-sitekey="{{ env('RE_CAP_SITE') }}">
+    
+  </div>
+  </div>
+ 
   <button class="col s6  btn waves-effect waves-light form-submit" type="submit" id="sign_in" name="action">Login <i class="material-icons right">power_settings_new</i></button>
 
     <a href="{{ url('password/email')  }}" class="col s6  btn waves-effect waves-light deep-orange darken-4" type="submit" name="action">Forgot Password?</a>

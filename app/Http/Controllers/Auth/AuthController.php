@@ -16,14 +16,14 @@ use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\EmailRequest;
 use App\Http\Controllers\MailController as Mail;
+use App\Traits\CaptchaTrait;
 
 class AuthController extends Controller
 {
-    use AuthenticatesAndRegistersUsers, ThrottlesLogins;
+    use AuthenticatesAndRegistersUsers, ThrottlesLogins, CaptchaTrait;
 
     protected $redirectTo = 'profile';
     protected $loginPath = 'login';
-
 
     public $mail;
 
@@ -43,6 +43,12 @@ class AuthController extends Controller
             return response()->json(['success' => false, 'errors' => $validator->errors()->toArray(), 'inputs' => Input::except('_token', 'password')], 200);
         }
 
+        if ($this->captchaCheck() == false) {
+            $errors = $validator->errors()->add('captchaerror', 'Wrong Captcha!');
+
+            return response()->json(['success' => false, 'errors' => $errors], 200);
+        }
+
         $email = $request->email;
         $password = $request->password;
         $credentials = [
@@ -55,16 +61,16 @@ class AuthController extends Controller
 
         if ($throttles && $this->hasTooManyLoginAttempts($request)) {
             $errors = $validator->errors()->add('lock', 'Try Again Later!');
+
             return response()->json(['success' => false, 'errors' => $errors], 429);
         }
 
         if (!$valid) {
             $errors = $validator->errors()->add('wrongpass', 'The Password You Type is Incorrect!');
             $this->incrementLoginAttempts($request);
+
             return response()->json(['success' => false, 'errors' => $errors], 200);
         }
-
-
 
         $user = Auth::attempt($credentials);
         $active = Auth::user()->active;
@@ -145,18 +151,15 @@ class AuthController extends Controller
         $data['active'] = false;
         $data['status'] = true;
 
-
         $createUserRequest = new CreateUserRequest();
         $validator = Validator::make($data, $createUserRequest->rules());
 
-        if ($validator->fails()) 
-        {
+        if ($validator->fails()) {
             return redirect('login')
                 ->withErrors($validator)
                 ->withInput()
                 ->with('signup', 'active');
         }
-        
 
         $link = Input::get('sponsor_link');
 
@@ -191,7 +194,4 @@ class AuthController extends Controller
 
         return \View::make('auth.success');
     }
-
-   
-    
 }
