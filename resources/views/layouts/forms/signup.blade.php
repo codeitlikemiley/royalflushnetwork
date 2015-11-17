@@ -1,15 +1,5 @@
-
-@if (count($errors) > 0)
-          <div class="alert alert-danger">
-            <strong>{{ Lang::get('auth.whoops') }}</strong>{{ Lang::get('auth.someProblems') }}<br><br>
-            <ul>
-              @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-              @endforeach
-            </ul>
-          </div>
-        @endif
-<form action="signup" method="POST" class="col s12 login-form" id="registration_form">
+<form action="signup" method="POST" class="col s12" 
+id="registration_form">
 <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
 		
 		<div class="input-field col s11 offset-s1">
@@ -48,25 +38,16 @@
 	    <input id=email type="email" class="validate" name="email" required="">
        <label for="email" data-error="InvalidEmailAddress" data-success="">Email Address</label>
 	</div>
-	{{-- <div class="input-field col s12">
-	    <i class="mdi-communication-phone prefix"></i>
-	    <input  type="text" name="contact_no" class="validate" required="">
-       <label for="contact_no">Contact No.</label>
-	</div> --}}
-	{{-- <div class="input-field col s12">
-	    <i class="mdi-action-room prefix"></i>
-	    <input  type="text" class="validate" name="address" length="60" required="">
-       <label for="address" data-error="ExceedAllowedCharacter" data-success="">Address</label>
-	</div> --}}
+
 	<div class="input-field col s12">
 	    <i class="mdi-action-lock-outline prefix"></i>
-	    <input id="pwd1" type="password" class="validate" minlength="8" name="password">
+	    <input id="pwd1" type="password" class="validate" minlength="8" name="password" required="">
         <label for="password" data-error="PasswordTooShort" data-success="" >Password</label>
 	</div>
 	<div class="input-field col s12">
 	    <i class="mdi-action-lock-outline prefix"></i>
-	    <input id="pwd2" type="password" class="validate"  minlength="8" name="password_confirmation" disabled>
-        <label for="password_confirmation" data-error="PasswordDontMatch" data-success="" >Password Confirmation</label>
+	    <input id="pwd2" type="password" class="validate"  minlength="8" name="password_confirmation" required="">
+        <label for="password_confirmation" data-error="PasswordTooShort" data-success="" >Password Confirmation</label>
         
 	</div>
   <div class="row">

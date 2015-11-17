@@ -13,7 +13,7 @@ class LinkTableSeeder extends Seeder
     {
         DB::table('links')->insert([
 
-            'link' => 'masterpowers',
+            'link' => 'supervip',
             'user_id'   => 1,
             'sp_link_id' =>  null,
             'sp_user_id' => null,

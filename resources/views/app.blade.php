@@ -31,6 +31,9 @@
     {!! HTML::script('js/matest.min.js') !!}
     {!! HTML::script('vendor/jnewsbar/js/jNewsbar.jquery.min.js') !!}
     {!! HTML::script('js/login.js') !!}
+    {!! HTML::script('js/search.js') !!}
+    {!! HTML::script('js/register.js') !!}
+
     {{-- {!! HTML::script('https://www.google.com/recaptcha/api.js') !!} --}}
     <script src="https://www.google.com/recaptcha/api.js?onload=CaptchaCallback&render=explicit" async defer></script>
     <script type="text/javascript">

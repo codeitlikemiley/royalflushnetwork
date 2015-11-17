@@ -146,20 +146,27 @@ class AuthController extends Controller
     {
         $data = $request->all();
 
+        
+
+        $createUserRequest = new CreateUserRequest();
+        $validator = Validator::make($request->all(), $createUserRequest->rules(), $createUserRequest->messages());
+ 
+
+        if ($validator->fails()) {
+            return response()->json(['success' => false, 'errors' => $validator->errors()->toArray()], 400);
+        }
+
+        if ($this->captchaCheck() == false) {
+            $errors = $validator->errors()->add('captchaerror', 'Wrong Captcha!');
+
+            return response()->json(['success' => false, 'errors' => $errors], 400);
+        }
+
+        
         $activation_code = str_random(60).$request->input('email');
         $data['activation_code'] = $activation_code;
         $data['active'] = false;
         $data['status'] = true;
-
-        $createUserRequest = new CreateUserRequest();
-        $validator = Validator::make($data, $createUserRequest->rules());
-
-        if ($validator->fails()) {
-            return redirect('login')
-                ->withErrors($validator)
-                ->withInput()
-                ->with('signup', 'active');
-        }
 
         $link = Input::get('sponsor_link');
 
@@ -192,6 +199,7 @@ class AuthController extends Controller
         $user->links()->save($link);
         $this->mail->registered($user);
 
-        return \View::make('auth.success');
+        return response()->json(['success' => true], 201);
+       
     }
 }
