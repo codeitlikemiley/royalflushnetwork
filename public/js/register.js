@@ -39,13 +39,13 @@ $('#registration_form').on('submit', function(e){
                 {
                     loader('off');
   
-                    Materialize.toast('Thanks For Registration', 4000,'',function(){console.log(data);});
+                    Materialize.toast('Thanks For Registration', 4000,'',function(){console.log('User Has Been Registered!');});
         			resetForm($('#registration_form'));
                 },
                 error:function(data)
                 {
                     loader('off');
-                   console.log(data);
+                   
                     var errors = data.responseJSON;
 
                     $.each(errors.errors, function(index, error) 
