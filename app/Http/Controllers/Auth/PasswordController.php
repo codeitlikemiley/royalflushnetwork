@@ -54,6 +54,8 @@ class PasswordController extends Controller
      */
     public function reset($email, $token)
     {
+       $user = User::where('email', $email)->firstOrFail();
+       $active_token = User::where('activation_code', $token)->firstOrFail();
         return \View::make('auth.reset', compact('token', 'email'));
     }
 
