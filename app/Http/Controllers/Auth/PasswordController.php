@@ -66,7 +66,8 @@ class PasswordController extends Controller
     {
         $user = User::where('email', $request->email)->firstOrFail();
         if ($user->activation_code == $request->token) {
-            $user->password = bcrypt($request->password);
+            $user->password = $request->password;
+            $user->activation_code = '';
             $user->save();
 
             return \View::make('auth.restored');
@@ -93,6 +94,9 @@ class PasswordController extends Controller
         }
 
         $user = User::where('email', $request->email)->firstOrFail();
+        $activation_code = str_random(60) . $request->input('email');
+        $user->activation_code = $activation_code;
+        $user->save();
         $this->mail->passwordLink($user);
         return \View::make('auth.success');
     }

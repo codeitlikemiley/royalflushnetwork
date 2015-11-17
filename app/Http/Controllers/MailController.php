@@ -78,7 +78,7 @@ class MailController extends Controller
         $data = array(
             'subject' => 'Account activated',
             'body' => 'Your account has been succsessfully activated.',
-            'title' => 'Welcome to our platform',
+            'title' => 'Welcome to Royal Flush Network!',
             'email' => $user->email,
         );
 
