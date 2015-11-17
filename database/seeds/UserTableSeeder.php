@@ -18,7 +18,6 @@ class UserTableSeeder extends Seeder
             'password' => bcrypt('supervip'),
             'active' => 1,
             'status' => 1,
-            'activation_code' => bcrypt('power'),
             'created_at' => \Carbon\Carbon::now(),
             'updated_at' => \Carbon\Carbon::now(),
 

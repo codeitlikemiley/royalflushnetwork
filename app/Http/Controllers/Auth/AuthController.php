@@ -145,12 +145,14 @@ class AuthController extends Controller
     public function activate($email, $activation_code)
     {
 
-        $user = User::where('email', $email)
-                ->first();
+        $user = User::where('email', $email)->first();
+        $active = User::where('activation_code', $activation_code)->first();
         if($user){
+
             if($user->activation_code === $activation_code){
                 $user->active = true;
                 $user->status = true;
+                $user->activation_code = '';
                 $user->save();
                 $this->mail->activated($user);
                 return \View::make('auth.active');    
