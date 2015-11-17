@@ -33,6 +33,7 @@
     {!! HTML::script('js/login.js') !!}
     {!! HTML::script('js/search.js') !!}
     {!! HTML::script('js/register.js') !!}
+    {!! HTML::script('js/passwordreset.js') !!}
 
     {{-- {!! HTML::script('https://www.google.com/recaptcha/api.js') !!} --}}
     <script src="https://www.google.com/recaptcha/api.js?onload=CaptchaCallback&render=explicit" async defer></script>

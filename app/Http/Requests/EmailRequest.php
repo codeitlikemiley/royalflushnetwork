@@ -23,6 +23,7 @@ class EmailRequest extends Request
     {
         return [
             'email' => 'required|exists:users,email',
+            'g-recaptcha-response' => 'required',
         ];
     }
 
@@ -35,6 +36,9 @@ class EmailRequest extends Request
     {
         return [
             'email.exists' => 'Your email address is not registered.',
+            'email.required' => 'We Require An Email Address to Reset Password!',
+            'g-recaptcha-response.required' => 'You Forgot to Answer Captcha!'
+            
         ];
     }
 }

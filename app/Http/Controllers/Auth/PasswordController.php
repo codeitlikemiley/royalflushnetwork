@@ -10,6 +10,7 @@ use App\Http\Controllers\MailController as Mail;
 use App\Http\Requests\EmailRequest;
 use Validator;
 use App\Http\Requests\PasswordRequest;
+use App\Traits\CaptchaTrait;
 
 class PasswordController extends Controller
 {
@@ -23,7 +24,7 @@ class PasswordController extends Controller
     | explore this trait and override any methods you wish to tweak.
     |
     */
-
+    use CaptchaTrait;
     public $mail;
 
     /**
@@ -86,13 +87,15 @@ class PasswordController extends Controller
     public function sendLink(Request $request)
     {
         $emailRequest = new EmailRequest();
-        $validator = Validator::make($request->all(), $emailRequest->rules());
+        $validator = Validator::make($request->all(), $emailRequest->rules(), $emailRequest->messages());
         if ($validator->fails()) {
-            return redirect()
-                ->back()
-                ->withErrors($validator)
-                ->withInput()
-                ->with('signup', 'active');
+            return response()->json(['success' => false, 'errors' => $validator->errors()->toArray()], 400);
+        }
+
+        if ($this->captchaCheck() == false) {
+            $errors = $validator->errors()->add('captchaerror', 'Wrong Captcha!');
+
+            return response()->json(['success' => false, 'errors' => $errors], 400);
         }
 
         $user = User::where('email', $request->email)->firstOrFail();
@@ -100,6 +103,6 @@ class PasswordController extends Controller
         $user->activation_code = $activation_code;
         $user->save();
         $this->mail->passwordLink($user);
-        return \View::make('auth.success');
+        return response()->json(['success' => true, 'message' => 'We Have  Sent You An Email For Password Reset!'], 200);
     }
 }
