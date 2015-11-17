@@ -49,7 +49,7 @@ Route::get('/resendEmail', 'Auth\AuthController@resendEmail');
 Route::get('materialized', function () {
     return view('materialized');
 });
-// Route For Looking Sponsor By Username
+ // Route For Searching For a Sponsor Thru Ajax 
 Route::post('searchUser', 'SearchController@searchUser');
 // Route For AutoComplete
 Route::get('search/autocomplete', 'SearchController@autocomplete');

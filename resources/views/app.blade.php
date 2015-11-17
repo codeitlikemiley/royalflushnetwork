@@ -30,6 +30,7 @@
     <!--Check the Update of materialize fix for select option-->
     {!! HTML::script('js/matest.min.js') !!}
     {!! HTML::script('vendor/jnewsbar/js/jNewsbar.jquery.min.js') !!}
+    {!! HTML::script('js/login.js') !!}
 
     <!--Under Test JS-->
     {{-- {!! HTML::script('js/vue.js') !!} --}}

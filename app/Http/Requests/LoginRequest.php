@@ -23,7 +23,7 @@ class LoginRequest extends Request
     {
         return [
             'email' => 'required|exists:users,email',
-            'password' => 'required|min:6',
+            'password' => 'required|min:8',
         ];
     }
 
@@ -35,7 +35,10 @@ class LoginRequest extends Request
     public function messages()
     {
         return [
-            'email.exists' => 'notregister',
+            'email.exists' => 'The Email You Enter is Not Registered!',
+            'password.min' => 'The Password You Entered is Too Short!',
+            'password.required' => 'You Cant Log Without a Password!',
+            'email.required' => 'You Cant Log In Without an Email!',
         ];
     }
 }

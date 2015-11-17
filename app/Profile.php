@@ -2,9 +2,6 @@
 
 namespace App;
 
-use App\User;
-
-
 use Illuminate\Database\Eloquent\Model;
 
 class Profile extends Model
@@ -17,7 +14,6 @@ class Profile extends Model
 
     protected $dates = ['created_at', 'updated_at'];
 
-    
     public function setFirstNameAttribute($value)
     {
         $this->attributes['first_name'] = ucfirst(strtolower($value));
@@ -26,16 +22,11 @@ class Profile extends Model
     public function setLastNameAttribute($value)
     {
         $this->attributes['last_name'] = ucfirst(strtolower($value));
-
     }
-
-
 
     // USER RELATION
     public function user()
     {
         return $this->belongsTo('App\User');
     }
-
-
 }
