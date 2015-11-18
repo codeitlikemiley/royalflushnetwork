@@ -14,6 +14,21 @@ $(document).ready(function() {
       }
     }
 
+    function loader(v)
+   {
+      if(v == 'on'){
+        $('#login_form').css({
+          opacity : 0.2
+        });
+        $('#loginloader').show();
+      }else{
+        $('#login_form').css({
+          opacity : 1
+        });
+        $('#loginloader').hide();
+      }
+    }
+
     var base_url = window.location.origin;
 
     function authenticated(url)
@@ -26,7 +41,7 @@ $(document).ready(function() {
             e.preventDefault();
             var passwordReset = $('#passwordreset_form').serializeArray();
             var url = $('#passwordreset_form').attr('action');
-            pageloader('on');
+            loader('on');
             
             $.ajax({
                 url: url,
@@ -35,16 +50,14 @@ $(document).ready(function() {
                 data: passwordReset,
                 success:function(data)
                 {
-                    pageloader('off');
+                    loader('off');
   
                     Materialize.toast(data.message, 4000,'',function(){console.log(data.message);});
-
-                    authenticated(base_url);
 
                 },
                 error:function(data)
                 {
-                    pageloader('off');
+                     loader('off');
                    
                     var errors = data.responseJSON;
 

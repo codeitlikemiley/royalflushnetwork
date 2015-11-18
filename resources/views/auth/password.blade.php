@@ -1,10 +1,10 @@
 @extends('app')
 
 @section('content')
-	<div class="container main">
+	<div class="container">
 		<div class="row center">
 			<div class="card badge light-blue">
-				<strong>Forgot Password? : </strong>Please enter your email below to restore your password</strong>
+				<strong>Forgot Password? : </strong>Please enter your email below to restore your password
 			</div>
 		</div>
 		<div class="row center">
