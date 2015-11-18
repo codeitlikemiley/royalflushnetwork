@@ -14,6 +14,13 @@ $(document).ready(function() {
       }
     }
 
+    var base_url = window.location.origin;
+
+    function authenticated(url)
+   {
+      window.location = url;
+   }
+
 	$('#passwordreset_form').on('submit', function(e){
 
             e.preventDefault();
@@ -31,7 +38,9 @@ $(document).ready(function() {
                     pageloader('off');
   
                     Materialize.toast(data.message, 4000,'',function(){console.log(data.message);});
-        			resetForm($('#passwordreset_form'));
+
+                    authenticated(base_url);
+
                 },
                 error:function(data)
                 {
@@ -48,4 +57,44 @@ $(document).ready(function() {
                 });
       
     });   
+
+    $('#pass_recovery').on('submit', function(e){
+
+                e.preventDefault();
+                var dataPass = $('#pass_recovery').serializeArray();
+                var url = $('#pass_recovery').attr('action');
+                pageloader('on');
+                
+                $.ajax({
+                    url: url,
+                    type: 'POST',
+                    dataType: 'json',
+                    data: dataPass,
+                    success:function(data)
+                    {
+                        pageloader('off');
+      
+                        Materialize.toast(data.message, 4000,'',function(){console.log(data.message);});
+
+                        authenticated(base_url);
+                    },
+                    error:function(data)
+                    {
+                        pageloader('off');
+                       
+                        var errors = data.responseJSON;
+
+                        $.each(errors.errors, function(index, error) 
+                        {
+                            Materialize.toast(error, 4000,'',function(){console.log(error);});
+                        });
+                        
+                    }
+                    });
+          
+        });  
+
+
+
+
 });

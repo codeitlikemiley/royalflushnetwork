@@ -65,18 +65,30 @@ class PasswordController extends Controller
      *
      * @param $request
      */
-    public function save(PasswordRequest $request)
+    public function save(Request $request)
     {
-        $user = User::where('email', $request->email)->firstOrFail();
-        if ($user->activation_code == $request->token) {
+        $passwordRequest = new PasswordRequest();
+        $validator = Validator::make($request->all(), $passwordRequest->rules(), $passwordRequest->messages());
+        if ($validator->fails()) {
+            return response()->json(['success' => false, 'errors' => $validator->errors()->toArray()], 400);
+        }
+
+        if ($this->captchaCheck() == false) {
+            $errors = $validator->errors()->add('captchaerror', 'Wrong Captcha!');
+
+            return response()->json(['success' => false, 'errors' => $errors], 400);
+        }
+
+            $user = User::where('email', $request->email)->firstOrFail();
+            $user->activation_code == $request->token;
             $user->password = $request->password;
             $user->activation_code = '';
             $user->save();
 
-            return \View::make('auth.restored');
-        }
+            return response()->json(['success' => true, 'message' => 'You Have Successfully Reset Your Password!'], 200);
+        
 
-        return redirect()->to('password/reset');
+       
     }
 
     /**
