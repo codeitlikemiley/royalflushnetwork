@@ -58,11 +58,11 @@ Route::get('search/autocomplete', 'SearchController@autocomplete');
 Route::post('signup', ['as' => 'signup', 'uses' => 'Auth\AuthController@create']);
 Route::get('{link?}', ['as' => 'links', 'uses' => 'LinkController@getRefLink']);
 
-// Route::get('activeSponsor/{id}', function($id){
-// 	$id= App\Link::where('id', $id)->firstOrFail()->activeSponsor($id);
-// 	return $id;
+Route::get('activeSponsor/{id}', function($id){
+	$id= App\Link::where('id', $id)->firstOrFail()->activeSponsor($id);
+	return $id;
 
-// });
+});
 
 // Update user account data
 // Route::put('profile', ['as' => 'profile/update', 'uses' => 'UserController@update']); // Not working yet
