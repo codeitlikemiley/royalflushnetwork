@@ -7,9 +7,9 @@
   
   // initialize sidenav button
    $('.button-collapse').sideNav({
-      menuWidth: 300, // Default is 240
+      menuWidth: 250, // Default is 240
       edge: 'left', // Choose the horizontal origin
-      closeOnClick: false // Closes side-nav on <a> clicks, useful for Angular/Meteor
+      closeOnClick: true // Closes side-nav on <a> clicks, useful for Angular/Meteor
     }); //End Button Collapse
 
   
@@ -47,7 +47,7 @@
     position : 'bottom',
     effect : 'slideDown',
     animSpeed: 500,
-    pauseTime : 1000,
+    pauseTime : 2000,
     toggleItems : 11,
     pauseOnHover : false,
     theme : "teal-lighten-2"

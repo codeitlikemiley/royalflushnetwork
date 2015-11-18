@@ -26,8 +26,8 @@
 
               {{-- Google Map --}}
               <div class="card-reveal">
-                <span class="card-title grey-text text-darken-4">Royal Flush Network<i class="material-icons left">close</i></span>
-                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d241.3611082991033!2d121.02433267353825!3d14.554699254140978!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sph!4v1445932685920" width="250" height="300" frameborder="0" style="border:0" allowfullscreen></iframe>
+                <span class="card-title grey-text text-darken-4">Visit Us<i class="material-icons left">close</i></span>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d241.3611082991033!2d121.02433267353825!3d14.554699254140978!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sph!4v1445932685920" width="200" height="250" frameborder="0" style="border:0" allowfullscreen></iframe>
               </div>
         </div>
           
