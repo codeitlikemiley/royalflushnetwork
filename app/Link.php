@@ -99,4 +99,9 @@ class Link extends Model
 
         return $sponsor->id;
     }
+
+    public function code()
+    {
+    	return $this->hasOne('App\Code');
+    }
 }

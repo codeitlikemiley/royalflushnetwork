@@ -63,6 +63,15 @@ Route::get('activeSponsor/{id}', function($id){
 	return $id;
 
 });
+Route::get('code/randomness', function(){
+	$code = App\Code::generateCodes;
+	return $code;
+
+
+});
+
+
+
 
 // Update user account data
 // Route::put('profile', ['as' => 'profile/update', 'uses' => 'UserController@update']); // Not working yet
