@@ -63,12 +63,10 @@ Route::get('activeSponsor/{id}', function($id){
 	return $id;
 
 });
-Route::get('code/randomness', function(){
-	$code = App\Code::generateCodes;
-	return $code;
+// Route::get('code/all', ['as' => 'codeall', 'uses' => 'CodeController@index']); 
+Route::get('code/{UserID}/', ['as' => 'code', 'uses' => 'CodeController@userPaginatedCodes']);
 
 
-});
 
 
 

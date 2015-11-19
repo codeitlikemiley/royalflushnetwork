@@ -14,17 +14,17 @@ class Code extends Model
 
     public static function findByPin($pin)
     {
-        return self::where('pin', $pin)->first();
+        return self::where('pin', $pin)->where('used', false)->firstorFail();
     }
 
     public function link()
     {
-        return $this->belongsTo('App\Link');
+        return $this->belongsTo('App\Link', 'consumer');
     }
 
     public function users()
     {
-        return $this->belongsTo('App\Link');
+        return $this->belongsTo('App\User', 'creator', 'id');
     }
 
     public function generateCodes($qty)
@@ -32,16 +32,19 @@ class Code extends Model
         $u = $qty;
         $i = 0;
         while ($i < $u) {
-            $code = Code::findByPin($this->generatePin());
-            $code = new Code();
-            $code->pin = $this->generatePin();
-            $code->secret = $this->generateSecret();
-            $code->creator = 1;
-            $code->save();
-            ++$i;
+            try {
+                $code = new self();
+                $code->pin = $this->generatePin();
+                $code->secret = $this->generateSecret();
+                $code->creator = 1;
+                $code->save();
+                ++$i;
+            } catch (\Illuminate\Database\QueryException $e) {
+                $i;
+            }
         }
 
-        return "You Have Generated $u Codes";
+        return "You Created  $i / $u Codes";
     }
 
     public function generatePin()
