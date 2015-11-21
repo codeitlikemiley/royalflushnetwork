@@ -13,31 +13,36 @@ $( document )
             window.location = url;
         }
 
+        function resetForm($form) {
+        $form.find('input:text, input:password, input:file, select, textarea').val('');
+        $form.find('input:radio, input:checkbox').removeAttr('checked').removeAttr('selected');
+    }
+
         function loader( v ) {
             if ( v == 'on' ) {
-                $( '#login_form' )
+                $( '#activatefirstlink_form' )
                     .css( {
                         opacity: 0.2
                     } );
-                $( '#loginloader' )
+                $( '#activatorloader' )
                     .show();
             } else {
-                $( '#login_form' )
+                $( '#activatefirstlink_form' )
                     .css( {
                         opacity: 1
                     } );
-                $( '#loginloader' )
+                $( '#activatorloader' )
                     .hide();
             }
         }
 
-        $( '#login_form' )
+        $( '#activatefirstlink_form' )
             .on( 'submit', function ( e ) {
 
                 e.preventDefault();
-                var login_form = $( '#login_form' )
+                var datalink = $( '#activatefirstlink_form' )
                     .serializeArray();
-                var url = $( '#login_form' )
+                var url = $( '#activatefirstlink_form' )
                     .attr( 'action' );
                 loader( 'on' );
 
@@ -45,7 +50,7 @@ $( document )
                     url: url,
                     type: 'POST',
                     dataType: 'json',
-                    data: login_form,
+                    data: datalink,
                     success: function ( data ) {
                         loader( 'off' );
 
@@ -64,7 +69,9 @@ $( document )
                             } );
                         }
                         if ( data.success === true ) {
-                            authenticated( data.url );
+                            var $toastContent = $('<span>Congratulations! Your Link is Activated!</span>');
+  Materialize.toast($toastContent, 5000);
+  resetForm($('#activatefirstlink_form'));
                         }
                     },
                     error: function ( data ) {

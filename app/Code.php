@@ -41,35 +41,42 @@ class Code extends Model
     /**
      * Scope of Specified Pin
      */
-    public function scopePin($pin)
+    public function scopePin($query, $pin)
     {
         return $query->where('pin', $pin);
     }
     /**
+     * Scope of Specified Secret
+     */
+    public function scopeSecret($query, $secret)
+    {
+        return $query->where('secret', $secret);
+    }
+    /**
      * Scope of UNUSED codes
      */
-    public function scopeUnusedCodes()
+    public function scopeUnusedCodes($query)
     {
         return $query->where('used', false);
     }
     /**
      * Scope of Specified USERID
      */
-    public function scopeCreator($creator)
+    public function scopeCreator($query, $creator)
     {
         return $query->where('creator', $creator);
     }
     /**
      * Scope of a Specified LINKID
      */
-    public function scopeConsumer($consumer)
+    public function scopeConsumer($query, $consumer)
     {
-        return $query->where('consumer', $creator);
+        return $query->where('consumer', $consumer);
     }
     /**
      * Scope With > 3 Code Attempts
      */
-    public function scopeTooManyCodeAttempts()
+    public function scopeTooManyCodeAttempts($query)
     {
         return $query->where('attempts', '>', 3);
     }
@@ -117,7 +124,7 @@ class Code extends Model
      */
     public function incrementCodeAttempts($pin)
     {
-        return Code::findByPin($pin)->update(array('attempts' => $this->attempts + 1));
+        return Code::findByPin($pin)->update(array('attempts' => $this->attempts++));
     }
     /**
      * Reset Attempts to 0 and set Blocked Status to False

@@ -7,14 +7,23 @@ use App\Code;
 use DB;
 use App\User;
 use App\Link;
+use App\Traits\CaptchaTrait;
+use App\Http\Requests\ActivateLinkRequest;
+use Validator;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class CodeController extends Controller
 {
+    use CaptchaTrait;
     public $code;
+    public $link;
+    public $user;
 
-    public function __construct(Code $code)
+    public function __construct(Code $code, User $user, Link $link)
     {
         $this->code = $code;
+        $this->link = $link;
+        $this->user = $user;
     }
     /**
      * This Will Display All The Codes Paginate by 50 Per Page
@@ -192,5 +201,59 @@ class CodeController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function showActivateLink()
+    {
+        return view('materialized');
+    }
+
+    public function activateLink(Request $request)
+    {
+        $activateLinkRequest = new activateLinkRequest();
+        $validator           = Validator::make($request->all(), $activateLinkRequest->rules(), $activateLinkRequest->messages());
+
+        if ($validator->fails()) {
+            return response()->json(['success' => false, 'errors' => $validator->errors()->toArray()], 400);
+        }
+        if ($this->captchaCheck() == false) {
+            $errors = $validator->errors()->add('captchaerror', 'Wrong Captcha!');
+
+            return response()->json(['success' => false, 'errors' => $errors], 200);
+        }
+
+        $pin        = $request->pin;
+        $secret     = $request->secret;
+        $link       = $request->link;
+        $code       = Code::findByPin($pin);
+        if ($code->attempts > 4) {
+            $code->blocked = true;
+            $code->save();
+        }
+        if ($code->blocked === true) {
+            $errors = $validator->errors()->add('CodeError', 'Your Code is Blocked');
+
+            return response()->json(['success' => false, 'errors' => $errors], 423);
+        }
+        try {
+            $validcode = Code::findByPin($pin)->secret($secret)->firstOrFail();
+        } catch (ModelNotFoundException $e) {
+            $code           = Code::findByPin($pin);
+            $code->attempts = $code->attempts + 1;
+            $code->save();
+            $attempts       = $code->attempts;
+            $errorMessage   = 5 - $attempts . ' More Attempt Until Code is Blocked!';
+            $errors         = $validator->errors()->add('CodeError', $errorMessage);
+
+            return response()->json(['success' => false, 'errors' => $errors], 400);
+        }
+        // attach Link to a Code
+        Link::findByLink($link)->code()->save($code);
+        $link             = Link::findByLink($link);
+        $link->active     = true;
+        $link->sp_link_id = $link->activeSponsor($link->sp_link_id);
+        $link->save();
+
+        return response()->json(['success' => true, 'url' => 'FirstLink'], 201);
     }
 }

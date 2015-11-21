@@ -54,6 +54,9 @@ Route::post('searchUser', 'SearchController@searchUser');
 // Route For AutoComplete
 Route::get('search/autocomplete', 'SearchController@autocomplete');
 
+Route::get('activate/FirstLink', 'CodeController@showActivateLink');
+Route::post('activate/FirstLink', ['as' => '1stlinkactivation', 'uses' => 'CodeController@activateLink']);
+// after first link is activated dont show anymore this url to them
 Route::post('signup', ['as' => 'signup', 'uses' => 'Auth\AuthController@create']);
 Route::get('{link?}', ['as' => 'links', 'uses' => 'LinkController@getRefLink']);
 

@@ -1,13 +1,13 @@
 <!DOCTYPE html>
   <html>
     <!--Import Header-->
-    @include('layouts.header') 
+    @include('layouts.header')
 
     <body>
     <!--Import Navbar-->
     @include('layouts.navbar')
     <!--Import Search Bar-->
-    @include('search') 
+    @include('search')
    <!--Import Page Loader-->
     @include('layouts.loader')
 
@@ -33,6 +33,7 @@
     {!! HTML::script('js/login.js') !!}
     {!! HTML::script('js/search.js') !!}
     {!! HTML::script('js/register.js') !!}
+    {!! HTML::script('js/activatefirstlink.js') !!}
     {!! HTML::script('js/passwordreset.js') !!}
 
     {{-- {!! HTML::script('https://www.google.com/recaptcha/api.js') !!} --}}
@@ -48,7 +49,7 @@
     {{-- {!! HTML::script('js/vue.js') !!} --}}
     {{-- {!! HTML::script('js/vue-resource.js') !!} --}}
     {{-- {!! HTML::script('js/myvue.js') !!} --}}
-    
+
     <!--Custom JS Here!-->
     @include('layouts.ajax')
     </body>
