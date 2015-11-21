@@ -13,10 +13,15 @@ $( document )
             window.location = url;
         }
 
-        function resetForm($form) {
-        $form.find('input:text, input:password, input:file, select, textarea').val('');
-        $form.find('input:radio, input:checkbox').removeAttr('checked').removeAttr('selected');
-    }
+        function resetForm( $form ) {
+            $form.find(
+                    'input:text, input:password, input:file, select, textarea'
+                )
+                .val( '' );
+            $form.find( 'input:radio, input:checkbox' )
+                .removeAttr( 'checked' )
+                .removeAttr( 'selected' );
+        }
 
         function loader( v ) {
             if ( v == 'on' ) {
@@ -69,9 +74,14 @@ $( document )
                             } );
                         }
                         if ( data.success === true ) {
-                            var $toastContent = $('<span>Congratulations! Your Link is Activated!</span>');
-  Materialize.toast($toastContent, 5000);
-  resetForm($('#activatefirstlink_form'));
+                            var $toastContent = $(
+                                '<span>Congratulations! Your Link is Activated!</span>'
+                            );
+                            Materialize.toast(
+                                $toastContent, 5000 );
+                            resetForm( $(
+                                '#activatefirstlink_form'
+                            ) );
                         }
                     },
                     error: function ( data ) {

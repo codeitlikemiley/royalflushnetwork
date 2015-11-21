@@ -210,7 +210,7 @@ class CodeController extends Controller
 
     public function activateLink(Request $request)
     {
-        $activateLinkRequest = new activateLinkRequest();
+        $activateLinkRequest = new ActivateLinkRequest();
         $validator           = Validator::make($request->all(), $activateLinkRequest->rules(), $activateLinkRequest->messages());
 
         if ($validator->fails()) {
@@ -231,7 +231,7 @@ class CodeController extends Controller
             $code->save();
         }
         if ($code->blocked === true) {
-            $errors = $validator->errors()->add('CodeError', 'Your Code is Blocked');
+            $errors = $validator->errors()->add('CodeError', 'Maximum Tries Reach! Code is Blocked!');
 
             return response()->json(['success' => false, 'errors' => $errors], 423);
         }
@@ -247,7 +247,7 @@ class CodeController extends Controller
 
             return response()->json(['success' => false, 'errors' => $errors], 400);
         }
-        // attach Link to a Code
+        // attach Link to a Code and attach Link to Active Sponsor
         Link::findByLink($link)->code()->save($code);
         $link             = Link::findByLink($link);
         $link->active     = true;
