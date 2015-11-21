@@ -49,27 +49,22 @@ Route::get('/resendEmail', 'Auth\AuthController@resendEmail');
 Route::get('materialized', function () {
     return view('materialized');
 });
- // Route For Searching For a Sponsor Thru Ajax 
+ // Route For Searching For a Sponsor Thru Ajax
 Route::post('searchUser', 'SearchController@searchUser');
 // Route For AutoComplete
 Route::get('search/autocomplete', 'SearchController@autocomplete');
 
-
 Route::post('signup', ['as' => 'signup', 'uses' => 'Auth\AuthController@create']);
 Route::get('{link?}', ['as' => 'links', 'uses' => 'LinkController@getRefLink']);
 
-Route::get('activeSponsor/{id}', function($id){
-	$id= App\Link::where('id', $id)->firstOrFail()->activeSponsor($id);
-	return $id;
+Route::get('activeSponsor/{id}', function ($id) {
+    $id = App\Link::where('id', $id)->firstOrFail()->activeSponsor($id);
+
+    return $id;
 
 });
-// Route::get('code/all', ['as' => 'codeall', 'uses' => 'CodeController@index']); 
-Route::get('code/{UserID}/', ['as' => 'code', 'uses' => 'CodeController@userPaginatedCodes']);
-
-
-
-
-
+// Route::get('code/all', ['as' => 'codeall', 'uses' => 'CodeController@index']);
+Route::get('code/{linkID}/{PINCODE}', ['as' => 'code', 'uses' => 'CodeController@attachLink']);
 
 // Update user account data
 // Route::put('profile', ['as' => 'profile/update', 'uses' => 'UserController@update']); // Not working yet
@@ -89,3 +84,4 @@ Route::get('code/{UserID}/', ['as' => 'code', 'uses' => 'CodeController@userPagi
 //
 
 //Route::get('/activate/{code}', 'Auth\AuthController@activateAccount
+

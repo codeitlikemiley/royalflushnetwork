@@ -19,9 +19,11 @@ class CreateCodesTable extends Migration
             $table->string('secret');
             $table->integer('creator')->unsigned()->nullable();
             $table->foreign('creator')->references('id')->on('users');
-            $table->integer('consumer')->unsigned()->nullable();
+            $table->integer('consumer')->unsigned()->nullable()->unique();
             $table->foreign('consumer')->references('id')->on('links');
+            $table->tinyInteger('attempts');
             $table->boolean('used')->default(0);
+            $table->boolean('blocked')->default(0);
             $table->timestamp('date_used');
             $table->timestamps();
         });

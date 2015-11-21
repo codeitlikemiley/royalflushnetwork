@@ -1,5 +1,5 @@
 $(document).ready(function() {
-     
+
      $.ajaxSetup({
   headers: {
   'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -33,7 +33,7 @@ $(document).ready(function() {
             var login_form = $('#login_form').serializeArray();
             var url = $('#login_form').attr('action');
             loader('on');
-            
+
             $.ajax({
                 url: url,
                 type: 'POST',
@@ -42,9 +42,9 @@ $(document).ready(function() {
                 success:function(data)
                 {
                     loader('off');
-                    
+
                     if(data.success === false){
-                    $.each(data.errors, function(index, error) 
+                    $.each(data.errors, function(index, error)
                     {
                         Materialize.toast(error, 4000,'',function(){console.log(error);});
                     });
@@ -57,20 +57,18 @@ $(document).ready(function() {
                 error:function(data)
                 {
                     loader('off');
-                    var errors = data.responseJSON;  
-                    $.each(errors.errors, function(index, error) 
+                    var errors = data.responseJSON;
+                    $.each(errors.errors, function(index, error)
                     {
                         Materialize.toast(error, 4000,'',function(){console.log(error);});
                     });
-                    
+
                 }
                 });
-      
-    });   
+
+    });
 
 
 
 
 });
-
-   

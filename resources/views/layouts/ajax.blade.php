@@ -4,7 +4,7 @@
 
    $('select').material_select();
 
-  
+
   // initialize sidenav button
    $('.button-collapse').sideNav({
       menuWidth: 250, // Default is 240
@@ -12,10 +12,10 @@
       closeOnClick: true // Closes side-nav on <a> clicks, useful for Angular/Meteor
     }); //End Button Collapse
 
-  
 
-  
-   
+
+
+
    // modal trigger for bottomsheet
    $('.modal-trigger').leanModal({
       dismissible: true, // Modal can be dismissed by clicking outside of the modal
@@ -35,12 +35,12 @@
    // initialize slider
    $('.slider').slider();
 
-  
-    
-    
-  
 
-    
+
+
+
+
+
 
     // newsbar initialize
     $('div.latest_payouts').jNewsbar({
@@ -58,10 +58,10 @@
 
 
 
-  
-    
-    
+
+
+
 
     });// end of document ready
-})(jQuery);     
+})(jQuery);
 </script>

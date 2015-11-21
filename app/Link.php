@@ -113,6 +113,6 @@ class Link extends Model
 
     public function code()
     {
-        return $this->hasOne('App\Code', 'consumer', 'id');
+        return $this->hasOne('App\Code','consumer','id');
     }
 }
