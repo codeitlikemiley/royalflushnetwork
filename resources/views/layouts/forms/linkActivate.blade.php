@@ -47,7 +47,7 @@
         {!! Form::open(['route'=> 'password/postEmail', 'class' => 'col s12', 'id' => 'passwordreset_form' ]) !!}
         <div class="row">
           <div class="input-field col s12">
-            <i class="mdi-action-lock-outline prefix"></i>
+            <i class="mdi-action-lock-outliene prefix"></i>
             {!! Form::email('email','',['placeholder' => 'Email' , 'class' => 'validate', 'required' =>'email']) !!}
           </div>
         </div>
