@@ -55,7 +55,7 @@ class Code extends Model
     /**
      * Scope of UNUSED codes
      */
-    public function scopeUnusedCodes($query)
+    public function scopeUnusedCode($query)
     {
         return $query->where('used', false);
     }

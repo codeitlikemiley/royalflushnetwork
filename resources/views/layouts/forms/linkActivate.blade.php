@@ -6,8 +6,7 @@
    <div class="row">
      <div class="input-field col s12">
        <i class="material-icons prefix">link</i>
-         <input id="link" type="text" class="validate" name="link" required="link">
-         <label for="link" data-error="LinkRequired" data-success="Ok" >Link</label>
+         <input id="link" type="text"  name="link"  readonly value="iyuri305">
 
      </div>
    </div>

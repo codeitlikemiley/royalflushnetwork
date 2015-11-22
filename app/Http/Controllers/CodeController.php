@@ -8,8 +8,8 @@ use DB;
 use App\User;
 use App\Link;
 use App\Traits\CaptchaTrait;
-use App\Http\Requests\ActivateLinkRequest;
 use Validator;
+use App\Http\Requests\ActivateFirstLinkRequest;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class CodeController extends Controller
@@ -203,29 +203,40 @@ class CodeController extends Controller
         //
     }
 
-    public function showActivateLink()
+    public function showActivateFirstLink()
     {
-        return view('materialized');
+        return view('auth.activateFirstLink');
     }
 
-    public function activateLink(Request $request)
+    public function activateFirstLink(Request $request)
     {
-        $activateLinkRequest = new ActivateLinkRequest();
-        $validator           = Validator::make($request->all(), $activateLinkRequest->rules(), $activateLinkRequest->messages());
+        $activateFirstLinkRequest = new ActivateFirstLinkRequest();
+        $validator                = Validator::make($request->all(), $activateFirstLinkRequest->rules(), $activateFirstLinkRequest->messages());
 
         if ($validator->fails()) {
             return response()->json(['success' => false, 'errors' => $validator->errors()->toArray()], 400);
         }
         if ($this->captchaCheck() == false) {
-            $errors = $validator->errors()->add('captchaerror', 'Wrong Captcha!');
+            $errors = $validator->errors()->add('captchaerror', 'Captcha Expired Refresh Page!');
+
+            return response()->json(['success' => false, 'errors' => $errors], 200);
+        }
+        $pin        = $request->pin;
+        $secret     = $request->secret;
+        $link       = $request->link;
+        $code       = Code::where('pin', $pin)->first();
+        $link       = Link::findByLink($link);
+        if ($link->active == true) {
+            $errors = $validator->errors()->add('linkerror', 'Your Link is Already Active');
+
+            return response()->json(['success' => false, 'errors' => $errors], 200);
+        }
+        if ($code->used == true) {
+            $errors = $validator->errors()->add('linkerror', 'Your Code is Already Used!');
 
             return response()->json(['success' => false, 'errors' => $errors], 200);
         }
 
-        $pin        = $request->pin;
-        $secret     = $request->secret;
-        $link       = $request->link;
-        $code       = Code::findByPin($pin);
         if ($code->attempts > 4) {
             $code->blocked = true;
             $code->save();
@@ -247,9 +258,11 @@ class CodeController extends Controller
 
             return response()->json(['success' => false, 'errors' => $errors], 400);
         }
-        // attach Link to a Code and attach Link to Active Sponsor
-        Link::findByLink($link)->code()->save($code);
-        $link             = Link::findByLink($link);
+        // $code here inherent call above
+        // $link is modified already to object not string link
+        // Both $code and $link are Object Already
+        $code->used       = true;
+        $link->code()->save($code);
         $link->active     = true;
         $link->sp_link_id = $link->activeSponsor($link->sp_link_id);
         $link->save();

@@ -58,7 +58,7 @@ $( document )
                     data: datalink,
                     success: function ( data ) {
                         loader( 'off' );
-
+                        
                         if ( data.success === false ) {
                             $.each( data.errors, function (
                                 index, error ) {

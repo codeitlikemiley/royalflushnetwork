@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-class ActivateLinkRequest extends Request
+class ActivateFirstLinkRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
