@@ -35,3 +35,27 @@ $factory->define(App\Link::class, function (Faker\Generator $faker) {
         'active'         => 0,
     ];
 });
+$factory->defineAs(App\Link::class, 'active-links', function ($faker) {
+    $users = App\User::all()->lists('id')->toArray();
+    $links = App\Link::all()->lists('id')->toArray();
+
+    return [
+        'link'           => str_replace('.', '_', $faker->unique()->userName),
+        'user_id'        => $faker->optional(),
+        'sp_user_id'     => $faker->randomElement($users),
+        'sp_link_id'     => $faker->randomElement($links),
+        'active'         => 1,
+    ];
+});
+$factory->defineAs(App\Link::class, 'inactive-links', function ($faker) {
+    $users = App\User::all()->lists('id')->toArray();
+    $links = App\Link::all()->lists('id')->toArray();
+
+    return [
+        'link'           => str_replace('.', '_', $faker->unique()->userName),
+        'user_id'        => $faker->optional(),
+        'sp_user_id'     => $faker->randomElement($users),
+        'sp_link_id'     => $faker->randomElement($links),
+        'active'         => 0,
+    ];
+});
