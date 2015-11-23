@@ -22,14 +22,4 @@ class Cardline extends Model
     {
         return $this->morphTo();
     }
-
-    public function overridePoints($lid)
-    {
-        return $this->cardline->card()->overridePoints($lid);
-    }
-
-    public function freePoints()
-    {
-        return $this->cardline->card()->freepoints;
-    }
 }
