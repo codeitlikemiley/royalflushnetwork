@@ -16,7 +16,7 @@ class UserTableSeeder extends Seeder
 
                 'username'   => 'supervip',
                 'email'      => 'supervip@maxpayout.com',
-                'password'   => 'supervip',
+                'password'   => bcrypt('supervip'),
                 'active'     => 1,
                 'status'     => 1,
                 'created_at' => \Carbon\Carbon::now(),
@@ -38,6 +38,6 @@ class UserTableSeeder extends Seeder
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now(),
             ]);
-        } //endforech
+        } //endforeach
     } // end function run
 }
