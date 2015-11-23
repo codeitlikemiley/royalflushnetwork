@@ -32,8 +32,6 @@ $factory->define(App\Link::class, function (Faker\Generator $faker) {
         'user_id'        => $faker->optional(),
         'sp_user_id'     => $faker->randomElement($users),
         'sp_link_id'     => $faker->randomElement($links),
-        'password'       => bcrypt('password'),
-        'remember_token' => str_random(64),
-        'active'         => 1,
+        'active'         => 0,
     ];
 });
