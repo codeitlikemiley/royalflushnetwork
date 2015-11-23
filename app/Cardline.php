@@ -8,9 +8,9 @@ class Cardline extends Model
 {
     protected $table = "cardlines";
 
-    public static function findByPin($link)
+    public static function findLinkID($lid)
     {
-        return self::where('link', $link)->get();
+        return self::where('link_id', $lid)->get();
     }
 
     public function cardlink()
@@ -23,8 +23,13 @@ class Cardline extends Model
         return $this->morphTo();
     }
 
-    public function points($link)
+    public function overridePoints($lid)
     {
-        return $this->cardline->points($link);
+        return $this->cardline->card()->overridePoints($lid);
+    }
+
+    public function freePoints()
+    {
+        return $this->cardline->card()->freepoints;
     }
 }

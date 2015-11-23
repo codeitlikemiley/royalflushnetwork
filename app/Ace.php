@@ -36,7 +36,7 @@ class Ace extends Model
 
     public function freePoints()
     {
-        $jack              = Jack::where('shuffle', false)->first();
+        $ace               = Ace::where('shuffle', false)->first();
         $cardline          = new App\Cardline();
         $cardline->points  = 1;
         $ace->cardpoints()->save($cardline);
