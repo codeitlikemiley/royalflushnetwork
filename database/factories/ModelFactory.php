@@ -24,11 +24,11 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
     ];
 });
 $factory->define(App\Link::class, function (Faker\Generator $faker) {
-    $users = User::all()->lists('id');
-    $links = Link::all()->lists('id');
+    $users = App\User::all()->lists('id')->toArray();
+    $links = App\Link::all()->lists('id')->toArray();
 
     return [
-        'link'           => $faker->userName,
+        'link'           => str_replace('.', '_', $faker->unique()->userName),
         'user_id'        => $faker->optional(),
         'sp_user_id'     => $faker->randomElement($users),
         'sp_link_id'     => $faker->randomElement($links),
