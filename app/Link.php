@@ -115,4 +115,30 @@ class Link extends Model
     {
         return $this->hasOne('App\Code', 'consumer', 'id');
     }
+
+    public function cardlines()
+    {
+        return $this->hasMany('App\Cardline', 'link_id', 'id');
+    }
+
+    public function tencards()
+    {
+        return $this->hasMany('App\Ten', 'link_id', 'id');
+    }
+    public function jackcards()
+    {
+        return $this->hasMany('App\Jack', 'link_id', 'id');
+    }
+    public function queencards()
+    {
+        return $this->hasMany('App\Queen', 'link_id', 'id');
+    }
+    public function kingcards()
+    {
+        return $this->hasMany('App\King', 'link_id', 'id');
+    }
+    public function acecards()
+    {
+        return $this->hasMany('App\Ace', 'link_id', 'id');
+    }
 }

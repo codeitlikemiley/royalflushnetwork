@@ -14,8 +14,10 @@ class CreateAceCardLineTable extends Migration
     {
         Schema::create('aces', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('link_id')->unsigned();
+            $table->foreign('link_id')->references('id')->on('links');
             $table->integer('min_direct')->unsigned();
-            $table->integer('points')->unsigned();
+            $table->boolean('shuffle')->default(0);
             $table->timestamps();
         });
     }

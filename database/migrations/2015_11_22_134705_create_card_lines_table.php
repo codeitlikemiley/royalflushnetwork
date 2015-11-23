@@ -14,9 +14,11 @@ class CreateCardLinesTable extends Migration
     {
         Schema::create('cardlines', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('pin')->unique();
+            $table->integer('link_id')->unsigned();
+            $table->foreign('link_id')->references('id')->on('links');
             $table->string('card_type')->unique();
             $table->integer('card_id')->unsigned();
+            $table->integer('points')->unsigned();
             $table->timestamps();
         });
     }

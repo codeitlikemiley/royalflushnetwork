@@ -8,13 +8,39 @@ class Jack extends Model
 {
     protected $table = "jacks";
 
-    public function cardline()
+    protected $dates = ['created_at', 'updated_at'];
+
+    protected $casts = [
+        'shuffle'    => 'boolean',
+    ];
+
+    public function cardpoints()
     {
-        return $this->morpOne('Cardline', 'card');
+        return $this->morphMany('App\Cardline', 'card');
     }
 
-    public function points($link)
+    public function jacklinks()
     {
-        return $this->points;
+        return $this->belongsTo('App\Link', 'link_id', 'id');
+    }
+
+    public function overridePoints($lid)
+    {
+        $jack              = Jack::where('link_id', $lid)->where('shuffle', false)->first();
+        $cardline          = new App\Cardline();
+        $cardline->points  = 1;
+        $jack->cardpoints()->save($cardline);
+        $jack->shuffle = true;
+        $jack->save();
+    }
+
+    public function freePoints()
+    {
+        $jack              = Jack::where('shuffle', false)->first();
+        $cardline          = new App\Cardline();
+        $cardline->points  = 1;
+        $jack->cardpoints()->save($cardline);
+        $jack->shuffle = true;
+        $jack->save();
     }
 }

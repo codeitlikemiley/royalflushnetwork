@@ -8,12 +8,38 @@ class Ten extends Model
 {
     protected $table = "tens";
 
-    public function cardline()
+    protected $dates = ['created_at', 'updated_at'];
+
+    protected $casts = [
+        'shuffle'    => 'boolean',
+    ];
+
+    public function cardpoints()
     {
-        return $this->morpOne('Cardline', 'card');
+        return $this->morphMany('App\Cardline', 'card');
     }
-    public function points($link)
+    public function tenlinks()
     {
-        return $this->points;
+        return $this->belongsTo('App\Link', 'link_id', 'id');
+    }
+
+    public function overridePoints($lid)
+    {
+        $ten              = Ten::where('link_id', $lid)->where('shuffle', false)->first();
+        $cardline         = new App\Cardline();
+        $cardline->points = 1;
+        $ten->cardpoints()->save($cardline);
+        $ten->shuffle = true;
+        $ten->save();
+    }
+
+    public function freePoints()
+    {
+        $ten              = Ten::where('shuffle', false)->first();
+        $cardline         = new App\Cardline();
+        $cardline->points = 1;
+        $ten->cardpoints()->save($cardline);
+        $ten->shuffle = true;
+        $ten->save();
     }
 }

@@ -8,9 +8,14 @@ class Cardline extends Model
 {
     protected $table = "cardlines";
 
-    public static function findByPin($pin)
+    public static function findByPin($link)
     {
-        return self::where('pin', $pin)->first();
+        return self::where('link', $link)->get();
+    }
+
+    public function cardlink()
+    {
+        return $this->belongsTo('App\Link', 'link_id', 'id');
     }
 
     public function card()
