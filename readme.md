@@ -30,19 +30,19 @@ Finished and Integrated
 
 ### Anticipating Update
 
- [ ] User Management System (admin Panel)
- [ ] User Profile (CRUD)
- [x] ~~Code Generator Module~~
- [ ] Offline Payment System
- [ ] Royal Pass Up/ Split UP
- [ ] Royal Matrix
- [ ]  Royal Push Up
- [x] ~~Royal Flush Line~~
- [ ]  Royal Rank Up and Downgrade
- [x] ~~Royal Switch Line~~
- [ ] Royal Flush Bonus
- [ ] Transaction
- [ ] Product Management System
+ * [ ] User Management System (admin Panel)
+ * [ ] User Profile (CRUD)
+ * [x] ~~Code Generator Module~~
+ * [ ] Offline Payment System
+ * [ ] Royal Pass Up/ Split UP
+ * [ ] Royal Matrix
+ * [ ]  Royal Push Up
+ * [x] ~~Royal Flush Line~~
+ * [ ]  Royal Rank Up and Downgrade
+ * [x] ~~Royal Switch Line~~
+ * [ ] Royal Flush Bonus
+ * [ ] Transaction
+ * [ ] Product Management System
 
 #### Contribution
 For Contribution Just Create an Issue!
