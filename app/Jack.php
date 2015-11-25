@@ -44,16 +44,16 @@ class Jack extends Model
         $jack->save();
     }
 
-    public function create($lid)
-    {
-        $jack               = new Jack();
-        $jack->link_id      = $lid;
-        $jack->min_direct   = 2;
-        $cardline           = new Cardline();
-        $cardline->link_id  = $lid;
-        $jack->cardpoints()->save($cardline);
-        $jack->save();
-    }
+    // public function create($lid)
+    // {
+    //     $jack               = new Jack();
+    //     $jack->link_id      = $lid;
+    //     $jack->min_direct   = 2;
+    //     $cardline           = new Cardline();
+    //     $cardline->link_id  = $lid;
+    //     $jack->cardpoints()->save($cardline);
+    //     $jack->save();
+    // }
 
     public function forceCycle($lid)
     {

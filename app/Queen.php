@@ -44,16 +44,16 @@ class Queen extends Model
         $queen->save();
     }
 
-    public function create($lid)
-    {
-        $queen               = new Queen();
-        $queen->link_id      = $lid;
-        $queen->min_direct   = 4;
-        $cardline            = new Cardline();
-        $cardline->link_id   = $lid;
-        $queen->cardpoints()->save($cardline);
-        $queen->save();
-    }
+    // public function create($lid)
+    // {
+    //     $queen               = new Queen();
+    //     $queen->link_id      = $lid;
+    //     $queen->min_direct   = 4;
+    //     $cardline            = new Cardline();
+    //     $cardline->link_id   = $lid;
+    //     $queen->cardpoints()->save($cardline);
+    //     $queen->save();
+    // }
 
     public function forceCycle($lid)
     {

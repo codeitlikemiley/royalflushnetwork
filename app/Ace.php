@@ -44,16 +44,16 @@ class Ace extends Model
         $ace->save();
     }
 
-    public function create($lid)
-    {
-        $ace                 = new Ace();
-        $ace->link_id        = $lid;
-        $ace->min_direct     = 12;
-        $cardline            = new Cardline();
-        $cardline->link_id   = $lid;
-        $ace->cardpoints()->save($cardline);
-        $ace->save();
-    }
+    // public function create($lid)
+    // {
+    //     $ace                 = new Ace();
+    //     $ace->link_id        = $lid;
+    //     $ace->min_direct     = 12;
+    //     $cardline            = new Cardline();
+    //     $cardline->link_id   = $lid;
+    //     $ace->cardpoints()->save($cardline);
+    //     $ace->save();
+    // }
 
     public function forceCycle($lid)
     {

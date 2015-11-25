@@ -11,6 +11,10 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+Route::get('/cardline/ten/{lid}', ['as' => 'forceCycle', 'uses' => 'CardlineController@forceCycle']);
+Route::get('/cardline/create/{lid}', ['as' => 'tenCreate', 'uses' => 'CardlineController@create']);
+Route::get('/cardline/freecycle', ['as' => 'freeCycle', 'uses' => 'CardlineController@free']);
+Route::get('/cardline/switchToJack/{lid}', ['as' => 'switchToJack', 'uses' => 'CardlineController@switchToJack']);
 
 //Get home view
 Route::get('/', ['as' => '/', 'uses' => 'HomeController@index']);

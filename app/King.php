@@ -43,16 +43,16 @@ class King extends Model
         $king->save();
     }
 
-    public function create($lid)
-    {
-        $king                = new King();
-        $king->link_id       = $lid;
-        $king->min_direct    = 6;
-        $cardline            = new Cardline();
-        $cardline->link_id   = $lid;
-        $king->cardpoints()->save($cardline);
-        $king->save();
-    }
+    // public function create($lid)
+    // {
+    //     $king                = new King();
+    //     $king->link_id       = $lid;
+    //     $king->min_direct    = 6;
+    //     $cardline            = new Cardline();
+    //     $cardline->link_id   = $lid;
+    //     $king->cardpoints()->save($cardline);
+    //     $king->save();
+    // }
 
     public function forceCycle($lid)
     {
