@@ -89,6 +89,7 @@ class Ten extends Model
         $ten               = Ten::where('link_id', $lid)->where('shuffle', false)->where('min_direct', '>', 1)->where('canSwitch', true)->first();
         $cardID            = $ten->id;
         $directCount       = $ten->min_direct;
+        $ten->delete();
         $cardline          = Cardline::where('card_type', "App\Ten")->where('card_id', $cardID)->delete();
         $jack              = new Jack();
         $jack->link_id     = $lid;
@@ -97,7 +98,6 @@ class Ten extends Model
         $cardline          = new Cardline();
         $cardline->link_id = $lid;
         $jack->cardpoints()->save($cardline);
-        $ten->delete();
     }
 
     public function switchToQueen($lid)
@@ -105,6 +105,7 @@ class Ten extends Model
         $ten                = Ten::where('link_id', $lid)->where('shuffle', false)->where('min_direct', '>', 3)->where('canSwitch', true)->first();
         $cardID             = $ten->id;
         $directCount        = $ten->min_direct;
+        $ten->delete();
         $cardline           = Cardline::where('card_type', "App\Ten")->where('card_id', $cardID)->delete();
         $queen              = new Queen();
         $queen->link_id     = $lid;
@@ -113,7 +114,6 @@ class Ten extends Model
         $cardline           = new Cardline();
         $cardline->link_id  = $lid;
         $queen->cardpoints()->save($cardline);
-        $ten->delete();
     }
 
     public function switchToKing($lid)
@@ -121,6 +121,7 @@ class Ten extends Model
         $ten                = Ten::where('link_id', $lid)->where('shuffle', false)->where('min_direct', '>', 5)->where('canSwitch', true)->first();
         $cardID             = $ten->id;
         $directCount        = $ten->min_direct;
+        $ten->delete();
         $cardline           = Cardline::where('card_type', "App\Ten")->where('card_id', $cardID)->delete();
         $king               = new King();
         $king->link_id      = $lid;
@@ -129,7 +130,6 @@ class Ten extends Model
         $cardline           = new Cardline();
         $cardline->link_id  = $lid;
         $king->cardpoints()->save($cardline);
-        $ten->delete();
     }
 
     public function switchToAce($lid)
@@ -137,6 +137,7 @@ class Ten extends Model
         $ten                = Ten::where('link_id', $lid)->where('shuffle', false)->where('min_direct', '>', 11)->where('canSwitch', true)->first();
         $cardID             = $ten->id;
         $directCount        = $ten->min_direct;
+        $ten->delete();
         $cardline           = Cardline::where('card_type', "App\Ten")->where('card_id', $cardID)->delete();
         $ace                = new Ace();
         $ace->link_id       = $lid;
@@ -145,6 +146,5 @@ class Ten extends Model
         $cardline           = new Cardline();
         $cardline->link_id  = $lid;
         $ace->cardpoints()->save($cardline);
-        $ten->delete();
     }
 }

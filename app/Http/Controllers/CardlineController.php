@@ -37,12 +37,12 @@ class CardlineController extends Controller
      */
     public function forceCycle($lid)
     {
-        return $this->ten->forceCycle($lid);
+        return $this->ace->forceCycle($lid);
     }
 
     public function switchToJack($lid)
     {
-        return $this->ten->switchToAce($lid);
+        return $this->ace->switchToTen($lid);
     }
 
     /**
@@ -62,9 +62,13 @@ class CardlineController extends Controller
          $ten->cardpoints()->save($cardline);
      }
 
-    public function free()
+    public function FlushLine()
     {
         $this->ten->freeCycle();
+        $this->jack->freeCycle();
+        $this->queen->freeCycle();
+        $this->king->freeCycle();
+        $this->ace->freeCycle();
     }
 
     /**

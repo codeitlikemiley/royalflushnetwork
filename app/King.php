@@ -25,22 +25,23 @@ class King extends Model
 
     public function forceShuffle($lid)
     {
-        $king               = King::where('link_id', $lid)->where('shuffle', false)->first();
-        $cardline           = new Cardline();
-        $cardline->points   = 1;
-        $king->cardpoints()->save($cardline);
-        $king->shuffle = true;
+        $king              = King::where('link_id', $lid)->where('shuffle', false)->first();
+        $king->shuffle     = true;
+        $cardID            = $king->id;
         $king->save();
-    }
+        $cardline = Cardline::where('card_type', "App\King")->where('card_id', $cardID)->update(array('points' => 1));
 
+        return $king;
+    }
     public function freeShuffle()
     {
-        $king               = King::where('shuffle', false)->first();
-        $cardline           = new Cardline();
-        $cardline->points   = 1;
-        $king->cardpoints()->save($cardline);
-        $king->shuffle = true;
+        $king              = King::where('shuffle', false)->first();
+        $king->shuffle     = true;
+        $cardID            = $king->id;
         $king->save();
+        $cardline = Cardline::where('card_type', "App\King")->where('card_id', $cardID)->update(array('points' => 1));
+
+        return $king;
     }
 
     // public function create($lid)
@@ -56,85 +57,93 @@ class King extends Model
 
     public function forceCycle($lid)
     {
-        $king                = $this->forceShuffle($lid);
-        $directCount         = Link::where('sp_link_id', $lid)->where('active', true)->count();
-        $king                = new King();
-        $king->link_id       = $lid;
-        $king->min_direct    = $directCount;
-        $king->canSwitch     = true;
-        $cardline            = new Cardline();
-        $cardline->link_id   = $lid;
-        $king->cardpoints()->save($cardline);
-        $king->save();
+        $king                  = $this->forceShuffle($lid);
+        $directCount           = $king->min_direct;
+        $newKing               = new King();
+        $newKing->link_id      = $lid;
+        $newKing->min_direct   = $directCount;
+        $newKing->canSwitch    = true;
+        $newKing->save();
+        $cardline          = new Cardline();
+        $cardline->link_id = $lid;
+        $newKing->cardpoints()->save($cardline);
     }
 
     public function freeCycle()
     {
-        $king                = $this->freeShuffle;
-        $lid                 = $king->link_id;
-        $directCount         = $king->min_direct;
-        $king                = new King();
-        $king->link_id       = $lid;
-        $king->min_direct    = $directCount;
-        $cardline            = new Cardline();
-        $cardline->link_id   = $lid;
-        $king->cardpoints()->save($cardline);
-        $king->save();
+        $king                  = $this->freeShuffle();
+        $lid                   = $king->link_id;
+        $directCount           = $king->min_direct;
+        $newKing               = new King();
+        $newKing->link_id      = $lid;
+        $newKing->min_direct   = $directCount;
+        $newKing->save();
+        $cardline          = new Cardline();
+        $cardline->link_id = $lid;
+        $newKing->cardpoints()->save($cardline);
     }
 
     public function switchToTen($lid)
     {
-        $king                = King::where('link_id', $lid)->where('shuffle', false)->where('min_direct', '>', 0)->where('canSwitch', true)->first();
-        $directCount         = $king->min_direct;
-        $ten                 = new Ten();
-        $ten->link_id        = $lid;
-        $ten->min_direct     = $directCount;
-        $cardline            = new Cardline();
-        $cardline->link_id   = $lid;
-        $ten->cardpoints()->save($cardline);
-        $ten->save();
+        $king               = King::where('link_id', $lid)->where('shuffle', false)->where('min_direct', '>', 0)->where('canSwitch', true)->first();
+        $cardID             = $king->id;
+        $directCount        = $king->min_direct;
         $king->delete();
+        $cardline          = Cardline::where('card_type', "App\King")->where('card_id', $cardID)->delete();
+        $ten               = new Ten();
+        $ten->link_id      = $lid;
+        $ten->min_direct   = $directCount;
+        $ten->save();
+        $cardline          = new Cardline();
+        $cardline->link_id = $lid;
+        $ten->cardpoints()->save($cardline);
     }
 
     public function switchToJack($lid)
     {
-        $king                 = King::where('link_id', $lid)->where('shuffle', false)->where('min_direct', '>', 1)->where('canSwitch', true)->first();
-        $directCount          = $king->min_direct;
-        $jack                 = new Jack();
-        $jack->link_id        = $lid;
-        $jack->min_direct     = $directCount;
-        $cardline             = new Cardline();
-        $cardline->link_id    = $lid;
-        $jack->cardpoints()->save($cardline);
-        $jack->save();
+        $king                = King::where('link_id', $lid)->where('shuffle', false)->where('min_direct', '>', 1)->where('canSwitch', true)->first();
+        $cardID              = $king->id;
+        $directCount         = $king->min_direct;
         $king->delete();
+        $cardline           = Cardline::where('card_type', "App\King")->where('card_id', $cardID)->delete();
+        $jack               = new Jack();
+        $jack->link_id      = $lid;
+        $jack->min_direct   = $directCount;
+        $jack->save();
+        $cardline           = new Cardline();
+        $cardline->link_id  = $lid;
+        $jack->cardpoints()->save($cardline);
     }
 
     public function switchToQueen($lid)
     {
-        $king                  = King::where('link_id', $lid)->where('shuffle', false)->where('min_direct', '>', 3)->where('canSwitch', true)->first();
-        $directCount           = $king->min_direct;
-        $queen                 = new Queen();
-        $queen->link_id        = $lid;
-        $queen->min_direct     = $directCount;
-        $cardline              = new Cardline();
-        $cardline->link_id     = $lid;
-        $queen->cardpoints()->save($cardline);
-        $queen->save();
+        $king                = King::where('link_id', $lid)->where('shuffle', false)->where('min_direct', '>', 3)->where('canSwitch', true)->first();
+        $cardID              = $king->id;
+        $directCount         = $king->min_direct;
         $king->delete();
+        $cardline            = Cardline::where('card_type', "App\King")->where('card_id', $cardID)->delete();
+        $queen               = new Queen();
+        $queen->link_id      = $lid;
+        $queen->min_direct   = $directCount;
+        $queen->save();
+        $cardline           = new Cardline();
+        $cardline->link_id  = $lid;
+        $queen->cardpoints()->save($cardline);
     }
 
     public function switchToAce($lid)
     {
-        $king                 = King::where('link_id', $lid)->where('shuffle', false)->where('min_direct', '>', 11)->where('canSwitch', true)->first();
-        $directCount          = $king->min_direct;
-        $ace                  = new Ace();
-        $ace->link_id         = $lid;
-        $ace->min_direct      = $directCount;
-        $cardline             = new Cardline();
-        $cardline->link_id    = $lid;
-        $ace->cardpoints()->save($cardline);
-        $ace->save();
+        $king                = King::where('link_id', $lid)->where('shuffle', false)->where('min_direct', '>', 11)->where('canSwitch', true)->first();
+        $cardID              = $king->id;
+        $directCount         = $king->min_direct;
         $king->delete();
+        $cardline           = Cardline::where('card_type', "App\King")->where('card_id', $cardID)->delete();
+        $ace                = new Ace();
+        $ace->link_id       = $lid;
+        $ace->min_direct    = $directCount;
+        $ace->save();
+        $cardline           = new Cardline();
+        $cardline->link_id  = $lid;
+        $ace->cardpoints()->save($cardline);
     }
 }
