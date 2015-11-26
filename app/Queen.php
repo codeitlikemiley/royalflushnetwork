@@ -36,7 +36,7 @@ class Queen extends Model
     }
     public function freeShuffle()
     {
-        $queen              = Queen::where('shuffle', false)->first();
+        $queen              = Queen::where('shuffle', false)->firstOrFail();
         $queen->shuffle     = true;
         $cardID             = $queen->id;
         $queen->save();

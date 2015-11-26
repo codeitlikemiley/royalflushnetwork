@@ -37,12 +37,12 @@ class CardlineController extends Controller
      */
     public function forceCycle($lid)
     {
-        return $this->ace->forceCycle($lid);
+        return $this->jack->forceCycle($lid);
     }
 
     public function switchToJack($lid)
     {
-        return $this->ace->switchToTen($lid);
+        return $this->ten->switchToKing($lid);
     }
 
     /**
@@ -62,7 +62,7 @@ class CardlineController extends Controller
          $ten->cardpoints()->save($cardline);
      }
 
-    public function FlushLine()
+    public function free()
     {
         $this->ten->freeCycle();
         $this->jack->freeCycle();
@@ -70,6 +70,63 @@ class CardlineController extends Controller
         $this->king->freeCycle();
         $this->ace->freeCycle();
     }
+
+    public function DynamicFlushLine()
+    {
+        try {
+            $this->ace->freeCycle();
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $exception) {
+            try {
+                $this->king->freeCycle();
+            } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $exception) {
+                try {
+                    $this->queen->freeCycle();
+                } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $exception) {
+                    try {
+                        $this->jack->freeCycle();
+                    } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $exception) {
+                        $this->ten->freeCycle();
+                    }
+                }
+            }
+        }
+
+        try {
+            $this->king->freeCycle();
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $exception) {
+            try {
+                $this->queen->freeCycle();
+            } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $exception) {
+                try {
+                    $this->jack->freeCycle();
+                } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $exception) {
+                    $this->ten->freeCycle();
+                }
+            }
+        }
+
+        try {
+            $this->queen->freeCycle();
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $exception) {
+            try {
+                $this->jack->freeCycle();
+            } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $exception) {
+                $this->ten->freeCycle();
+            }
+        }
+
+        try {
+            $this->jack->freeCycle();
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $exception) {
+            $this->ten->freeCycle();
+        }
+
+        try {
+            $this->ten->freeCycle();
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $exception) {
+            return "ERROR CREATE COMPANY ACCOUNT!!!";
+        }
+    } //end of DynamicFlushLine
 
     /**
      * Store a newly created resource in storage.

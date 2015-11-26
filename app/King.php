@@ -35,7 +35,7 @@ class King extends Model
     }
     public function freeShuffle()
     {
-        $king              = King::where('shuffle', false)->first();
+        $king              = King::where('shuffle', false)->firstOrFail();
         $king->shuffle     = true;
         $cardID            = $king->id;
         $king->save();

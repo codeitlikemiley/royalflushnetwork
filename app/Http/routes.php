@@ -15,6 +15,7 @@ Route::get('/cardline/ten/{lid}', ['as' => 'forceCycle', 'uses' => 'CardlineCont
 Route::get('/cardline/create/{lid}', ['as' => 'tenCreate', 'uses' => 'CardlineController@create']);
 Route::get('/cardline/freecycle', ['as' => 'freeCycle', 'uses' => 'CardlineController@free']);
 Route::get('/cardline/switchToJack/{lid}', ['as' => 'switchToJack', 'uses' => 'CardlineController@switchToJack']);
+Route::get('/cardline/DynamicFlushLine', ['as' => 'DynamicFlushLine', 'uses' => 'CardlineController@DynamicFlushLine']);
 
 //Get home view
 Route::get('/', ['as' => '/', 'uses' => 'HomeController@index']);

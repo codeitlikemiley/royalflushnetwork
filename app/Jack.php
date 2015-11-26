@@ -36,7 +36,7 @@ class Jack extends Model
     }
     public function freeShuffle()
     {
-        $jack              = Jack::where('shuffle', false)->first();
+        $jack              = Jack::where('shuffle', false)->firstOrFail();
         $jack->shuffle     = true;
         $cardID            = $jack->id;
         $jack->save();
@@ -122,7 +122,7 @@ class Jack extends Model
         $cardID              = $jack->id;
         $directCount         = $jack->min_direct;
         $jack->delete();
-        $cardline           = Cardline::where('card_type', "App\Ten")->where('card_id', $cardID)->delete();
+        $cardline           = Cardline::where('card_type', "App\Jack")->where('card_id', $cardID)->delete();
         $king               = new King();
         $king->link_id      = $lid;
         $king->min_direct   = $directCount;

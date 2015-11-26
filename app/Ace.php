@@ -36,7 +36,7 @@ class Ace extends Model
     }
     public function freeShuffle()
     {
-        $ace               = Ace::where('shuffle', false)->first();
+        $ace               = Ace::where('shuffle', false)->firstOrFail();
         $ace->shuffle      = true;
         $cardID            = $ace->id;
         $ace->save();
