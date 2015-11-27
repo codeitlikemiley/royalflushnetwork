@@ -16,7 +16,7 @@ Route::get('/cardline/create/{lid}', ['as' => 'tenCreate', 'uses' => 'CardlineCo
 Route::get('/cardline/freecycle', ['as' => 'freeCycle', 'uses' => 'CardlineController@free']);
 Route::get('/cardline/switchToJack/{lid}', ['as' => 'switchToJack', 'uses' => 'CardlineController@switchToJack']);
 Route::get('/cardline/DynamicFlushLine', ['as' => 'DynamicFlushLine', 'uses' => 'CardlineController@DynamicFlushLine']);
-
+Route::get('/cardline/Booster/{qty}', ['as' => 'Booster', 'uses' => 'CardlineController@Booster']);
 //Get home view
 Route::get('/', ['as' => '/', 'uses' => 'HomeController@index']);
 //show profile edit form

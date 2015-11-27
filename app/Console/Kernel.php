@@ -14,6 +14,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         \App\Console\Commands\Codegenerator::class,
+        \App\Console\Commands\Booster::class,
     ];
 
     /**
@@ -24,7 +25,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('generate:code')
-                 ->hourly();
+        // $schedule->command('generate:code')
+        //          ->hourly();
     }
 }

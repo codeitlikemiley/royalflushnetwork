@@ -20,6 +20,7 @@ class CardlineController extends Controller
     public $king;
     public $ace;
     public $cardline;
+
     public function __construct(Link $link, Ten $ten, Jack $jack, Queen $queen, King $king, Ace $ace, Cardline $cardline)
     {
         $this->link     = $link;
@@ -37,12 +38,12 @@ class CardlineController extends Controller
      */
     public function forceCycle($lid)
     {
-        return $this->jack->forceCycle($lid);
+        return $this->ten->forceCycle($lid);
     }
 
     public function switchToJack($lid)
     {
-        return $this->ten->switchToKing($lid);
+        return $this->ten->switchToTen($lid);
     }
 
     /**
@@ -62,13 +63,21 @@ class CardlineController extends Controller
          $ten->cardpoints()->save($cardline);
      }
 
+    public function Booster($qty)
+    {
+        $u = $qty;
+        $i = 0;
+        while ($i < $u) {
+            $this->DynamicFlushLine();
+            $i++;
+        }
+
+        return "Booster Has Been Finished Distributing!";
+    }
+
     public function free()
     {
         $this->ten->freeCycle();
-        $this->jack->freeCycle();
-        $this->queen->freeCycle();
-        $this->king->freeCycle();
-        $this->ace->freeCycle();
     }
 
     public function DynamicFlushLine()

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Cardline extends Model
 {
-    protected $table = "cardlines";
+    public $table = "cardlines";
 
     public static function findLinkID($lid)
     {
