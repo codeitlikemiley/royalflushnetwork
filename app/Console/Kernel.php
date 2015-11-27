@@ -15,6 +15,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         \App\Console\Commands\Codegenerator::class,
         \App\Console\Commands\Booster::class,
+        \App\Console\Commands\RandomBooster::class,
     ];
 
     /**

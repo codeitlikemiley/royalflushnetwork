@@ -38,7 +38,7 @@ trait CardTrait
     public function deactivate($lid)
     {
         if ($this->graduate($lid)) {
-            static::where('link_id', $lid)->where('active', true)->update(array('active' => false));
+            static::where('link_id', $lid)->where('active', true)->where('shuffle', false)->update(array('active' => false));
         }
     }
 

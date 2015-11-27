@@ -8,28 +8,28 @@ use App\Jack;
 use App\Queen;
 use App\King;
 use App\Ace;
+use Faker;
 
-class Booster extends Command
+class RandomBooster extends Command
 {
     protected $ten;
     protected $jack;
     protected $queen;
     protected $king;
     protected $ace;
-
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'rfn:booster';
+    protected $signature = 'rfn:randombooster';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Distribute Booster to Active Account From Top To Bottom';
+    protected $description = 'Distribute Random Booster to Active Accounts!';
 
     /**
      * Create a new command instance.
@@ -53,9 +53,11 @@ class Booster extends Command
      */
     public function handle()
     {
-        $qty = $this->ask('How Many Cycle Each Card Line Do You Want for [BOOSTER] ?!');
+        $qty  = $this->ask('How Many Cycle Each Card Line Do You Want For [RANDOM BOOSTER]?!');
         if ($this->confirm('Do you wish to continue? [y|N]')) {
             $this->output->progressStart($qty);
+
+            $faker = Faker\Factory::create();
 
             $u = $qty;
             $i = 0;
@@ -66,33 +68,41 @@ class Booster extends Command
             $k           = 0;
             $a           = 0;
 
+            $ten   = Ten::where('active', true)->where('shuffle', false)->lists('link_id')->toArray();
+            $jack  = Jack::where('active', true)->where('shuffle', false)->lists('link_id')->toArray();
+            $queen = Queen::where('active', true)->where('shuffle', false)->lists('link_id')->toArray();
+            $king  = King::where('active', true)->where('shuffle', false)->lists('link_id')->toArray();
+            $ace   = Ace::where('active', true)->where('shuffle', false)->lists('link_id')->toArray();
+
             while ($i < $u) {
                 try {
-                    $this->ten->freeCycle();
+                    $this->ten->forceCycle($faker->randomElement($ten));
                 } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $exception) {
                     $t++;
                 }
                 try {
-                    $this->jack->freeCycle();
+                    $this->jack->forceCycle($faker->randomElement($jack));
                 } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $exception) {
                     $jk++;
                 }
                 try {
-                    $this->queen->freeCycle();
+                    $this->queen->forceCycle($faker->randomElement($queen));
                 } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $exception) {
                     $q++;
                 }
                 try {
-                    $this->king->freeCycle();
+                    $this->king->forceCycle($faker->randomElement($king));
                 } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $exception) {
                     $k++;
                 }
                 try {
-                    $this->ace->freeCycle();
+                    $this->ace->forceCycle($faker->randomElement($ace));
                 } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $exception) {
                     $a++;
                 }
+
                 $i++;
+
                 $this->output->progressAdvance();
             }
             $headers  = ['Total Cycle Count', 'Cycle Distributed', 'Ten Error', 'Jack Error', 'Queen Error', 'King Error', 'Ace Error'];
