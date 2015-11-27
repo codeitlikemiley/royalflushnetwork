@@ -17,7 +17,9 @@ class Ace extends Model
         'shuffle'    => 'boolean',
     ];
 
-    protected $cardtype  = "App\King";
+    protected $cardtype  = "App\Ace";
+
+    protected $maxshuffle = 130;
 
     public function cardpoints()
     {

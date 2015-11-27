@@ -43,7 +43,7 @@ class CardlineController extends Controller
 
     public function switchToJack($lid)
     {
-        return $this->ten->switchToTen($lid);
+        var_dump($this->ten->deactivate($lid));
     }
 
     /**

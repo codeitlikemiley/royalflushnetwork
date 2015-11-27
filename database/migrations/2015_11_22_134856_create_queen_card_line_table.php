@@ -19,6 +19,7 @@ class CreateQueenCardLineTable extends Migration
             $table->integer('min_direct')->unsigned();
             $table->boolean('shuffle')->default(0);
             $table->boolean('canSwitch')->default(0);
+            $table->boolean('active')->default(1);
             $table->timestamps();
         });
     }

@@ -15,9 +15,36 @@ trait CardTrait
     protected $min_king  = 5;
     protected $min_ace   = 11;
 
+    public function maxShuffle()
+    {
+        return $this->maxshuffle;
+    }
+    public function shuffleCount($lid)
+    {
+        $shufflecount = static::where('link_id', $lid)->where('shuffle', true)->count();
+
+        return $shufflecount;
+    }
+
+    public function graduate($lid)
+    {
+        if ($this->maxShuffle() >= $this->shuffleCount($lid)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public function deactivate($lid)
+    {
+        if ($this->graduate($lid)) {
+            static::where('link_id', $lid)->where('active', true)->update(array('active' => false));
+        }
+    }
+
     public function freeShuffle()
     {
-        $card              = static::where('shuffle', false)->firstOrFail();
+        $card              = static::where('shuffle', false)->where('active', true)->firstOrFail();
         $card->shuffle     = true;
         $cardID            = $card->id;
         $card->save();
@@ -38,6 +65,7 @@ trait CardTrait
         $cardline          = new Cardline();
         $cardline->link_id = $lid;
         $newCard->cardpoints()->save($cardline);
+        $this->deactivate($lid);
     }
 
     public function forceShuffle($lid)

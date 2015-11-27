@@ -19,6 +19,8 @@ class Ten extends Model
 
     protected $cardtype  = "App\Ten";
 
+    protected $maxshuffle = 10;
+
     public function cardpoints()
     {
         return $this->morphMany('App\Cardline', 'card');
