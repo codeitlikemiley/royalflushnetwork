@@ -224,4 +224,15 @@ trait CardTrait
 
         return "You  Cant Switch Line!";
     }
+    /**
+     * Using Link and Card Relationship
+     * $link = Link::find(1);
+     * $link->tencards()->cardCountToday()
+     * User::find(1)->links->find(1)->tencards()->today()
+     * result is the Total Count of Cycle of that Link
+     */
+    public function scopeToday($query)
+    {
+        return $query->where('updated_at', '>', \Carbon\Carbon::today())->where('updated_at', '<', \Carbon\Carbon::tomorrow())->where('shuffle', true)->count();
+    }
 }
