@@ -16,6 +16,7 @@ class Kernel extends ConsoleKernel
         \App\Console\Commands\Codegenerator::class,
         \App\Console\Commands\Booster::class,
         \App\Console\Commands\RandomBooster::class,
+        \App\Console\Commands\RandomForceCycleBooster::class,
     ];
 
     /**

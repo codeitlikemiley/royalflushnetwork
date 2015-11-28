@@ -17,6 +17,7 @@ class RandomBooster extends Command
     protected $queen;
     protected $king;
     protected $ace;
+
     /**
      * The name and signature of the console command.
      *
@@ -29,7 +30,7 @@ class RandomBooster extends Command
      *
      * @var string
      */
-    protected $description = 'Distribute Random Booster to Active Accounts!';
+    protected $description = 'Distribute Random Booster';
 
     /**
      * Create a new command instance.
@@ -53,7 +54,7 @@ class RandomBooster extends Command
      */
     public function handle()
     {
-        $qty  = $this->ask('How Many Cycle Each Card Line Do You Want For [RANDOM BOOSTER]?!');
+        $qty = $this->ask('How Many Cycle Each Card Line Do You Want for [ RANDOM BOOSTER ] ?!');
         if ($this->confirm('Do you wish to continue? [y|N]')) {
             $this->output->progressStart($qty);
 
@@ -76,36 +77,34 @@ class RandomBooster extends Command
 
             while ($i < $u) {
                 try {
-                    $this->ten->forceCycle($faker->randomElement($ten));
+                    $this->ten->randomCycle($faker->randomElement($ten));
                 } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $exception) {
                     $t++;
                 }
                 try {
-                    $this->jack->forceCycle($faker->randomElement($jack));
+                    $this->jack->randomCycle($faker->randomElement($jack));
                 } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $exception) {
                     $jk++;
                 }
                 try {
-                    $this->queen->forceCycle($faker->randomElement($queen));
+                    $this->queen->randomCycle($faker->randomElement($queen));
                 } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $exception) {
                     $q++;
                 }
                 try {
-                    $this->king->forceCycle($faker->randomElement($king));
+                    $this->king->randomCycle($faker->randomElement($king));
                 } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $exception) {
                     $k++;
                 }
                 try {
-                    $this->ace->forceCycle($faker->randomElement($ace));
+                    $this->ace->randomCycle($faker->randomElement($ace));
                 } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $exception) {
                     $a++;
                 }
-
                 $i++;
-
                 $this->output->progressAdvance();
             }
-            $headers  = ['Total Cycle Count', 'Cycle Distributed', 'Ten Error', 'Jack Error', 'Queen Error', 'King Error', 'Ace Error'];
+            $headers  = ['Total Random Booster', 'Booster Distributed', 'Ten Failed', 'Jack Failed', 'Queen Failed', 'King Failed', 'Ace Failed'];
             $rows     = [[
                           "total"    => $u * 5,
                           "consumed" => ($u * 5) - ($t + $jk + $q + $k + $a),

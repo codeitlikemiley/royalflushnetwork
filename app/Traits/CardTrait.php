@@ -93,6 +93,32 @@ trait CardTrait
         $newCard->cardpoints()->save($cardline);
     }
 
+    public function randomShuffle($lid)
+    {
+        $card              = static::where('link_id', $lid)->where('shuffle', false)->where('active', true)->firstOrFail();
+        $card->shuffle     = true;
+        $cardID            = $card->id;
+        $card->save();
+        $cardline = Cardline::where('card_type', $this->cardtype)->where('card_id', $cardID)->update(array('points' => 1));
+
+        return $card;
+    }
+
+    public function randomCycle($lid)
+    {
+        $card                  = $this->randomShuffle($lid);
+        $directCount           = $card->min_direct;
+        $newCard               = new static();
+        $newCard->link_id      = $lid;
+        $newCard->min_direct   = $directCount;
+        $newCard->canSwitch    = true;
+        $newCard->save();
+        $cardline          = new Cardline();
+        $cardline->link_id = $lid;
+        $newCard->cardpoints()->save($cardline);
+        $this->deactivate($lid);
+    }
+
     public function switchToTen($lid)
     {
         if (new static != new Ten()) {
