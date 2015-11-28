@@ -233,6 +233,6 @@ trait CardTrait
      */
     public function scopeToday($query)
     {
-        return $query->where('updated_at', '>', \Carbon\Carbon::today())->where('updated_at', '<', \Carbon\Carbon::tomorrow())->where('shuffle', true)->count();
+        return $query->whereDate('created_at', '=', \Carbon\Carbon::today()->toDateString())->where('shuffle', true)->count();
     }
 }
