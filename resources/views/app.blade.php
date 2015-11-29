@@ -52,5 +52,18 @@
 
     <!--Custom JS Here!-->
     @include('layouts.ajax')
+
+        {!! Html::script("/vendor/socket.io/socket.io.js") !!}
+
+        <script>
+            // Use the Code for Production for now HardCode It!
+            // var socket = io(window.location.origin + ':6001');
+            var socket = io('http://maxims.code:6001');
+            socket.on("test-channel:App\\Events\\UserHasRegistered", function(message){
+                // increase the power everytime we load test route
+                $('#power').text(parseInt($('#power').text()) + parseInt(message.data.power));
+            });
+        </script>
+
     </body>
   </html>

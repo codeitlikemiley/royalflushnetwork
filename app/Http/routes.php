@@ -54,6 +54,19 @@ Route::get('/resendEmail', 'Auth\AuthController@resendEmail');
 Route::get('materialized', function () {
     return view('materialized');
 });
+
+Route::get('fire', function () {
+    // this fires the event
+    event(new App\Events\UserHasRegistered());
+
+    return "event fired";
+});
+
+Route::get('message', function () {
+    $app = PHPRedis::connection();
+$app->set("masterpowers", "Yeah Baby Yeah");
+print_r($app->get("masterpowers"));
+});
  // Route For Searching For a Sponsor Thru Ajax
 Route::post('searchUser', 'SearchController@searchUser');
 // Route For AutoComplete
@@ -64,7 +77,7 @@ Route::get('activate/FirstLink', ['as' => 'get1stlink', 'uses' => 'CodeControlle
 Route::post('activate/FirstLink', ['as' => '1stlinkactivation', 'uses' => 'CodeController@activateFirstLink']);
 // after first link is activated dont show anymore this url to them
 Route::post('signup', ['as' => 'signup', 'uses' => 'Auth\AuthController@create']);
-Route::get('{link?}', ['as' => 'links', 'uses' => 'LinkController@getRefLink']);
+// Route::get('{link?}', ['as' => 'links', 'uses' => 'LinkController@getRefLink']);
 
 Route::get('activeSponsor/{id}', function ($id) {
     $id = App\Link::where('id', $id)->firstOrFail()->activeSponsor($id);
