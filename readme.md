@@ -19,6 +19,7 @@ Finished and Integrated
   * Code Generator
   * Royal Flush Line
   * Royal Switch Line
+  * Real Time Notification with PhpRedis
 
 ### Version
 * 1.0.0  - Front End Deployed
@@ -27,6 +28,7 @@ Finished and Integrated
 * 1.2.5 - Link Activation by Code
 * 1.3.0 - Added Cardlines
 * 1.3.5 - Added Switch Line
+* 1.4.0 - Added Real Time Broadcast
 
 ### Anticipating Update
 
