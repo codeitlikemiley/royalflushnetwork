@@ -195,6 +195,18 @@ class AuthController extends Controller
         $user->links()->save($link);
         $this->mail->registered($user);
 
+        $data = [
+            'event' => 'UserSignedUp',
+            'data'  => [
+                'username'   => $profile->display_name,
+                'created_at' => $user->created_at,
+            ],
+        ];
+
+        // Use this To Fire User Info In NewsBar
+        // This Can Use the test-chanel in UserHasRegistered Event
+        \PHPRedis::publish('rfn-chanel', json_encode($data));
+
         return response()->json(['success' => true], 201);
     }
 }
