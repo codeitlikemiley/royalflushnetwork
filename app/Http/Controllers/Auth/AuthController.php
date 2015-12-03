@@ -200,7 +200,7 @@ class AuthController extends Controller
 
             if( !$user && !$profile && !$link )
             {
-                $error = throw new \Exception('User not created for account');
+                $error = throw new \Exception('Account is Not Created Try Again!!!');
                 $error = $error->getMessage();
                 $errors = $validator->errors()->add('AccountCreationFailed', $error);
 
