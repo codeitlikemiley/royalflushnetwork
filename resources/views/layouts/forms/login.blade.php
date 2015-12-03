@@ -19,15 +19,15 @@
       <i class="mdi-action-lock-outline prefix"></i>
         <input id="login_password" type="password" class="validate" minlength="8" name="password" required>
         <label for="password" data-error="PasswordTooShort" data-success="Ok" >Password</label>
- 
+
     </div>
   </div>
   <div class="row">
   <div class="g-recaptcha">
-    
+
   </div>
   </div>
- 
+
   <button class="col s6  btn waves-effect waves-light form-submit" type="submit" id="sign_in" name="action">Login <i class="material-icons right">power_settings_new</i></button>
 
     <a class="activator col s6  btn waves-effect waves-light deep-orange darken-4" type="submit" name="action" >Forgot Password?</a>
@@ -49,7 +49,7 @@
         </div>
         <div class="row">
           <div class="g-recaptcha">
-    
+
           </div>
         </div>
         <div class="row">

@@ -1,15 +1,15 @@
-<form action="signup" method="POST" class="col s12" 
+<form action="signup" method="POST" class="col s12 login-form"
 id="registration_form">
 <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
-		
+
 		<div class="input-field col s11 offset-s1">
 
     	<select id="powerselect" name="sponsor_link">
-    	<option value="" disabled selected>Choose Link</option>  
+    	<option value="" disabled selected>Choose Link</option>
     	</select>
     	<label>Sponsor Links</label>
   		</div>
- 
+
         <div class="input-field col s6">
         <i class="material-icons prefix">account_circle</i>
     	  <input id="first_name" type="text" class="validate" name="first_name" class="validate" required="">
@@ -19,8 +19,8 @@ id="registration_form">
           <input id="last_name" type="text" class="validate" name="last_name" class="validate" required="">
           <label for="last_name">Last Name</label>
         </div>
-    
-      
+
+
         <div class="input-field col s12">
         <i class="material-icons prefix">visibility</i>
           <input id="username" type="text" class="validate" name="username" class="validate" required="">
@@ -32,7 +32,7 @@ id="registration_form">
           <input id="display_name" type="text" class="validate" name="display_name" class="validate" required="">
           <label for="display_name">Display Name</label>
         </div>
-     
+
 	<div class="input-field col s12">
 	    <i class="mdi-communication-email prefix"></i>
 	    <input id=email type="email" class="validate" name="email" required="">
@@ -48,9 +48,9 @@ id="registration_form">
 	    <i class="mdi-action-lock-outline prefix"></i>
 	    <input id="pwd2" type="password" class="validate"  minlength="8" name="password_confirmation" required="">
         <label for="password_confirmation" data-error="PasswordTooShort" data-success="" >Password Confirmation</label>
-        
+
 	</div>
-  <div class="row">
+  <div class="row agree">
 	 <div class="row col s11 offset-s1">
       <input type="checkbox" id="agree" name="agree"/>
       <label for="agree">Do You Agree On Our <a class="modal-trigger" data-target="tos">Terms and Condition</a>?</label>
@@ -58,10 +58,14 @@ id="registration_form">
    </div>
    <div class="row">
    <div class="g-recaptcha">
-    
+
    </div>
    </div>
-   <div class="row">
+
+  @include('layouts.buttonloader')
+
+   <div class="row" id="regbutton">
+
     <button class="col s6 offset-s3 btn waves-effect waves-light form-submit" type="submit" name="action" id="registration_submit">Register An Account</button>
     </div>
     </form>
