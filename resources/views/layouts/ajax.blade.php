@@ -43,7 +43,7 @@
 
 
     // newsbar initialize
-    $('div.latest_payouts').jNewsbar({
+    $('div.latest_members').jNewsbar({
     position : 'bottom',
     effect : 'slideDown',
     animSpeed: 500,
@@ -52,6 +52,7 @@
     pauseOnHover : false,
     theme : "teal-lighten-2"
     });
+
 
 
 

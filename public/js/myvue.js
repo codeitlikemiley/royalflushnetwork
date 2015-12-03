@@ -1,33 +1,31 @@
+var socket = io(window.location.origin + ':6001');
+
 new Vue({
   el: '#users',
-  
   data: {
-  	users: [],
-  	search : [],
+  	users: [
 
-  	
+    ],
   },
-
   ready: function(){
-  	this.fetchUsers();
-  	this.fetchSearch();
-  	
+      $("abbr.timeago").livequery(function () { $(this).timeago(); });
+      this.fetchUsers();
+      socket.on('rfn-chanel:UserSignedUp', function(data) {
+          this.users.unshift(data);
+      }.bind(this));
+
+
+
+
   },
 
   methods: {
   	fetchUsers: function(){
-  		this.$http.get('/api/users', function(users, success){
+  		this.$http.get('/api/users', function(users,success){
   			this.users = users;
-  			
-  		});
-  	},
-
-  	fetchSearch: function(){
-  		this.$http.get('/api/users/{search}', function(search, success){
-  			this.search = search;
-  		});
+  		}.bind(this));
   	}
-
-  	
   }
+
+  
 });

@@ -1,72 +1,11 @@
-{{-- <li>
-<a href='{{ $username }}' title="{{ Latest Commission }}" data-toggle="tooltip">{{ $message }}</a> 
-<span class="earnings">
-<a href="">{{ $earnings }}</a></span> 
-<span class="date">| {{ date_timestamp }}</span>
-</li> --}}
 
-<div class="latest_payouts">
+<div class="latest_members">
 
-<h2>Latest Payouts</h2>
 
-<ul>
+<h2>Latest Members</h2>
+<ul id="users">
+    <li v-for="user in users">@{{ user.username }}  <abbr class="timeago" v-bind:title="user.created_at">@{{ user.created_at }}</abbr></li>
 
-<li>
-	<a href="">Masterpowers Earned 100$!</a>
+</ul>
 
-</li>
-<li>
-	<a href="">Jeich Earned 100$!</a>
-
-</li>
-<li>
-	<a href="">Jhona Earned 100$!</a>
-
-</li>
-<li>
-	<a href="">Bhong Earned 100$!</a>
-
-</li>
-<li>
-	<a href="">Pot Earned 100$!</a>
-
-</li>
-<li>
-	<a href="">Yiel Earned 100$!</a>
-
-</li>
-<li>
-	<a href="">Eric Earned 100$!</a>
-
-</li>
-<li>
-	<a href="">Masterpowers Earned 100$!</a>
-
-</li>
-<li>
-	<a href="">Jeich Earned 100$!</a>
-
-</li>
-<li>
-	<a href="">Jhona Earned 100$!</a>
-
-</li>
-<li>
-	<a href="">Bhong Earned 100$!</a>
-
-</li>
-<li>
-	<a href="">Pot Earned 100$!</a>
-
-</li>
-<li>
-	<a href="">Yiel Earned 100$!</a>
-
-</li>
-<li>
-	<a href="">Eric Earned 100$!</a>
-
-</li>
-
-	</ul>
 </div>

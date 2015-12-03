@@ -46,22 +46,35 @@
 };
     </script>
     <!--Under Test JS-->
-    {{-- {!! HTML::script('js/vue.js') !!} --}}
-    {{-- {!! HTML::script('js/vue-resource.js') !!} --}}
-    {{-- {!! HTML::script('js/myvue.js') !!} --}}
+    {!! HTML::script('js/timeago.js') !!}
+    {!! HTML::script('js/test.js') !!}
+    {!! HTML::script('vendor/vue/vue.js') !!}
+    {!! HTML::script('js/vue-resource.js') !!}
+
+
+
 
     <!--Custom JS Here!-->
     @include('layouts.ajax')
-
+        <!-- {!! Html::script("/vendor/moment/moment.js") !!} -->
         {!! Html::script("/vendor/socket.io/socket.io.js") !!}
-
+        <!-- Make Sure You add Another Blade that is Below Socket.io.js
+        To Avoid io Being Undefined !-->
         <script>
+            // Dynamically Load the Url and Append the Port Specified in socket.js
             var socket = io(window.location.origin + ':6001');
             socket.on("test-channel:App\\Events\\UserHasRegistered", function(message){
-                // increase the power everytime we load test route
                 $('#power').text(parseInt($('#power').text()) + parseInt(message.data.power));
+                // Select Power ID then Parse the text to int then add the Broadcast Data
             });
+
+
         </script>
+        {!! HTML::script('js/livequery.js') !!}
+        {!! HTML::script('js/myvue.js') !!}
+
+
+
 
     </body>
   </html>
