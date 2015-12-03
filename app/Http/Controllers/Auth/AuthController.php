@@ -17,7 +17,7 @@ use App\Http\Requests\LoginRequest;
 use App\Http\Requests\EmailRequest;
 use App\Http\Controllers\MailController as Mail;
 use App\Traits\CaptchaTrait;
-
+use DB;
 
 class AuthController extends Controller
 {
@@ -159,8 +159,9 @@ class AuthController extends Controller
 
             return response()->json(['success' => false, 'errors' => $errors], 400);
         }
-
-        $activation_code         = str_random(60) . $request->input('email');
+        // This Will Prevent Unnecessary Creation of Account if Something Failed!
+        DB::transaction(function () {
+        $activation_code         = str_random(60) . Input::get('email');
         $data['activation_code'] = $activation_code;
         $data['active']          = false;
         $data['status']          = true;
@@ -168,13 +169,10 @@ class AuthController extends Controller
         $link = Input::get('sponsor_link');
 
         $sponsor = Link::where('link', $link)->firstOrFail();
-
-        \DB::transaction(function()
-        {
         $user                  = new User();
-        $user->username        = $request->input('username');
-        $user->email           = $request->input('email');
-        $user->password        = $request->input('password');
+        $user->username        = Input::get('username');
+        $user->email           = Input::get('email');
+        $user->password        = Input::get('password');
         $user->sp_id           = $sponsor->user_id;
         $user->activation_code = $data['activation_code'];
         $user->active          = $data['active'];
@@ -184,42 +182,38 @@ class AuthController extends Controller
         // Creates the user_id in the profile
         $url                   = asset('img/avatar.png');
         $profile               = new Profile();
-        $profile->first_name   = $request->input('first_name');
-        $profile->last_name    = $request->input('last_name');
-        $profile->display_name = $request->input('display_name');
+        $profile->first_name   = Input::get('first_name');
+        $profile->last_name    = Input::get('last_name');
+        $profile->display_name = Input::get('display_name');
         $profile->profile_pic  = $url;
         $user->profile()->save($profile);
 
         // Creates the user_id in the link
         $link             = new Link();
-        $link->link       = $request->input('username');
+        $link->link       = Input::get('username');
         $link->sp_link_id = $sponsor->id;
         $link->sp_user_id = $sponsor->user_id;
         $user->links()->save($link);
         $this->mail->registered($user);
 
-            if( !$user && !$profile && !$link )
-            {
-                throw new \Exception('Account is Not Created Try Again!!!');
-                $error = $e->getMessage();
+            if (!$user && !$profile && !$link) {
+                $error = new \Exception('Account is Not Created Try Again!!!');
+                $error = $error->getMessage();
                 $errors = $validator->errors()->add('CreationFailed', $error);
 
-            return response()->json(['success' => false, 'errors' => $errors], 400);
+                return response()->json(['success' => false, 'errors' => $errors], 400);
             }
+            $data = [
+                'event' => 'UserSignedUp',
+                'data'  => [
+                    'username'   => $profile->display_name,
+                    'created_at' => $user->created_at,
+                ],
+            ];
+
+            // Use this To Fire User Info In NewsBar
+            \PHPRedis::publish('rfn-chanel', json_encode($data));
         });
-        
-
-        $data = [
-            'event' => 'UserSignedUp',
-            'data'  => [
-                'username'   => $profile->display_name,
-                'created_at' => $user->created_at,
-            ],
-        ];
-
-        // Use this To Fire User Info In NewsBar
-        // This Can Use the test-chanel in UserHasRegistered Event
-        \PHPRedis::publish('rfn-chanel', json_encode($data));
 
         return response()->json(['success' => true], 201);
     }
