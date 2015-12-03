@@ -18,6 +18,7 @@ use App\Http\Requests\EmailRequest;
 use App\Http\Controllers\MailController as Mail;
 use App\Traits\CaptchaTrait;
 
+
 class AuthController extends Controller
 {
     use AuthenticatesAndRegistersUsers, ThrottlesLogins, CaptchaTrait;
@@ -168,6 +169,8 @@ class AuthController extends Controller
 
         $sponsor = Link::where('link', $link)->firstOrFail();
 
+        \DB::transaction(function()
+        {
         $user                  = new User();
         $user->username        = $request->input('username');
         $user->email           = $request->input('email');
@@ -194,6 +197,17 @@ class AuthController extends Controller
         $link->sp_user_id = $sponsor->user_id;
         $user->links()->save($link);
         $this->mail->registered($user);
+
+            if( !$user && !$profile && !$link )
+            {
+                $error = throw new \Exception('User not created for account');
+                $error = $error->getMessage();
+                $errors = $validator->errors()->add('AccountCreationFailed', $error);
+
+            return response()->json(['success' => false, 'errors' => $errors], 400);
+            }
+        });
+        
 
         $data = [
             'event' => 'UserSignedUp',
