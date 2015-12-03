@@ -66,6 +66,15 @@ trait CardTrait
         $cardline->link_id = $lid;
         $newCard->cardpoints()->save($cardline);
         $this->deactivate($lid);
+        // This will Broadcast To the Front End!
+        $username = \App\Link::find($lid)->user->username;
+        $data     = [
+            'event' => 'UserSignedUp',
+            'data'  => [
+                'username' => $username,
+            ],
+        ];
+        \PHPRedis::publish('rfn-chanel', json_encode($data));
     }
 
     public function forceShuffle($lid)
