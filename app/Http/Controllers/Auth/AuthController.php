@@ -206,8 +206,8 @@ class AuthController extends Controller
             $data = [
                 'event' => 'UserSignedUp',
                 'data'  => [
-                    'username'   => $profile->display_name,
-                    'created_at' => $user->created_at,
+                    'display_name'   => $profile->display_name,
+                    'created_at'     => $user->created_at,
                 ],
             ];
 
