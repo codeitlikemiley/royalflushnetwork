@@ -10,7 +10,7 @@ class Profile extends Model
 
     protected $fillable = ['profile_pic', 'about_me', 'display_name', 'contact_no', 'address', 'city', 'province_state', 'zip_code', 'country'];
 
-    protected $hidden = ['id', 'first_name', 'last_name', 'user_id', 'address', 'city',  'province_state', 'zip_code', 'country', 'created_at', 'updated_at'];
+    protected $hidden = ['id', 'first_name', 'last_name', 'user_id', 'address', 'city',  'province_state', 'zip_code', 'country', 'updated_at'];
 
     protected $dates = ['created_at', 'updated_at'];
 

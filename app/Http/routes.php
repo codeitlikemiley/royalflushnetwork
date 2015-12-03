@@ -121,7 +121,9 @@ Route::get('/vue', function () {
 Route::get('api/users', function () {
 
     $value = Cache::rememberForever('users', function () {
-    return \App\User::latest()->take(20)->get()->toArray();
+    return \App\Profile::latest()->take(50)->select('display_name', 'created_at')->get();
+
+    // Should Only Fetch the Users Display Name!
 });
 
 return $value = Cache::pull('users');
