@@ -52,14 +52,36 @@ Route::get('/resendEmail', 'Auth\AuthController@resendEmail');
 
 // Route::get('{link?}', ['as' => 'reflink', 'uses' => 'LinkController@getRefLink']);
 Route::get('materialized', function () {
-    return view('materialized');
+    $users = App\User::latest()->get();
+
+    return view('materialized', compact('users'));
 });
 
 Route::get('fire', function () {
     // this fires the event
     event(new App\Events\UserHasRegistered());
 
-    return "event fired";
+    return "Event Fired!";
+
+});
+
+Route::get('sender', function () {
+    $data = [
+        'event' => 'UserSignedUp',
+        'data'  => [
+            'username'   => 'chill',
+            'created_at' => '2011-12-17T09:24:17Z',
+        ],
+    ];
+    // Use this To Fire User Info In NewsBar
+    // This Can Use the test-chanel in UserHasRegistered Event
+    PHPRedis::publish('rfn-chanel', json_encode($data));
+
+    return "User Signed Up!";
+});
+
+Route::get('receiver', function () {
+    return view('receiver');
 });
 
 Route::get('message', function () {
@@ -92,14 +114,19 @@ Route::get('code/{linkID}/{PINCODE}', ['as' => 'code', 'uses' => 'CodeController
 // Route::put('profile', ['as' => 'profile/update', 'uses' => 'UserController@update']); // Not working yet
 
 
-//Route::get('/vue', function(){
-//	return view('vue');
-//});
-//
-//Route::get('api/users', function(){
-//	return App\User::all();
-//});
-//
+Route::get('/vue', function () {
+    return view('vue');
+});
+
+Route::get('api/users', function () {
+
+    $value = Cache::rememberForever('users', function () {
+    return \App\User::latest()->take(20)->get()->toArray();
+});
+
+return $value = Cache::pull('users');
+});
+
 //Route::post('api/users', function(){
 //	 App\User::create(Request::all());
 //});
