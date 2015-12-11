@@ -43,6 +43,24 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 
     ];
     /**
+     * Boot the model.
+     * Automatically Append this during Creation
+     * But is Easily Override if an Attribute is Given.
+     */
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($user) {
+            $cookie = \Cookie::get('sponsor');
+            if ($cookie) {
+                $user->sp_id = $cookie->user_id;
+            }
+            $user->activation_code = str_random(60);
+
+        });
+    }
+    /**
      * [findByUsername Find User Using Their Username].
      *
      * @param [string] $username [Public Searchable]
@@ -80,10 +98,10 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     // $timezone = ($this->timezone) ?: env('APP_LOCALTZ');
 
     // use Illuminate\Database\Eloquent\Model;
-    $datetime = $this->asDateTime($value)->toIso8601String();
+        $datetime = $this->asDateTime($value)->toIso8601String();
 
     // Carbon instance modified with TZ
-    return $datetime;
+        return $datetime;
     }
 
     /**
@@ -108,5 +126,18 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     public function codes()
     {
         return $this->hasMany('App\Code', 'creator', 'id');
+    }
+
+    public function verifyEmail()
+    {
+        $this->active = true;
+        $this->activation_code = null;
+        $this->save();
+    }
+
+    public function incrementResent()
+    {
+        $this->resent = $this->resent + 1;
+        $this->save();
     }
 }

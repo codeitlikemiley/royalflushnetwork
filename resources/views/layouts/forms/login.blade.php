@@ -23,6 +23,12 @@
     </div>
   </div>
   <div class="row">
+   <div class="row col s11 offset-s1">
+      <input type="checkbox" id="remember_token" name="remember_token"/>
+      <label for="remember_token">Keep Me LoggedIn in This Device?</label>
+   </div>
+   </div>
+  <div class="row">
   <div class="g-recaptcha">
 
   </div>

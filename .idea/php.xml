@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PhpStepFilterConfiguration">
+    <option name="skippedFunctions">
+      <list>
+        <option value="App\Providers\RouteServiceProvider-&gt;{closure:/home/vagrant/Code/maxims/app/Http/routes.php:21-28}" />
+        <option value="Illuminate\Foundation\AliasLoader-&gt;load" />
+        <option value="Symfony\Component\HttpFoundation\Response-&gt;__construct" />
+        <option value="Illuminate\Routing\Router-&gt;prepareResponse" />
+      </list>
+    </option>
+  </component>
+</project>

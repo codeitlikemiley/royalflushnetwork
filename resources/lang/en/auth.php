@@ -50,6 +50,11 @@ return [
     'resetPassword'     => 'Reset Password',
     
     'loggedIn'          => 'You are logged in!',
+    'cookieError'            => 'You Sponsor Cookie Was Missing!',
+    'enablecookie'      => 'Please Allow Cookie In Your Browser!',
+    'captchaError'      => 'Captcha Is Not Valid Anymore!',
+    'refreshPage'       => 'Please Refresh Your Page',
+    'cookieAttached'    => 'We Attached new Cookie of Your Sponsor',
     
     //emails
     'pleaseActivate'    => 'Please activate your account.',

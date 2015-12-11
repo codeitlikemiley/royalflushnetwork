@@ -23,13 +23,33 @@ class Link extends Model
      *
      * @var array
      */
-    protected $hidden = ['id','user_id', 'sp_user_id', 'sp_link_id', 'date_activated', 'created_at', 'updated_at'];
+    protected $hidden = ['id','sp_user_id', 'sp_link_id', 'date_activated', 'created_at', 'updated_at'];
     /**
      * [$dates That is Casted on Carbon Instance].
      *
      * @var [Timestamp]
      */
     protected $dates = ['created_at', 'updated_at', 'date_activated'];
+
+    /**
+     * Boot the model.
+     * Automatically Append this during Creation
+     * But is Easily Override if an Attribute is Given
+     */
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($link) {
+            $cookie = \Cookie::get('sponsor');
+            if ($cookie) {
+                $link->sp_user_id = $cookie->user_id;
+                $link->sp_link_id = $cookie->id;
+            }
+
+        });
+    }
+
     /**
      * [findByLink Get Link Object By Link].
      *

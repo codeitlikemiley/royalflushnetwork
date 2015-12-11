@@ -18,13 +18,14 @@ use App\Http\Requests\EmailRequest;
 use App\Http\Controllers\MailController as Mail;
 use App\Traits\CaptchaTrait;
 use DB;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class AuthController extends Controller
 {
     use AuthenticatesAndRegistersUsers, ThrottlesLogins, CaptchaTrait;
 
     protected $redirectTo = 'profile';
-    protected $loginPath  = 'login';
+    protected $loginPath = 'login';
 
     public $mail;
 
@@ -38,34 +39,45 @@ class AuthController extends Controller
     public function authenticate(Request $request)
     {
         $loginRequest = new LoginRequest();
-        $validator    = Validator::make($request->all(), $loginRequest->rules(), $loginRequest->messages());
+        $validator = Validator::make($request->all(), $loginRequest->rules(), $loginRequest->messages());
 
+        // Validate Form
         if ($validator->fails()) {
             return response()->json(['success' => false, 'errors' => $validator->errors()->toArray(), 'inputs' => Input::except('_token', 'password')], 200);
         }
 
+        // Check Captcha is Valid or Used!
+
         if ($this->captchaCheck() == false) {
-            $errors = $validator->errors()->add('captchaerror', 'Wrong Captcha!');
+            $errors = [
+            'captchaError' => 'Captcha Is Not Valid AnyMore',
+            'refreshpage' => 'Please Refresh Your Page!',
+            ];
 
             return response()->json(['success' => false, 'errors' => $errors], 200);
         }
 
-        $email       = $request->email;
-        $password    = $request->password;
+        // Make Credentials
+        $email = $request->email;
+        $password = $request->password;
         $credentials = [
-                    'email'    => $email,
+                    'email' => $email,
                     'password' => $password,
                         ];
+        // Remember Me Token If Filled                
+        $remember = $request->remember_token;
 
-        $valid     = Auth::validate($credentials);
+        $valid = Auth::validate($credentials);
         $throttles = $this->isUsingThrottlesLoginsTrait();
 
+        // Login Attempt Check
         if ($throttles && $this->hasTooManyLoginAttempts($request)) {
-            $errors = $validator->errors()->add('lock', 'Try Again Later!');
+            $errors = $validator->errors()->add('lock', 'Too Many Failed Login Attempts! Please Try Again Later!');
 
             return response()->json(['success' => false, 'errors' => $errors], 429);
         }
 
+        // Wrong Password Check
         if (!$valid) {
             $errors = $validator->errors()->add('wrongpass', 'The Password You Type is Incorrect!');
             $this->incrementLoginAttempts($request);
@@ -73,23 +85,27 @@ class AuthController extends Controller
             return response()->json(['success' => false, 'errors' => $errors], 200);
         }
 
-        $user   = Auth::attempt($credentials);
+        $user = Auth::attempt($credentials, $remember);
         $active = Auth::user()->active;
         $status = Auth::user()->status;
 
+        // User Not Active
         if (!$active) {
-            $errors = $validator->errors()->add('notactive', 'Account Not Yet Active!');
+            $errors = $validator->errors()->add('notactive', 'Please Verify Your Email First!');
             Auth::logout();
 
             return response()->json(['success' => false, 'errors' => $errors], 200);
         }
+
+        // User is Banned
         if (!$status) {
-            $errors = $validator->errors()->add('banned', 'Account is Banned!');
+            $errors = $validator->errors()->add('banned', 'Sorry Your Account is Banned!');
             Auth::logout();
 
             return response()->json(['success' => false, 'errors' => $errors], 401);
         }
 
+        // Successfully Login Without Any Problem
         return response()->json(['success' => true, 'url' => 'profile'], 200);
     }
 
@@ -100,26 +116,21 @@ class AuthController extends Controller
 
     public function activate($email, $activation_code)
     {
-        $user   = User::where('email', $email)->first();
-        $active = User::where('activation_code', $activation_code)->first();
-        if ($user) {
-            if ($user->activation_code === $activation_code) {
-                $user->active          = true;
-                $user->status          = true;
-                $user->activation_code = '';
-                $user->save();
-                $this->mail->activated($user);
+        try {
+            $user = User::where('email', $email)->where('activation_code', $activation_code)->firstOrFail();
+            $user->verifyEmail();
+            $this->mail->activated($user);
 
-                return \View::make('auth.active');
-            }
+            return \View::make('auth.active');
+        } catch (ModelNotFoundException $e) {
+            return redirect()->route('login');
         }
-
-        return \View::make('auth.error');
     }
 
     public function sendActivationLink(EmailRequest $request)
     {
         $user = User::where('email', $request->email)->firstOrFail();
+
         $this->mail->registered($user);
 
         return \View::make('auth.success');
@@ -132,8 +143,7 @@ class AuthController extends Controller
             return view('auth.tooManyEmails')
                 ->with('email', $user->email);
         } else {
-            $user->resent = $user->resent + 1;
-            $user->save();
+            $user->incrementResent();
             $this->mail->passwordResend($user);
             \Auth::Logout();
 
@@ -145,76 +155,82 @@ class AuthController extends Controller
 
     public function create(Request $request)
     {
-        $data = $request->all();
-
         $createUserRequest = new CreateUserRequest();
-        $validator         = Validator::make($request->all(), $createUserRequest->rules(), $createUserRequest->messages());
+        $validator = Validator::make($request->all(), $createUserRequest->rules(), $createUserRequest->messages());
 
+        // Validate Form
         if ($validator->fails()) {
             return response()->json(['success' => false, 'errors' => $validator->errors()->toArray()], 400);
         }
 
+        // Check Captcha still Valid or Used!
+
         if ($this->captchaCheck() == false) {
-            $errors = $validator->errors()->add('captchaerror', 'Wrong Captcha!');
+            $errors = [
+            'captchaError' => trans('auth.captchaError'),
+            'refreshpage' => trans('auth.refreshPage'),
+            ];
 
             return response()->json(['success' => false, 'errors' => $errors], 400);
         }
+
+        // Check Sponsor Cookie , Provide One if None
+        if (\Cookie::get('sponsor') == false) {
+            $cookie = Link::where('link', $request->sponsor_link)->first();
+            $errors = [
+            'CookieError' => trans('auth.cookieError'),
+            'cookieNew' => trans('auth.cookieAttached'),
+            
+            ];
+
+            return response()->json(['success' => false, 'errors' => $errors], 400)->withCookie(cookie('sponsor', $cookie, 60));
+        }
+
         // This Will Prevent Unnecessary Creation of Account if Something Failed!
-        DB::transaction(function () {
-        $activation_code         = str_random(60) . Input::get('email');
-        $data['activation_code'] = $activation_code;
-        $data['active']          = false;
-        $data['status']          = true;
-
-        $link = Input::get('sponsor_link');
-
-        $sponsor = Link::where('link', $link)->firstOrFail();
-        $user                  = new User();
-        $user->username        = Input::get('username');
-        $user->email           = Input::get('email');
-        $user->password        = Input::get('password');
-        $user->sp_id           = $sponsor->user_id;
-        $user->activation_code = $data['activation_code'];
-        $user->active          = $data['active'];
-        $user->status          = $data['status'];
-        $user->save();
-
-        // Creates the user_id in the profile
-        $url                   = asset('img/avatar.png');
-        $profile               = new Profile();
-        $profile->first_name   = Input::get('first_name');
-        $profile->last_name    = Input::get('last_name');
-        $profile->display_name = Input::get('display_name');
-        $profile->profile_pic  = $url;
-        $user->profile()->save($profile);
-
-        // Creates the user_id in the link
-        $link             = new Link();
-        $link->link       = Input::get('username');
-        $link->sp_link_id = $sponsor->id;
-        $link->sp_user_id = $sponsor->user_id;
+        DB::beginTransaction();
+        $user = User::create($request->all());
+        $profile = $user->profile()->create($request->all());
+        $link = new Link();
+        $link->link = Input::get('username');
         $user->links()->save($link);
+
+        // IF Error Occured Throw an Exception then Rollback!
+        try {
+            if (!$user && !$profile && !$link) {
+                throw new \Exception('Account Creation Failed ,Account is Rollback');
+            }
+        } catch (\Exception $e) {
+            DB::rollback();
+
+            $errors = [
+            'ExceptionError' => $e->getMessage(),
+            'RefreshPage' => trans('auth.refreshPage'),
+            ];
+
+            return response()->json(['success' => false, 'errors' => $errors], 400); // Failed Creation
+        }
+
+        // Account Successfully Created
+        DB::commit();
+
+        // Send Email To The New User
         $this->mail->registered($user);
 
-            if (!$user && !$profile && !$link) {
-                $error = new \Exception('Account is Not Created Try Again!!!');
-                $error = $error->getMessage();
-                $errors = $validator->errors()->add('CreationFailed', $error);
-
-                return response()->json(['success' => false, 'errors' => $errors], 400);
-            }
-            $data = [
+        $data = [
                 'event' => 'UserSignedUp',
-                'data'  => [
-                    'display_name'   => $profile->display_name,
-                    'created_at'     => $user->created_at,
+                'data' => [
+                    'display_name' => $profile->display_name,
+                    'created_at' => $user->created_at,
                 ],
             ];
 
-            // Use this To Fire User Info In NewsBar
-            \PHPRedis::publish('rfn-chanel', json_encode($data));
-        });
+        // BroadCast Realtime in NewsBar
+        \PHPRedis::publish('rfn-chanel', json_encode($data));
 
-        return response()->json(['success' => true], 201);
+        // Forget the Set Cookie
+        $cookie = \Cookie::forget('sponsor');
+
+        // Return With a Response to Delete Cookie
+        return response()->json(['success' => true], 201)->withCookie($cookie);
     }
 }
