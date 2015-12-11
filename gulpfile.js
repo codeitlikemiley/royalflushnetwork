@@ -12,5 +12,13 @@ var elixir = require('laravel-elixir');
  */
 
 elixir(function(mix) {
-    mix.sass('app.scss');
+    mix.scripts([
+    'vendor/jquery.min.js',
+    'vendor/materialize.min.js',
+    'vendor/jquery-ui.min.js',
+    'vendor/jquery-jNewsbar.min.js',
+    'vendor/jquery-timeago.min.js',
+    'vendor/livequery.min.js',
+    'vendor/socket.io.min.js',
+    ],'public/js/vendor.js');
 });

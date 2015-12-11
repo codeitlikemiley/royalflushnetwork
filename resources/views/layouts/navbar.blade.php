@@ -3,7 +3,7 @@
     <div class="nav-wrapper red darken-4">
       {{-- NavBar Logo Section --}}
       <a id="logo-container" href="#" class="brand-logo center fixed">
-       
+
        <h4 class="rffont normalscript">RoyalFlush<span class="nfont superscript">NETWORK</span></h4>
         {{--  <img src="img/rfnlogo.001.png" alt="RFN"> --}}
       </a>
@@ -30,7 +30,7 @@
                 <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d241.3611082991033!2d121.02433267353825!3d14.554699254140978!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sph!4v1445932685920" width="200" height="250" frameborder="0" style="border:0" allowfullscreen></iframe>
               </div>
         </div>
-          
+
 
         {{-- Side Bar Nav Menu --}}
 
@@ -61,13 +61,7 @@
 
       {{-- Side Bar Toggle Button --}}
       <a href="#" data-activates="slide-out" class="button-collapse show-on-large"><i class="mdi-navigation-menu"></i></a>
-      
+
     </div>
   </nav>
 </div>
- 
-
- 
-
-
-  

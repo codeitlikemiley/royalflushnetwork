@@ -10,18 +10,7 @@
 	          <i class="material-icons" >close</i>
 
 	        </div>
-		</form>  
+		</form>
     </div>
 </nav>
 {{-- Search Nav Bar Ends Here --}}
-
-
-
-
-
-
-
-
-
-
-

@@ -11,6 +11,25 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+Route::get('cookie/{sponsor}', function($sponsor)
+{
+	$sponsor = App\Link::where('link', $sponsor)->firstOrFail();
+	$response = new Illuminate\Http\Response($sponsor);
+
+return $response->withCookie(cookie('sponsor', $sponsor, 60));
+});
+Route::get('getcookie', function(){
+if (Cookie::get('sponsor')) {
+return "GOT A SPONSOR";
+}
+else{ // IF NO SPONSOR DIRECT IT TO COMPANY
+$sponsor = App\Link::find(1);
+$response = new Illuminate\Http\Response($sponsor);
+return $response->withCookie(cookie('sponsor', $sponsor, 60));	
+}
+
+
+});
 Route::get('/cardline/ten/{lid}', ['as' => 'forceCycle', 'uses' => 'CardlineController@forceCycle']);
 Route::get('/cardline/create/{lid}', ['as' => 'tenCreate', 'uses' => 'CardlineController@create']);
 Route::get('/cardline/freecycle', ['as' => 'freeCycle', 'uses' => 'CardlineController@free']);
@@ -53,24 +72,32 @@ Route::get('/resendEmail', 'Auth\AuthController@resendEmail');
 // Route::get('{link?}', ['as' => 'reflink', 'uses' => 'LinkController@getRefLink']);
 Route::get('materialized', function () {
     $users = App\User::latest()->get();
-
-    return view('materialized', compact('users'));
+    $int = ((App\User::all()->count()) * 5 );
+    $rfnbonus= intval($int); 
+    return view('materialized', compact('users','rfnbonus'));
 });
 
 Route::get('fire', function () {
     // this fires the event
-    event(new App\Events\UserHasRegistered());
+    event(new App\Events\IncreaseRfnBonus());
 
     return "Event Fired!";
 
 });
 
+Route::get('api/rfnbonus', function(){
+
+    $rfnbonus = ((App\User::all()->count()) * 5 );
+    return $rfnbonus;
+});
+
+//test route for broadcasting in the NewsBar
 Route::get('sender', function () {
     $data = [
         'event' => 'UserSignedUp',
         'data'  => [
-            'username'   => 'chill',
-            'created_at' => '2011-12-17T09:24:17Z',
+            'display_name'   => 'chill',
+            'created_at'     => '2011-12-17T09:24:17Z',
         ],
     ];
     // Use this To Fire User Info In NewsBar
@@ -83,7 +110,7 @@ Route::get('sender', function () {
 Route::get('receiver', function () {
     return view('receiver');
 });
-
+//test route for Redis set and get key
 Route::get('message', function () {
     $app = PHPRedis::connection();
 $app->set("masterpowers", "Yeah Baby Yeah");
