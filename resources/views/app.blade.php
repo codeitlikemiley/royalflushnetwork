@@ -24,57 +24,49 @@
     {{-- Note Only Load BottomSheet if there is Referror or Searched User --}}
     @include('layouts.bottomsheet')
 
-    <!--Import all Javascript-->
-    {!! HTML::script('js/jquery.js') !!}
-    {!! HTML::script('https://code.jquery.com/ui/1.11.4/jquery-ui.js') !!}
-    <!--Check the Update of materialize fix for select option-->
-    {!! HTML::script('js/matest.min.js') !!}
-    {!! HTML::script('vendor/jnewsbar/js/jNewsbar.jquery.min.js') !!}
+    <!--Import all JS Libary-->
+    {!! HTML::script('js/vendor.js') !!}
+    <!--Import Custom JS-->
+    @include('layouts.ajax')
     {!! HTML::script('js/login.js') !!}
     {!! HTML::script('js/search.js') !!}
     {!! HTML::script('js/register.js') !!}
     {!! HTML::script('js/activatefirstlink.js') !!}
     {!! HTML::script('js/passwordreset.js') !!}
 
-    {{-- {!! HTML::script('https://www.google.com/recaptcha/api.js') !!} --}}
-    <script src="https://www.google.com/recaptcha/api.js?onload=CaptchaCallback&render=explicit" async defer></script>
-    <script type="text/javascript">
-    var CaptchaCallback = function(){
-    $('.g-recaptcha').each(function(index, el) {
-        grecaptcha.render(el, {'sitekey' : '{{ env('RE_CAP_SITE') }}'});
-    });
-};
-    </script>
-    <!--Under Test JS-->
-    {!! HTML::script('js/timeago.js') !!}
-    {!! HTML::script('js/test.js') !!}
-    {!! HTML::script('vendor/vue/vue.js') !!}
-    {!! HTML::script('js/vue-resource.js') !!}
+    <!--Import Google Recaptcha-->
+    @include('layouts.recaptcha')
+
+
 
 
 
 
     <!--Custom JS Here!-->
-    @include('layouts.ajax')
-        <!-- {!! Html::script("/vendor/moment/moment.js") !!} -->
-        {!! Html::script("/vendor/socket.io/socket.io.js") !!}
+
         <!-- Make Sure You add Another Blade that is Below Socket.io.js
         To Avoid io Being Undefined !-->
-        <script>
-            // Dynamically Load the Url and Append the Port Specified in socket.js
-            var socket = io(window.location.origin + ':6001');
-            socket.on("test-channel:App\\Events\\UserHasRegistered", function(message){
-                $('#power').text(parseInt($('#power').text()) + parseInt(message.data.power));
-                // Select Power ID then Parse the text to int then add the Broadcast Data
-            });
-
-
-        </script>
-        {!! HTML::script('js/livequery.js') !!}
+        {!! HTML::script('js/vue.js') !!}
         {!! HTML::script('js/myvue.js') !!}
 
 
 
 
+
     </body>
+<script type="text/javascript">
+
+
+
+
+// Dynamically Load the Url and Append the Port Specified in socket.js
+            var socket = io(window.location.origin + ':6001');
+            socket.on("rfn-channel:App\\Events\\IncreaseRfnBonus", function(message){
+                $('#rfn_bonus').text(parseInt($('#rfn_bonus').text()) + parseInt(message.data.rfn_bonus));
+
+
+                // parse the text to int then add rfn bonus!
+            });
+
+</script>
   </html>
