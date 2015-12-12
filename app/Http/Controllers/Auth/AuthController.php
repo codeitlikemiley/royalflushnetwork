@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace app\Http\Controllers\Auth;
 
 use App\User;
 use App\Profile;
@@ -26,6 +26,7 @@ class AuthController extends Controller
 
     protected $redirectTo = 'profile';
     protected $loginPath = 'login';
+    protected $redirectAfterLogout = 'login';
 
     public $mail;
 
@@ -49,10 +50,7 @@ class AuthController extends Controller
         // Check Captcha is Valid or Used!
 
         if ($this->captchaCheck() == false) {
-            $errors = [
-            'captchaError' => 'Captcha Is Not Valid AnyMore',
-            'refreshpage' => 'Please Refresh Your Page!',
-            ];
+            $errors = ['captchaError' => trans('auth.captchaError')];
 
             return response()->json(['success' => false, 'errors' => $errors], 200);
         }
@@ -89,14 +87,6 @@ class AuthController extends Controller
         $active = Auth::user()->active;
         $status = Auth::user()->status;
 
-        // User Not Active
-        if (!$active) {
-            $errors = $validator->errors()->add('notactive', 'Please Verify Your Email First!');
-            Auth::logout();
-
-            return response()->json(['success' => false, 'errors' => $errors], 200);
-        }
-
         // User is Banned
         if (!$status) {
             $errors = $validator->errors()->add('banned', 'Sorry Your Account is Banned!');
@@ -105,8 +95,16 @@ class AuthController extends Controller
             return response()->json(['success' => false, 'errors' => $errors], 401);
         }
 
+        // User Not Active
+        if (!$active) {
+            $messages = ['NotActive' => 'Account is Not Active Yet Please Verify Your Email'];
+
+            return response()->json(['success' => true, 'messages' => $messages, 'url' => 'profile'], 200);
+        }
+
+        $messages = ['success' => 'Welcome Back!'];
         // Successfully Login Without Any Problem
-        return response()->json(['success' => true, 'url' => 'profile'], 200);
+        return response()->json(['success' => true, 'messages' => $messages, 'url' => 'profile'], 200);
     }
 
     public function login()
@@ -127,6 +125,7 @@ class AuthController extends Controller
         }
     }
 
+    // Method Can be Remove with Route
     public function sendActivationLink(EmailRequest $request)
     {
         $user = User::where('email', $request->email)->firstOrFail();
@@ -136,6 +135,7 @@ class AuthController extends Controller
         return \View::make('auth.success');
     }
 
+    // Needs a Good Template
     public function resendEmail()
     {
         $user = \Auth::user();
@@ -145,7 +145,6 @@ class AuthController extends Controller
         } else {
             $user->incrementResent();
             $this->mail->passwordResend($user);
-            \Auth::Logout();
 
             return \View::make('auth.success');
         }
@@ -166,10 +165,7 @@ class AuthController extends Controller
         // Check Captcha still Valid or Used!
 
         if ($this->captchaCheck() == false) {
-            $errors = [
-            'captchaError' => trans('auth.captchaError'),
-            'refreshpage' => trans('auth.refreshPage'),
-            ];
+            $errors = ['captchaError' => trans('auth.captchaError')];
 
             return response()->json(['success' => false, 'errors' => $errors], 400);
         }
@@ -180,7 +176,7 @@ class AuthController extends Controller
             $errors = [
             'CookieError' => trans('auth.cookieError'),
             'cookieNew' => trans('auth.cookieAttached'),
-            
+
             ];
 
             return response()->json(['success' => false, 'errors' => $errors], 400)->withCookie(cookie('sponsor', $cookie, 60));

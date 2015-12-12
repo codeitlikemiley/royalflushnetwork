@@ -18,6 +18,7 @@
   {!! HTML::style('https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.2/css/materialize.min.css') !!}
   {!! HTML::style('css/style.css') !!}
   {!! HTML::style('vendor/jnewsbar/css/jNewsbar.css') !!}
+  
 
 
 </head>

@@ -9,7 +9,7 @@
     <div class="input-field col s12">
       <i class="mdi-communication-email prefix"></i>
        <input id="login_email" type="email" class="validate" name="email" required="email">
-       <label for="email" data-error="InvalidEmailAddress" data-success="Ok">Email Address</label>
+       <label for="email" data-error="Invalid Email Address!" data-success="Ok">Email Address</label>
 
     </div>
   </div>
@@ -18,7 +18,7 @@
     <div class="input-field col s12">
       <i class="mdi-action-lock-outline prefix"></i>
         <input id="login_password" type="password" class="validate" minlength="8" name="password" required>
-        <label for="password" data-error="PasswordTooShort" data-success="Ok" >Password</label>
+        <label for="password" data-error="Password Entered is Too Short!" data-success="Ok" >Password</label>
 
     </div>
   </div>
@@ -68,3 +68,6 @@
   {{-- End of Password Reset Form --}}
 </div>
 {{-- End Card --}}
+
+
+

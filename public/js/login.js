@@ -31,15 +31,19 @@ $( document )
             }
         }
 
+
+
         $( '#login_form' )
             .on( 'submit', function ( e ) {
 
                 e.preventDefault();
-                var login_form = $( '#login_form' )
+                
+                    var login_form = $( '#login_form' )
                     .serializeArray();
-                var url = $( '#login_form' )
+                    var url = $( '#login_form' )
                     .attr( 'action' );
-                loader( 'on' );
+                    loader( 'on' );
+                
 
                 $.ajax( {
                     url: url,
@@ -64,6 +68,18 @@ $( document )
                             } );
                         }
                         if ( data.success === true ) {
+                            $.each( data.messages, function (
+                                index, message ) {
+                                Materialize.toast(
+                                    message, 4000,
+                                    '',
+                                    function () {
+                                        console
+                                            .log(
+                                                message
+                                            );
+                                    } );
+                            } );
                             authenticated( data.url );
                         }
                     },
@@ -83,6 +99,9 @@ $( document )
 
                     }
                 } );
+        
+    
+                
 
             } );
 

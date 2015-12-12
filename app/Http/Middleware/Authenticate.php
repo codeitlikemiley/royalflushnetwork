@@ -47,9 +47,19 @@ class Authenticate
 //          return redirect()->guest('auth.guest_activate');
             return view('auth.guestactivate')
                 ->with( 'email', \Auth::user()->email )
-                ->with( 'date', \Auth::user()->created_at->format('Y-m-d') );
+                ->with( 'date', \Auth::user()->created_at);
         }
 
-        return $next($request);
+        return $this->nocache( $next($request) );
     }
+
+    protected function nocache($response)
+    {
+        $response->headers->set('Cache-Control','nocache, no-store, max-age=0, must-revalidate');
+        $response->headers->set('Expires','Wed, 17 Aug 1988 00:00:00 GMT');
+        $response->headers->set('Pragma','no-cache');
+
+        return $response;
+    }
+
 }

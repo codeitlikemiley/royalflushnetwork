@@ -67,6 +67,9 @@ class PasswordController extends Controller
      */
     public function save(Request $request)
     {
+
+        
+
         $passwordRequest = new PasswordRequest();
         $validator = Validator::make($request->all(), $passwordRequest->rules(), $passwordRequest->messages());
         if ($validator->fails()) {
@@ -74,10 +77,11 @@ class PasswordController extends Controller
         }
 
         if ($this->captchaCheck() == false) {
-            $errors = $validator->errors()->add('captchaerror', 'Wrong Captcha!');
-
+            $errors = ['captchaError' => trans('auth.captchaError')];
             return response()->json(['success' => false, 'errors' => $errors], 400);
         }
+
+        
 
             $user = User::where('email', $request->email)->firstOrFail();
             $user->activation_code == $request->token;
@@ -98,6 +102,8 @@ class PasswordController extends Controller
      */
     public function sendLink(Request $request)
     {
+        
+
         $emailRequest = new EmailRequest();
         $validator = Validator::make($request->all(), $emailRequest->rules(), $emailRequest->messages());
         if ($validator->fails()) {
@@ -105,10 +111,12 @@ class PasswordController extends Controller
         }
 
         if ($this->captchaCheck() == false) {
-            $errors = $validator->errors()->add('captchaerror', 'Wrong Captcha!');
+            $errors = ['captchaError' => trans('auth.captchaError')];
 
             return response()->json(['success' => false, 'errors' => $errors], 400);
         }
+
+        
 
         $user = User::where('email', $request->email)->firstOrFail();
         $activation_code = str_random(60) . $request->input('email');

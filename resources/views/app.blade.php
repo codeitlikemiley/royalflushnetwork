@@ -28,11 +28,11 @@
     {!! HTML::script('js/vendor.js') !!}
     <!--Import Custom JS-->
     @include('layouts.ajax')
-    {!! HTML::script('js/login.js') !!}
+    {{-- {!! HTML::script('js/login.js') !!} --}}
     {!! HTML::script('js/search.js') !!}
-    {!! HTML::script('js/register.js') !!}
+    {{-- {!! HTML::script('js/register.js') !!} --}}
     {!! HTML::script('js/activatefirstlink.js') !!}
-    {!! HTML::script('js/passwordreset.js') !!}
+    {{-- {!! HTML::script('js/passwordreset.js') !!} --}}
 
     <!--Import Google Recaptcha-->
     @include('layouts.recaptcha')
