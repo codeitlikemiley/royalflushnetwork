@@ -344,11 +344,17 @@ p {
   margin: auto;
 }
 
-// Has Bug On The Search bar but Fixes Data-Error and Data-Success Message Lenght
-/*.input-field label {
-    width: 100%;
-}*/
+// Avoid The Search Bar Being Locked Up
+.input-field label {
+width: calc(100% - 4rem);
+}
 
+// Fixed the Bug In Data-error and Success Message 
+label[data-error]:after {
+white-space: nowrap;
+}
+
+// Add More Space In Input Forms
  input[type=text] + label:after, input[type=password] + label:after, input[type=email] + label:after, input[type=url] + label:after, input[type=time] + label:after, input[type=date] + label:after, input[type=datetime-local] + label:after, input[type=tel] + label:after, input[type=number] + label:after, input[type=search] + label:after, textarea.materialize-textarea + label:after {
     display: block;
     content: "";
