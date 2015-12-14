@@ -1,6 +1,6 @@
 $(document).ready(function() {
-   
- 
+
+
     function pageloader(v){
       if(v == 'on'){
         $('#search_form').css({
@@ -16,8 +16,8 @@ $(document).ready(function() {
     }
 
 
-   
-    
+
+
 
      // ajax call for autocomplete
    $( "#q" ).autocomplete({
@@ -30,7 +30,7 @@ $(document).ready(function() {
     }
   });
 
-    // autocomplete added behavior 
+    // autocomplete added behavior
     $( "input[name='q']" ).on( "focus", function(){
         $( "input[name='q']" ).css( "color", "#e57373" );
         $( "input[name='q']" ).val();
@@ -41,8 +41,8 @@ $(document).ready(function() {
       $( ".ui-autocomplete" ).empty();
     });
 
-    // initialize select 
-    
+    // initialize select
+
 
 
     // ajax call for search sponsor
@@ -50,39 +50,39 @@ $(document).ready(function() {
                 e.preventDefault();
                 var url = $('#search_form').attr('action');
                 var search_form = $('#search_form').serializeArray();
-                pageloader('on');  
+                pageloader('on');
                 $.ajax({
                         url: url,
                         type: 'post',
                         dataType: 'json',
                         data: search_form,
                         success: function(data){
-                        // stop the loader  
-                        pageloader('off'); 
+                        // stop the loader
+                        pageloader('off');
                         $('#pageloader').addClass('teal lighten-2').fadeIn(2000, function(){
                           $(this).hide();
                           $(this).removeClass("teal lighten-2");
                         });
 
-                        
+
                         //initiate profile object
                         var pic = data.userdata.profile.profile_pic;
 
                         var mobileno = data.userdata.profile.contact_no;
-                        
+
                         var dname = data.userdata.profile.display_name;
                         // user data
-                        
+
                         var about_me = data.userdata.profile.about_me;
-                        
+
                         var username = data.userdata.username;
 
                         var premium = "FREEMIUM";
                         var active = data.userdata.links[0].active;
                         // initiate links object
                         var links = data.userdata.links;
-                       
-                        
+
+
                         // fill the input value with search value
                         $( "input[name='q']" ).val();
 
@@ -107,7 +107,7 @@ $(document).ready(function() {
                         if(mobileno == null){
                           mobileno = " ";
                         }
-          
+
                         // remove image
                         $('div#userbtn > a > img').remove();
                         // append image
@@ -120,19 +120,19 @@ $(document).ready(function() {
                         $('div#profile_card').append('<p>' + dname + '</p>');
                         $('div#profile_card').append('<span class="right">' + mobileno + '</span>');
                         $('div#profile_card').append('<span class="amber bold">' + premium + '</span>');
-                        
+
                         $('.collapsible').collapsible({
                         accordion : true
                         });
                         // reset the loading of sponsorlink
                         $('#sploadlinks > li').remove();
                         $('#sploadlinks > hr').remove();
-                        
+
                         // attach link to the collapsible
                         for (var i = 0; i < links.length; i++) {
                           // append all links in options
                           $("#sploadlinks").append('<li style="text-indent: 4rem;"><a href="' + links[i].link + '" class="teal-text">' + links[i].link  + '<i class="material-icons right">send</i></a></li><hr>');
-                          
+
                         }
 
                         // re-initialize collapsible on call instance
@@ -144,48 +144,58 @@ $(document).ready(function() {
                         $('#about_me').append('<p>' + about_me + '</p>');
 
 
-                        
-                        
 
-                        
+
+
+
 
                         // this code below wont re-populate if no image is set in a user
-                        
+
                         // remove any existing option in select
                         $('select').children().remove();
                         $('select').material_select('destroy');
+
+
+
                         // interate thru all links
                         for (var i = 0; i < links.length; i++) {
                           // append all links in options
+                          $('#powerselect').parsley().destroy();
                           $("#powerselect").append('<option value="' + links[i].link + '">' + links[i].link  + '</option>');
+                          $('#powerselect').attr('data-parsley-required', 'true');
+                          $('#powerselect').parsley();
+
                           // log all links
                           // console.log(links[i].link);
-                          
+
                         }
-                        // re initiate again select
+
+                        // re initiate again select with new Option
                         $('select').material_select();
-                        
+
+
+
 
 
 
                         //add More logic to populate page with data
                         },
                         error: function(data){
-                          
+
                         pageloader('off');
 
                         $('#pageloader').addClass('red accent-4').fadeIn(2000, function(){
                           $(this).hide();
                           $(this).removeClass('red accent-4');
                         });
-                        
+
                         $( "input[name='q']" ).val('We Cant Find Your Sponsor, Search Again!');
                         $( "input[name='q']" ).css( "color", "#d50000" );
                         }
                       });
 
-                
+
         });
 
-  
+
 });

@@ -94,7 +94,8 @@ recaptcha3 = grecaptcha.render('recaptcha3', {
           'sitekey' : '{{ env('RE_CAP_SITE') }}',
           'expired-callback': reCaptchaExpired3,
           'callback' : reCaptchaVerify3,
-          'theme' : 'light'
+          'theme' : 'light',
+          'data-tabindex': 10
         });
 }; // END ALL ABOUT GOOGLE RECAPTCHA
 
@@ -321,7 +322,14 @@ $('#registration_form').on('submit', function(e){
                     buttonloader('off');
 
                     Materialize.toast('Thanks For Registration', 4000,'',function(){console.log('User Has Been Registered!');});
+                    $('select').children().remove();
+                    $('select').material_select('destroy');
                     resetForm($('#registration_form'));
+                    $('#email').val('');
+                    $("#powerselect").append('<option value="" disabled selected>Choose Link</option>');
+                    $('select').material_select();
+
+
                 },
                 error:function(data)
                 {
@@ -339,7 +347,7 @@ $('#registration_form').on('submit', function(e){
 
                 }
                 }); // End Ajax
-            } else { // If Do Submit Failed then Do This
+            } else {
                 Materialize.toast('Please Answer Registration Captcha!', 4000,'',function () {
                     //
                 });
@@ -347,7 +355,7 @@ $('#registration_form').on('submit', function(e){
             if (refresh3) {
                 reCaptchaExpired3();
                 Materialize.toast('Refreshing Registration Captcha', 4000,'',function () {
-                    //
+
                 });
             } // End Refresh Captcha
         }// End If parsley isValid
