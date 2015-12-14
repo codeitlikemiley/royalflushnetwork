@@ -4,17 +4,12 @@
 
    $('select').material_select();
 
-
   // initialize sidenav button
    $('.button-collapse').sideNav({
       menuWidth: 250, // Default is 240
       edge: 'left', // Choose the horizontal origin
       closeOnClick: true // Closes side-nav on <a> clicks, useful for Angular/Meteor
     }); //End Button Collapse
-
-
-
-
 
    // modal trigger for bottomsheet
    $('.modal-trigger').leanModal({
@@ -35,13 +30,6 @@
    // initialize slider
    $('.slider').slider();
 
-
-
-
-
-
-
-
     // newsbar initialize
     $('div.latest_members').jNewsbar({
     position : 'bottom',
@@ -52,16 +40,6 @@
     pauseOnHover : false,
     theme : "teal-lighten-2"
     });
-
-
-
-
-
-
-
-
-
-
 
     });// end of document ready
 })(jQuery);

@@ -6,12 +6,12 @@
   <!-- Facebook Open Graph  -->
   <meta property="og:url"           content="{{ route('/') }}" />
     <meta property="og:type"          content="website" />
-    <meta property="og:title"         content="Royal Flush Network" />
-    <meta property="og:description"   content="The Most Exciting and Rewarding Payplan Period!" />
-    <meta property="og:image"         content="http://maxims.code:8000/img/rfnlogo.png" />
+    <meta property="og:title"         content="{{ trans('rfn.SiteName') }}" />
+    <meta property="og:description"   content="{{ trans('rfn.SiteDescription') }}" />
+    <meta property="og:image"         content="{{ asset('img/rfnlogo.png') }}" />
 
   <!-- Title Tag  -->
-  <title>Hellow Bitch! >;)</title>
+  <title>{{ trans('rfn.SiteName') }}</title>
 
 
   <!--Import all Css-->

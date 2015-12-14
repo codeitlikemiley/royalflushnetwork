@@ -1,4 +1,4 @@
-<div class="row center" id="buttonloader" style="display:none">
+<div class="row center animatebuttonloader" style="display:none">
     <div class="preloader-wrapper big active">
        <div class="spinner-layer spinner-blue">
          <div class="circle-clipper left">

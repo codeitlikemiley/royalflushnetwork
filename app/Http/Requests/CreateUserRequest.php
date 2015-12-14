@@ -28,7 +28,7 @@ class CreateUserRequest extends Request
                 'last_name' => 'required|between:2,30',
                 'display_name' => 'required|max:30',
                 'email' => 'required|email|max:60|unique:users',
-                'password' => 'required|confirmed|min:8',
+                'password' => 'required|confirmed|min:8|max:60',
                 'agree' => 'required',
                 'g-recaptcha-response' => 'required',
         ];

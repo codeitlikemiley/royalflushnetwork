@@ -2,7 +2,8 @@
   <html>
     <!--Import Header-->
     @include('layouts.header')
-
+    <!--Custom Per Page Header-->
+    @yield('head')
     <body>
     <!--Import Navbar-->
     @include('layouts.navbar')
@@ -54,6 +55,8 @@
 
 
     </body>
+    <!--Custom Script On Desired Page -->
+    @yield('footer')
 <script type="text/javascript">
 
 

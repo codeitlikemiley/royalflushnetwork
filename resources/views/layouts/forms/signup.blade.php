@@ -1,5 +1,5 @@
 <form action="signup" method="POST" class="col s12 login-form"
-id="registration_form">
+id="registration_form" data-parsley-validate>
 <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
 
 		<div class="input-field col s11 offset-s1">
@@ -10,61 +10,62 @@ id="registration_form">
     	<label>Sponsor Links</label>
   		</div>
 
-        <div class="input-field col s6">
-        <i class="material-icons prefix">account_circle</i>
-    	  <input id="first_name" type="text" class="validate" name="first_name" class="validate" required="">
+        <div class="input-field col s12">
+        <i class="material-icons prefix">perm_identity</i>
+    	  <input id="first_name" type="text" name="first_name" required="" data-parsley-required-message="First Name is required" data-parsley-minlength="2" data-parsley-minlength-message="First Name Cant Be That Short!" data-parsley-maxlength="30" data-parsley-maxlength-message="You Exceeded The Character Limit!" data-parsley-pattern="/^[a-zA-Z]*$/" data-parsley-pattern-message="Invalid Character Present!" data-parsley-trigger="change focusout"/>
           <label for="first_name">First Name</label>
         </div>
-        <div class="input-field col s6">
-          <input id="last_name" type="text" class="validate" name="last_name" class="validate" required="">
+        <div class="input-field col s12">
+        <i class="material-icons prefix">supervisor_account</i>
+          <input id="last_name" type="text" name="last_name" required="" data-parsley-required-message="Last Name is required" data-parsley-minlength="2" data-parsley-minlength-message="Last Name Cant Be That Short!" data-parsley-maxlength="30" data-parsley-maxlength-message="You Exceeded The Character Limit!" data-parsley-pattern="/^[a-zA-Z]*$/" data-parsley-pattern-message="Invalid Character Present!" data-parsley-trigger="change focusout"/>
           <label for="last_name">Last Name</label>
         </div>
 
 
         <div class="input-field col s12">
         <i class="material-icons prefix">visibility</i>
-          <input id="username" type="text" class="validate" name="username" class="validate" required="">
+          <input id="username" type="text" name="username" required="" data-parsley-required-message="Username is Required!" data-parsley-minlength="6" data-parsley-minlength-message="Username Name Cant Be That Short!" data-parsley-maxlength="30" data-parsley-maxlength-message="You Exceeded The Character Limit!" data-parsley-pattern="/^[a-zA-Z0-9]+([._]?[a-zA-Z0-9]+)*$/" data-parsley-pattern-message="Username Pattern Must Be e.g. (johndoe_001)" data-parsley-trigger="change focusout"/>
           <label for="username">Username</label>
         </div>
 
         <div class="input-field col s12">
     	<i class="material-icons prefix">vpn_lock</i>
-          <input id="display_name" type="text" class="validate" name="display_name" class="validate" required="">
+          <input id="display_name" type="text" name="display_name" required="" data-parsley-required-message="Display Name is Required!" data-parsley-minlength="2" data-parsley-minlength-message="Display Name Cant Be That Short!" data-parsley-maxlength="30" data-parsley-maxlength-message="You Exceeded The Character Limit!" data-parsley-pattern="/^[\w\-\s]*$/" data-parsley-pattern-message="Diplay Name Pattern Must Be e.g. (Im John-Doe_23)" data-parsley-trigger="change focusout"/>
           <label for="display_name">Display Name</label>
         </div>
 
 	<div class="input-field col s12">
 	    <i class="mdi-communication-email prefix"></i>
-	    <input id=email type="email" class="validate" name="email" required="">
-       <label for="email" data-error="InvalidEmailAddress" data-success="">Email Address</label>
+	    <input id=email type="email" name="email" required="" data-parsley-required-message="Email is required" data-parsley-type="email" data-parsley-type-message="This is Not an Email!" data-parsley-maxlength="60" data-parsley-maxlength-message="You Exceeded The Character Limit!" data-parsley-trigger="change focusout"/>
+       <label for="email">Email Address</label>
 	</div>
 
 	<div class="input-field col s12">
 	    <i class="mdi-action-lock-outline prefix"></i>
-	    <input id="pwd1" type="password" class="validate" minlength="8" name="password" required="">
-        <label for="password" data-error="PasswordTooShort" data-success="" >Password</label>
+	    <input id="pwd1" type="password" name="password" required="" data-parsley-required-message="Password is required" data-parsley-minlength="8" data-parsley-minlength-message="Password is Too Short!" data-parsley-maxlength="60" data-parsley-maxlength-message="You Exceeded The Character Limit!" data-parsley-trigger="change focusout"/>
+        <label for="password">Password</label>
 	</div>
 	<div class="input-field col s12">
 	    <i class="mdi-action-lock-outline prefix"></i>
-	    <input id="pwd2" type="password" class="validate"  minlength="8" name="password_confirmation" required="">
-        <label for="password_confirmation" data-error="PasswordTooShort" data-success="" >Password Confirmation</label>
+	    <input id="pwd2" type="password" name="password_confirmation" required="" data-parsley-required-message="Password Confirmation is required" data-parsley-minlength="8" data-parsley-minlength-message="Password Confirmation is Too Short!" data-parsley-maxlength="60" data-parsley-maxlength-message="You Exceeded The Character Limit!" data-parsley-equalto="#pwd1" data-parsley-equalto-message="Password Confirmation Does Not Match!" data-parsley-trigger="change focusout"/>
+        <label for="password_confirmation">Password Confirmation</label>
 
 	</div>
-  <div class="row agree">
+  <div class="row non-input-field">
 	 <div class="row col s11 offset-s1">
-      <input type="checkbox" id="agree" name="agree"/>
+      <input type="checkbox" id="agree" name="agree" required="" data-parsley-required-message="You Need To Agree In Our Terms and Condition" data-parsley-trigger="change focusout"/>
       <label for="agree">Do You Agree On Our <a class="modal-trigger" data-target="tos">Terms and Condition</a>?</label>
 	 </div>
    </div>
    <div class="row">
-   <div class="g-recaptcha">
+   <div class="g-recaptcha" id="recaptcha3">
 
    </div>
    </div>
 
   @include('layouts.buttonloader')
 
-   <div class="row" id="regbutton">
+   <div class="row buttonloader">
 
     <button class="col s6 offset-s3 btn waves-effect waves-light form-submit" type="submit" name="action" id="registration_submit">Register An Account</button>
     </div>

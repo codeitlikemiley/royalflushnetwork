@@ -50,15 +50,16 @@ return [
     'resetPassword'     => 'Reset Password',
     
     'loggedIn'          => 'You are logged in!',
-    'cookieError'       => 'You Sponsor Cookie Was Missing!',
+    'cookieError'       => 'Oops! Sponsor Cookie Missing?!',
     'enablecookie'      => 'Please Allow Cookie In Your Browser!',
-    'captchaError'      => 'Wait For Captcha To Refresh! And Try Again Later!',
+    'captchaError'      => 'Wait For Captcha Refresh! Please Wait and Try Again Later!',
     'refreshPage'       => 'Refresh Your Page!',
-    'cookieAttached'    => 'We Attached new Cookie of Your Sponsor',
+    'cookieAttached'    => 'We Attached A New Based On Your ChoosenLink',
     
     //emails
     'pleaseActivate'    => 'Please activate your account.',
     'clickHereReset'    => 'Click here to reset your password: ',
     'clickHereActivate' => 'Click here to activate your account: ',
+
 
 ];

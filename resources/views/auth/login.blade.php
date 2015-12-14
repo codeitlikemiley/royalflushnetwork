@@ -1,5 +1,9 @@
 @extends('app')
 
+@section('head')
+    {!! HTML::style('css/parsley.css') !!}
+@stop
+
 @section('content')
 <div class="container main">
 
@@ -31,3 +35,10 @@
     </div>
 </div>
 @endsection
+
+@section('footer')
+
+
+
+
+@stop

@@ -55,8 +55,9 @@ class PasswordController extends Controller
      */
     public function reset($email, $token)
     {
-       $user = User::where('email', $email)->firstOrFail();
-       $active_token = User::where('activation_code', $token)->firstOrFail();
+        $user         = User::where('email', $email)->firstOrFail();
+        $active_token = User::where('activation_code', $token)->firstOrFail();
+
         return \View::make('auth.reset', compact('token', 'email'));
     }
 
@@ -67,32 +68,25 @@ class PasswordController extends Controller
      */
     public function save(Request $request)
     {
-
-        
-
         $passwordRequest = new PasswordRequest();
-        $validator = Validator::make($request->all(), $passwordRequest->rules(), $passwordRequest->messages());
+        $validator       = Validator::make($request->all(), $passwordRequest->rules(), $passwordRequest->messages());
         if ($validator->fails()) {
             return response()->json(['success' => false, 'errors' => $validator->errors()->toArray()], 400);
         }
 
         if ($this->captchaCheck() == false) {
             $errors = ['captchaError' => trans('auth.captchaError')];
+
             return response()->json(['success' => false, 'errors' => $errors], 400);
         }
 
-        
+        $user = User::where('email', $request->email)->firstOrFail();
+        $user->activation_code == $request->token;
+        $user->password        = $request->password;
+        $user->activation_code = '';
+        $user->save();
 
-            $user = User::where('email', $request->email)->firstOrFail();
-            $user->activation_code == $request->token;
-            $user->password = $request->password;
-            $user->activation_code = '';
-            $user->save();
-
-            return response()->json(['success' => true, 'message' => 'You Have Successfully Reset Your Password!'], 200);
-        
-
-       
+        return response()->json(['success' => true, 'message' => 'You Have Successfully Reset Your Password!'], 200);
     }
 
     /**
@@ -102,27 +96,22 @@ class PasswordController extends Controller
      */
     public function sendLink(Request $request)
     {
-        
-
         $emailRequest = new EmailRequest();
-        $validator = Validator::make($request->all(), $emailRequest->rules(), $emailRequest->messages());
+        $validator    = Validator::make($request->all(), $emailRequest->rules(), $emailRequest->messages());
         if ($validator->fails()) {
             return response()->json(['success' => false, 'errors' => $validator->errors()->toArray()], 400);
         }
-
         if ($this->captchaCheck() == false) {
             $errors = ['captchaError' => trans('auth.captchaError')];
 
             return response()->json(['success' => false, 'errors' => $errors], 400);
         }
-
-        
-
-        $user = User::where('email', $request->email)->firstOrFail();
-        $activation_code = str_random(60) . $request->input('email');
+        $user                  = User::where('email', $request->email)->firstOrFail();
+        $activation_code       = str_random(60) . $request->input('email');
         $user->activation_code = $activation_code;
         $user->save();
         $this->mail->passwordLink($user);
+
         return response()->json(['success' => true, 'message' => 'We Have  Sent You An Email For Password Reset!'], 200);
     }
 }

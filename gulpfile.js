@@ -20,5 +20,6 @@ elixir(function(mix) {
     'vendor/jquery-timeago.min.js',
     'vendor/livequery.min.js',
     'vendor/socket.io.min.js',
+    'vendor/parsley.min.js',
     ],'public/js/vendor.js');
 });

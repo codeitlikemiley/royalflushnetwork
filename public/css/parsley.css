@@ -1,0 +1,12 @@
+.parsley-errors-list {
+  padding-left: 3.5em;
+  margin-top: -10px;
+  list-style-type: none;
+  font-size: 0.9em;
+  line-height: 0.9em;
+  transition: all .3s ease-in;
+  -o-transition: all .3s ease-in;
+  -moz-transition: all .3s ease-in;
+  -webkit-transition: all .3s ease-in;
+  color: red;
+}
