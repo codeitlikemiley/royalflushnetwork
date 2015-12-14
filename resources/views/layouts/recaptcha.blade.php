@@ -94,8 +94,7 @@ recaptcha3 = grecaptcha.render('recaptcha3', {
           'sitekey' : '{{ env('RE_CAP_SITE') }}',
           'expired-callback': reCaptchaExpired3,
           'callback' : reCaptchaVerify3,
-          'theme' : 'light',
-          'data-tabindex': 10
+          'theme' : 'light'
         });
 }; // END ALL ABOUT GOOGLE RECAPTCHA
 

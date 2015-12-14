@@ -6,7 +6,7 @@
    <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
 
    <div class="row">
-    <div class="input-field col s12">
+    <div class="input-field col s11">
       <i class="mdi-communication-email prefix"></i>
        <input id="login_email" type="email" name="email" required="" data-parsley-required-message="Email is required" data-parsley-type="email" data-parsley-type-message="This is Not an Email!" data-parsley-maxlength="60" data-parsley-maxlength-message="You Exceeded The Character Limit!" data-parsley-trigger="change focusout"/>
        <label for="email">Email Address</label>
@@ -15,7 +15,7 @@
   </div>
 
   <div class="row">
-    <div class="input-field col s12">
+    <div class="input-field col s11">
       <i class="mdi-action-lock-outline prefix"></i>
         <input id="login_password" type="password" name="password" required="" data-parsley-required-message="Password is required" data-parsley-minlength="8" data-parsley-minlength-message="Password is Too Short!" data-parsley-maxlength="60" data-parsley-maxlength-message="You Exceeded The Character Limit!" data-parsley-trigger="change focusout"/>
         <label for="password">Password</label>
@@ -49,7 +49,7 @@
 
         {!! Form::open(['route'=> 'password/postEmail', 'class' => 'col s12', 'id' => 'passwordreset_form', 'data-parsley-validate' ]) !!}
         <div class="row">
-          <div class="input-field col s12">
+          <div class="input-field col s11">
             <i class="mdi-action-lock-outline prefix"></i>
             {!! Form::email('email','',['placeholder' => 'Email', 'required' =>'', 'data-parsley-required-message' => 'Type Email You Want To Recover', 'data-parsley-type' => 'email', 'data-parsley-type-message' => 'This is Not An Email!', 'data-parsley-trigger' => 'change focusout']) !!}
           </div>
