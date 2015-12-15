@@ -4,8 +4,8 @@ id="registration_form" data-parsley-validate>
 
 		<div class="input-field col s10 pull-s1 offset-s1">
 
-    	<select id="powerselect" name="sponsor_link" tabindex="1" required="" data-parsley-required-message="Sponsor Required!" data-parsley-trigger="change focusout">
-    	<option value="" disabled selected datab-parsley-focus="">Choose Link</option>
+    	<select id="powerselect" name="sponsor_link" tabindex="1" required="" data-parsley-required-message="You Cant Register Without A Sponsor" data-parsley-trigger="change focusout" data-parsley-no-focus>
+    	<option value="" disabled selected>Search Sponsor</option>
     	</select>
     	<label>Sponsor Links</label>
   		</div>

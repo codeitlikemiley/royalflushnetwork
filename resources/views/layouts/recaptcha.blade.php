@@ -325,7 +325,7 @@ $('#registration_form').on('submit', function(e){
                     $('select').material_select('destroy');
                     resetForm($('#registration_form'));
                     $('#email').val('');
-                    $("#powerselect").append('<option value="" disabled selected>Choose Link</option>');
+                    $("#powerselect").append('<option value="" disabled selected>Search Sponsor</option>');
                     $('select').material_select();
 
 
