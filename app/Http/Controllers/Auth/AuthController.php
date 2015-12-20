@@ -56,11 +56,11 @@ class AuthController extends Controller
         }
 
         // Make Credentials
-        $email       = $request->email;
-        $password    = $request->password;
-        $credentials = [
-                    'email'    => $email,
-                    'password' => $password,
+        $username       = $request->username;
+        $password       = $request->password;
+        $credentials    = [
+                    'username'    => $username,
+                    'password'    => $password,
                         ];
         // Remember Me Token If Filled
         $remember = $request->remember_token;
@@ -172,7 +172,7 @@ class AuthController extends Controller
 
         // Check Sponsor Cookie , Provide One if None
         if (\Cookie::get('sponsor') == false) {
-            $link = Link::with('user', 'user.profile')->where('link', $request->sponsor_link)->first();
+            $link   = Link::with('user', 'user.profile')->where('link', $request->sponsor_link)->first();
             $cookie = $link->toArray();
 
             $errors = [
