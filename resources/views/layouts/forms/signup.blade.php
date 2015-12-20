@@ -30,30 +30,30 @@ id="registration_form" data-parsley-validate>
 
 
         <div class="input-field col s11">
-        <i class="material-icons prefix">visibility</i>
-          <input id="username" type="text" name="username" tabindex="4" required="" data-parsley-required-message="On What Name Do You Want to Be Search?" data-parsley-minlength="6" data-parsley-minlength-message="Username Name Cant Be That Short!" data-parsley-maxlength="30" data-parsley-maxlength-message="You Exceeded The Character Limit!" data-parsley-pattern="/^[a-zA-Z0-9]+([._]?[a-zA-Z0-9]+)*$/" data-parsley-pattern-message="Username Pattern Must Be e.g. (johndoe_001)" data-parsley-trigger="change focusout"/>
+        <i class="material-icons prefix">account_circle</i>
+          <input id="username" type="text" name="username" tabindex="4" required="" data-parsley-required-message="Username is Required For Account Login!" data-parsley-minlength="6" data-parsley-minlength-message="Username Name Cant Be That Short!" data-parsley-maxlength="30" data-parsley-maxlength-message="You Exceeded The Character Limit!" data-parsley-pattern="/^[a-zA-Z0-9]+([._]?[a-zA-Z0-9]+)*$/" data-parsley-pattern-message="Username Pattern Must Be e.g. (johndoe_001)" data-parsley-trigger="change focusout"/>
           <label for="username">Username</label>
         </div>
 
         <div class="input-field col s11">
-    	<i class="material-icons prefix">vpn_lock</i>
+    	<i class="material-icons prefix">public</i>
           <input id="display_name" type="text" name="display_name" tabindex="5" required="" data-parsley-required-message="On What Name Do You Want to Be Viewed?" data-parsley-minlength="2" data-parsley-minlength-message="Display Name Cant Be That Short!" data-parsley-maxlength="30" data-parsley-maxlength-message="You Exceeded The Character Limit!" data-parsley-pattern="/^[\w\-\s]*$/" data-parsley-pattern-message="Diplay Name Pattern Must Be e.g. (Im John-Doe_23)" data-parsley-trigger="change focusout"/>
           <label for="display_name">Display Name</label>
         </div>
 
 	<div class="input-field col s11">
 	    <i class="mdi-communication-email prefix"></i>
-	    <input id=email type="email" name="email" tabindex="6" required="" data-parsley-required-message="What Email Do You Want For Logging In?" data-parsley-type="email" data-parsley-type-message="This is Not an Email!" data-parsley-maxlength="60" data-parsley-maxlength-message="You Exceeded The Character Limit!" data-parsley-trigger="change focusout"/>
+	    <input id=email type="email" name="email" tabindex="6" required="" data-parsley-required-message="Required for Account Recovery" data-parsley-type="email" data-parsley-type-message="This is Not a Valid Email" data-parsley-maxlength="60" data-parsley-maxlength-message="You Exceeded The Character Limit!" data-parsley-pattern="/^[a-z0-9](\.?[a-z0-9]){5,}@g(oogle)?mail\.com$/i" data-parsley-pattern-message="Use Only Google Email Address!" data-parsley-trigger="change focusout"/>
        <label for="email">Email Address</label>
 	</div>
 
 	<div class="input-field col s11">
-	    <i class="mdi-action-lock-outline prefix"></i>
+	    <i class="material-icons prefix">lock_open</i>
 	    <input id="pwd1" type="password" name="password" tabindex="7" required="" data-parsley-required-message="Please Provide a Password For Your Account!" data-parsley-minlength="8" data-parsley-minlength-message="Password is Too Short!" data-parsley-maxlength="60" data-parsley-maxlength-message="You Exceeded The Character Limit!" data-parsley-trigger="change focusout"/>
         <label for="password">Password</label>
 	</div>
 	<div class="input-field col s11">
-	    <i class="mdi-action-lock-outline prefix"></i>
+	    <i class="material-icons prefix">vpn_key</i>
 	    <input id="pwd2" type="password" name="password_confirmation" tabindex="8" required="" data-parsley-required-message="Password Confirmation is required" data-parsley-minlength="8" data-parsley-minlength-message="Password Confirmation is Too Short!" data-parsley-maxlength="60" data-parsley-maxlength-message="You Exceeded The Character Limit!" data-parsley-equalto="#pwd1" data-parsley-equalto-message="Password Confirmation Does Not Match!" data-parsley-trigger="change focusout"/>
         <label for="password_confirmation">Password Confirmation</label>
 

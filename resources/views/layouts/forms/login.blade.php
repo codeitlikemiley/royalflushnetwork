@@ -7,17 +7,17 @@
 
    <div class="row">
     <div class="input-field col s11">
-      <i class="mdi-communication-email prefix"></i>
-       <input id="login_email" type="email" name="email" required="" data-parsley-required-message="Email is required" data-parsley-type="email" data-parsley-type-message="This is Not an Email!" data-parsley-maxlength="60" data-parsley-maxlength-message="You Exceeded The Character Limit!" data-parsley-trigger="change focusout"/>
-       <label for="email">Email Address</label>
+      <i class="material-icons prefix">account_circle</i>
+       <input id="login_email" type="text" name="username" required="" data-parsley-required-message="Type Your Registered Username" data-parsley-minlength="8" data-parsley-minlength-message="Username Must be 8 Characters Above!" data-parsley-maxlength="60" data-parsley-maxlength-message="You Exceeded The Character Limit!" data-parsley-pattern="/^[a-zA-Z0-9]+([._]?[a-zA-Z0-9]+)*$/" data-parsley-pattern-message="Username Pattern Must Be e.g. (johndoe_001)" data-parsley-trigger="change focusout"/>
+       <label for="username">Username</label>
 
     </div>
   </div>
 
   <div class="row">
     <div class="input-field col s11">
-      <i class="mdi-action-lock-outline prefix"></i>
-        <input id="login_password" type="password" name="password" required="" data-parsley-required-message="Password is required" data-parsley-minlength="8" data-parsley-minlength-message="Password is Too Short!" data-parsley-maxlength="60" data-parsley-maxlength-message="You Exceeded The Character Limit!" data-parsley-trigger="change focusout"/>
+      <i class="material-icons prefix">vpn_key</i>
+        <input id="login_password" type="password" name="password" required="" data-parsley-required-message="Password is required" data-parsley-minlength="8" data-parsley-minlength-message="Password Must Be 8 Characters Above!" data-parsley-maxlength="60" data-parsley-maxlength-message="You Exceeded The Character Limit!" data-parsley-trigger="change focusout"/>
         <label for="password">Password</label>
 
     </div>
@@ -51,7 +51,7 @@
         <div class="row">
           <div class="input-field col s11">
             <i class="mdi-action-lock-outline prefix"></i>
-            {!! Form::email('email','',['placeholder' => 'Email', 'required' =>'', 'data-parsley-required-message' => 'Type Email You Want To Recover', 'data-parsley-type' => 'email', 'data-parsley-type-message' => 'This is Not An Email!', 'data-parsley-trigger' => 'change focusout']) !!}
+            {!! Form::email('email','',['placeholder' => 'Email', 'required' => '', 'data-parsley-required-message' => 'Type Email You Want To Recover', 'data-parsley-type' => 'email', 'data-parsley-type-message' => 'This is Not A Valid Email!', 'data-parsley-pattern' => '/^[a-z0-9](\.?[a-z0-9]){5,}@g(oogle)?mail\.com$/i' , 'data-parsley-pattern-message' => 'Use Only Google Email Address!', 'data-parsley-trigger' => 'change focusout']) !!}
           </div>
         </div>
         <div class="row">
