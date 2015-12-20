@@ -3,12 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Link;
-
 use Redirect;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-
-
-
 
 class LinkController extends Controller
 {
@@ -18,11 +14,9 @@ class LinkController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-
     public function __construct()
     {
         $this->middleware('guest');
-
     }
 
     /**
@@ -38,38 +32,34 @@ class LinkController extends Controller
 
         //  // If it has a Sponsor Cookie
          if (\Cookie::has('sponsor')) {
-
-             return view('welcome'); // Load Referral Link View
+             return Redirect::to('/'); // Load Referral Link View
          }
          if (is_null($link)) {
              return Redirect::to('/'); // Redirect To HomePage
-        }
+         }
 
-        try {
-            // If has $Link then Look in Database if Exist
-            $link = Link::with('user', 'user.profile')->where('link', $link)->firstOrFail();
-            $link = $link->toArray();
+         try {
+             // If has $Link then Look in Database if Exist
+            $link  = Link::findByLink($link)->load('user.profile');
+             $link = $link->toArray();
             // Note Cookie Wont Be Created if Exceeded More than 4kb
             \Cookie::queue('sponsor', $link, 2628000);
 
             // Return Referral View with Variable Link
-              return view('welcome')->with('link', $link);
+              return Redirect::to('/')->with('link', $link);
 
         // If No Record Found Throw Exception!
-        } catch (ModelNotFoundException $e) {
-            // Return Back to Home
+         } catch (ModelNotFoundException $e) {
+             // Return Back to Home
         return Redirect::to('/');
 
             // return view('nosponsor');
-        }
-
-
+         }
      }
 
-    public function showSponsor(){
-       return view('welcome');
-
-
+    public function showSponsor()
+    {
+        return view('welcome');
     }
 
 //    public function showRefLink($link = null)

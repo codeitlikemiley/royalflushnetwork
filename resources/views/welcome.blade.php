@@ -12,8 +12,6 @@ Returning Back Load Cookie <br>
 {{ $cookie['link']  }}  <br>
 {{ $cookie['user_id']  }}   <br>
 {{ $cookie['active']  }}    <br>
-{{ $cookie['user']['username']  }}  <br>
-{{ $cookie['user']['created_at']  }}    <br>
 {{ $cookie['user']['profile']['profile_pic']  }}    <br>
 {{ $cookie['user']['profile']['about_me']  }}   <br>
 {{ $cookie['user']['profile']['display_name']  }}   <br>
@@ -32,8 +30,6 @@ Returning Back Load Cookie <br>
     {{ $link['link']  }}    <br>
     {{ $link['user_id']  }}  <br>
     {{ $link['active']  }}  <br>
-    {{ $link['user']['username']  }}    <br>
-    {{ $link['user']['created_at']  }}  <br>
     {{ $link['user']['profile']['profile_pic']  }}  <br>
     {{ $link['user']['profile']['about_me']  }} <br>
     {{ $link['user']['profile']['display_name']  }} <br>
