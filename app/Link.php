@@ -23,7 +23,7 @@ class Link extends Model
      *
      * @var array
      */
-    protected $hidden = ['id','sp_user_id', 'sp_link_id', 'date_activated', 'created_at', 'updated_at'];
+    protected $hidden = ['sp_user_id', 'sp_link_id', 'date_activated', 'created_at', 'updated_at'];
     /**
      * [$dates That is Casted on Carbon Instance].
      *
@@ -43,8 +43,8 @@ class Link extends Model
         static::creating(function ($link) {
             $cookie = \Cookie::get('sponsor');
             if ($cookie) {
-                $link->sp_user_id = $cookie->user_id;
-                $link->sp_link_id = $cookie->id;
+                $link->sp_user_id = $cookie['user_id'];
+                $link->sp_link_id = $cookie['id'];
             }
 
         });

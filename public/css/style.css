@@ -33,26 +33,43 @@
   font-family: "RF-fonts";
   src: url("../font/rfn/Qwigley-Regular.ttf") format("truetype");
   font-weight: normal;
-  font-style: normal; 
+  font-style: normal;
 }
 
 @font-face {
   font-family: "N-fonts";
   src: url("../font/rfn/steelfis.ttf") format("truetype");
   font-weight: normal;
-  font-style: normal; 
+  font-style: normal;
 }
 
 .rffont {
-  font-family: "RF-fonts";  
+  font-family: "RF-fonts";
   font-size: 1.8em;
   font-style: normal;
   color: #ffffff;
 
 }
 
+.rf {
+  font-family: "RF-fonts";
+  font-size: 4rem;
+  font-style: normal;
+  color: black;
+
+}
+
+.n {
+    font-family: "N-fonts";
+    font-size: 1.5rem;
+    color: black;
+    position: relative;
+    top: -13px;
+
+}
+
 .normalscript {
-  
+
   margin-top: -4px;
 
 }
@@ -80,7 +97,7 @@
   main {
     flex: 1 0 auto;
   }
-  
+
 .error{
 	padding-top: 0;
 	padding-bottom: 0;
@@ -209,7 +226,7 @@ p {
   color:#ffca28;
 }
 .jnews-teal-lighten-2 .jnewsbar-navigate a{
-  
+
 }
 
 
@@ -236,10 +253,10 @@ p {
 /*Navigation Side Bar UserBtn*/
 #userbtn{
   position:fixed;
-  top: 20px; 
-  right: 50px; 
+  top: 20px;
+  right: 50px;
   padding-bottom: 15px;
-  padding-top: 15px;  
+  padding-top: 15px;
   z-index: 998;
 }
 
@@ -344,15 +361,15 @@ label[data-error]:after {
     display: block;
     content: "";
     position: absolute;
-    top: 60px; 
+    top: 60px;
     opacity: 0;
-    transition: .2s opacity ease-out, .2s color ease-out; 
+    transition: .2s opacity ease-out, .2s color ease-out;
   }
 
 /*select {
-    width:100px; 
-    overflow:hidden; 
-    white-space:nowrap; 
+    width:100px;
+    overflow:hidden;
+    white-space:nowrap;
     text-overflow:ellipsis;
 }
 select option {
@@ -361,8 +378,3 @@ select option {
     overflow:hidden;
 }
 */
-
-
-
-
-

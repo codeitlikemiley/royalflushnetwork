@@ -24,8 +24,8 @@ class AuthController extends Controller
 {
     use AuthenticatesAndRegistersUsers, ThrottlesLogins, CaptchaTrait;
 
-    protected $redirectTo = 'profile';
-    protected $loginPath = 'login';
+    protected $redirectTo          = 'profile';
+    protected $loginPath           = 'login';
     protected $redirectAfterLogout = 'login';
 
     public $mail;
@@ -40,7 +40,7 @@ class AuthController extends Controller
     public function authenticate(Request $request)
     {
         $loginRequest = new LoginRequest();
-        $validator = Validator::make($request->all(), $loginRequest->rules(), $loginRequest->messages());
+        $validator    = Validator::make($request->all(), $loginRequest->rules(), $loginRequest->messages());
 
         // Validate Form
         if ($validator->fails()) {
@@ -56,21 +56,21 @@ class AuthController extends Controller
         }
 
         // Make Credentials
-        $email = $request->email;
-        $password = $request->password;
+        $email       = $request->email;
+        $password    = $request->password;
         $credentials = [
-                    'email' => $email,
+                    'email'    => $email,
                     'password' => $password,
                         ];
-        // Remember Me Token If Filled                
+        // Remember Me Token If Filled
         $remember = $request->remember_token;
 
-        $valid = Auth::validate($credentials);
+        $valid     = Auth::validate($credentials);
         $throttles = $this->isUsingThrottlesLoginsTrait();
 
         // Login Attempt Check
         if ($throttles && $this->hasTooManyLoginAttempts($request)) {
-            $errors = $validator->errors()->add('lock', 'Too Many Failed Login Attempts! Please Try Again Later!');
+            $errors = $validator->errors()->add('lock', 'Oops! Too Many Failed Login Attempts! Try Again Later!');
 
             return response()->json(['success' => false, 'errors' => $errors], 429);
         }
@@ -83,7 +83,7 @@ class AuthController extends Controller
             return response()->json(['success' => false, 'errors' => $errors], 200);
         }
 
-        $user = Auth::attempt($credentials, $remember);
+        $user   = Auth::attempt($credentials, $remember);
         $active = Auth::user()->active;
         $status = Auth::user()->status;
 
@@ -155,7 +155,7 @@ class AuthController extends Controller
     public function create(Request $request)
     {
         $createUserRequest = new CreateUserRequest();
-        $validator = Validator::make($request->all(), $createUserRequest->rules(), $createUserRequest->messages());
+        $validator         = Validator::make($request->all(), $createUserRequest->rules(), $createUserRequest->messages());
 
         // Validate Form
         if ($validator->fails()) {
@@ -172,21 +172,23 @@ class AuthController extends Controller
 
         // Check Sponsor Cookie , Provide One if None
         if (\Cookie::get('sponsor') == false) {
-            $cookie = Link::where('link', $request->sponsor_link)->first();
+            $link = Link::with('user', 'user.profile')->where('link', $request->sponsor_link)->first();
+            $cookie = $link->toArray();
+
             $errors = [
             'CookieError' => trans('auth.cookieError'),
-            'cookieNew' => trans('auth.cookieAttached'),
+            'cookieNew'   => trans('auth.cookieAttached'),
 
             ];
 
-            return response()->json(['success' => false, 'errors' => $errors], 400)->withCookie(cookie('sponsor', $cookie, 60));
+            return response()->json(['success' => false, 'errors' => $errors], 400)->withCookie(\Cookie::forever('sponsor', $cookie));
         }
 
         // This Will Prevent Unnecessary Creation of Account if Something Failed!
         DB::beginTransaction();
-        $user = User::create($request->all());
-        $profile = $user->profile()->create($request->all());
-        $link = new Link();
+        $user       = User::create($request->all());
+        $profile    = $user->profile()->create($request->all());
+        $link       = new Link();
         $link->link = Input::get('username');
         $user->links()->save($link);
 
@@ -200,7 +202,7 @@ class AuthController extends Controller
 
             $errors = [
             'ExceptionError' => $e->getMessage(),
-            'RefreshPage' => trans('auth.refreshPage'),
+            'RefreshPage'    => trans('auth.refreshPage'),
             ];
 
             return response()->json(['success' => false, 'errors' => $errors], 400); // Failed Creation
@@ -214,9 +216,9 @@ class AuthController extends Controller
 
         $data = [
                 'event' => 'UserSignedUp',
-                'data' => [
+                'data'  => [
                     'display_name' => $profile->display_name,
-                    'created_at' => $user->created_at,
+                    'created_at'   => $user->created_at,
                 ],
             ];
 

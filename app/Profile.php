@@ -20,7 +20,7 @@ class Profile extends Model
 
         static::creating(function ($profile) {
             $profile->profile_pic = asset('img/avatar.png');
-            
+
         });
     }
 

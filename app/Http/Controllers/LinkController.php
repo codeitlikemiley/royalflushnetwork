@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Link;
-use App\User;
-use App\Profile;
+
+use Redirect;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use App\Http\Controllers\MailController as Mail;
+
+
+
 
 class LinkController extends Controller
 {
@@ -15,76 +17,91 @@ class LinkController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public $link;
-    public $user;
-    public $mail;
-    public $profile;
 
-    public function __construct(Link $link, User $user, Mail $mail, Profile $profile)
+
+    public function __construct()
     {
-        $this->link = $link;
-        $this->user = $user;
-        $this->mail = $mail;
-        $this->profile = $profile;
+        $this->middleware('guest');
+
     }
 
     /**
-     * [getRefLink description]
-     * Route::get('{link?}', ['as' => 'reflink', 'uses' => 'LinkController@getRefLink']);.
+     * [showRefLink description]
+     * Route::get('{link?}', ['as' => 'reflink', 'uses' => 'LinkController@showRefLink']);
      *
      * @param [text] $link [referral link]
      *
      * @return [json] [all info abou the link]
      */
-    public function getRefLink($link = null)
-    {
-        try {
-            $link = $this->findByLink($link);
-            $id = $this->getUserId($link);
-            $reflinks = $this->getAllLinks($id);
-            $user = $this->getLinksOwner($id);
-            $profile = $this->getLinksProfile($id);
+     public function showRefLink($link = null)
+     {
 
-            return view('pages.link')->with(compact(['link', 'user', 'profile', 'reflinks']));
-        } catch (ModelNotFoundException $e) {
-            $message = "$link is a Dead Link!";
+        //  // If it has a Sponsor Cookie
+         if (\Cookie::has('sponsor')) {
 
-            return view('errors.503')->with('message', $message);
+             return view('welcome'); // Load Referral Link View
+         }
+         if (is_null($link)) {
+             return Redirect::to('/'); // Redirect To HomePage
         }
+
+        try {
+            // If has $Link then Look in Database if Exist
+            $link = Link::with('user', 'user.profile')->where('link', $link)->firstOrFail();
+            $link = $link->toArray();
+            // Note Cookie Wont Be Created if Exceeded More than 4kb
+            \Cookie::queue('sponsor', $link, 2628000);
+
+            // Return Referral View with Variable Link
+              return view('welcome')->with('link', $link);
+
+        // If No Record Found Throw Exception!
+        } catch (ModelNotFoundException $e) {
+            // Return Back to Home
+        return Redirect::to('/');
+
+            // return view('nosponsor');
+        }
+
+
+     }
+
+    public function showSponsor(){
+       return view('welcome');
+
+
     }
 
-    public function findByLink($link)
-    {
-        $link = Link::where('link', $link)->firstOrFail();
-
-        return $link;
-    }
-
-    public function getUserId($link)
-    {
-        $id = $link->user_id;
-
-        return $id;
-    }
-
-    public function getLinksOwner($id)
-    {
-        $user = User::where('id', $id)->first();
-
-        return $user;
-    }
-
-    public function getLinksProfile($id)
-    {
-        $profile = Profile::where('user_id', $id)->first();
-
-        return $profile;
-    }
-
-    public function getAllLinks($id)
-    {
-        $reflinks = Link::where('user_id', $id)->get();
-
-        return $reflinks;
-    }
+//    public function showRefLink($link = null)
+//    {
+//
+//        //  // If it has a Sponsor Cookie
+//        if (\Cookie::has('sponsor')) {
+//
+//            return Redirect::to('/');
+//        }
+//        // if it has A Value then Check if it Exist in DB
+//        try {
+//            // if Value Exceed More than 4kb You Cant Create a Cookie
+//            $link = Link::with(['user', 'user.profile'])->where('link', $link)->first();
+//            $link = $link->toJson();
+//
+//
+////            $response = new Response($link);
+//
+//            \Cookie::queue('sponsor', $link, 2628000); // 5 Year Cookie or Forever
+//
+//            return Redirect::to('showsponsor');
+//
+//
+////            return $response->withCookie(\Cookie::forever('sponsor', $link)); // OK Returning 5 years Cookie
+//
+//            // Catch Exception if Not Found!
+//        } catch (ModelNotFoundException $e) {
+//            // Return Back to Home
+//            return Redirect::to('/');
+//        }
+//
+//        // Return With Cookie Response
+//    }
 }

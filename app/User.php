@@ -33,7 +33,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      *
      * @var array
      */
-    protected $hidden = ['id' ,'password', 'remember_token', 'updated_at', 'activation_code', 'resent', 'status', 'active', 'sp_id', 'email'];
+    protected $hidden = ['id' ,'password', 'remember_token', 'updated_at', 'activation_code', 'resent', 'status', 'active', 'sp_id', 'email', 'created_at', 'username'];
 
     protected $dates = ['created_at', 'updated_at'];
 
@@ -54,7 +54,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         static::creating(function ($user) {
             $cookie = \Cookie::get('sponsor');
             if ($cookie) {
-                $user->sp_id = $cookie->user_id;
+                $user->sp_id = $cookie['user_id'];
             }
             $user->activation_code = str_random(60);
 
@@ -130,7 +130,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 
     public function verifyEmail()
     {
-        $this->active = true;
+        $this->active          = true;
         $this->activation_code = null;
         $this->save();
     }

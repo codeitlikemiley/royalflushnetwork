@@ -11,23 +11,21 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-Route::get('cookie/{sponsor}', function($sponsor)
-{
-	$sponsor = App\Link::where('link', $sponsor)->firstOrFail();
-	$response = new Illuminate\Http\Response($sponsor);
-
-return $response->withCookie(cookie('sponsor', $sponsor, 60));
+Route::get('showsponsor', 'LinkController@showSponsor');
+Route::get('cookie/', function () {
+$cookie = \Cookie::get('sponsor');
+    dd($cookie);
 });
-Route::get('getcookie', function(){
+Route::get('getcookie', function () {
 if (Cookie::get('sponsor')) {
-return "GOT A SPONSOR";
-}
-else{ // IF NO SPONSOR DIRECT IT TO COMPANY
-$sponsor = App\Link::find(1);
-$response = new Illuminate\Http\Response($sponsor);
-return $response->withCookie(cookie('sponsor', $sponsor, 60));	
-}
+    return Cookie::get('sponsor');
+} else { // IF NO SPONSOR DIRECT IT TO COMPANY
+    $sponsor = App\Link::with(['user', 'user.profile'])->find(1);
 
+    $response = new Illuminate\Http\Response($sponsor);
+
+    return $response->withCookie(cookie('sponsor', $sponsor, 60));
+}
 
 });
 Route::get('/cardline/ten/{lid}', ['as' => 'forceCycle', 'uses' => 'CardlineController@forceCycle']);
@@ -72,9 +70,10 @@ Route::get('/resendEmail', 'Auth\AuthController@resendEmail');
 // Route::get('{link?}', ['as' => 'reflink', 'uses' => 'LinkController@getRefLink']);
 Route::get('materialized', function () {
     $users = App\User::latest()->get();
-    $int = ((App\User::all()->count()) * 5 );
-    $rfnbonus= intval($int); 
-    return view('materialized', compact('users','rfnbonus'));
+    $int = ((App\User::all()->count()) * 5);
+    $rfnbonus = intval($int);
+
+    return view('materialized', compact('users', 'rfnbonus'));
 });
 
 Route::get('fire', function () {
@@ -85,9 +84,10 @@ Route::get('fire', function () {
 
 });
 
-Route::get('api/rfnbonus', function(){
+Route::get('api/rfnbonus', function () {
 
-    $rfnbonus = ((App\User::all()->count()) * 5 );
+    $rfnbonus = ((App\User::all()->count()) * 5);
+
     return $rfnbonus;
 });
 
@@ -160,6 +160,8 @@ return $value = Cache::pull('users');
 //	 App\User::create(Request::all());
 //});
 //
-
+Route::get('getCookie', function () {
+    return view('welcome');
+});
 //Route::get('/activate/{code}', 'Auth\AuthController@activateAccount
-
+Route::get('{link?}', ['as' => 'reflink', 'uses' => 'LinkController@showRefLink']);
