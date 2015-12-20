@@ -22,9 +22,9 @@ class LoginRequest extends Request
     public function rules()
     {
         return [
-            'email' => 'required|exists:users,email',
-            'password' => 'required|min:8',
-            'g-recaptcha-response' => 'required'
+            'username'             => 'required|exists:users,username|min:8',
+            'password'             => 'required|min:8',
+            'g-recaptcha-response' => 'required',
         ];
     }
 
@@ -36,11 +36,12 @@ class LoginRequest extends Request
     public function messages()
     {
         return [
-            'email.exists' => 'The Email You Enter is Not Registered!',
-            'password.min' => 'The Password You Entered is Too Short!',
-            'password.required' => 'You Cant Log Without a Password!',
-            'email.required' => 'You Cant Log In Without an Email!',
-            'g-recaptcha-response.required' => 'You Forgot to Answer Captcha!'
+            'username.exists'               => 'Username You Enter is Not Registered!',
+            'password.min'                  => 'Password You Entered is Too Short!',
+            'password.required'             => 'You Cant Log Without a Password!',
+            'username.required'             => 'Please Login Using Your Username',
+            'username.min'                  => 'Username Entered is Too Short!',
+            'g-recaptcha-response.required' => 'You Forgot to Answer Captcha!',
         ];
     }
 }
