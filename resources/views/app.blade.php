@@ -25,25 +25,19 @@
     {{-- Note Only Load BottomSheet if there is Referror or Searched User --}}
     @include('layouts.bottomsheet')
 
-    <!--Import all JS Libary-->
+    <!--Import all JS Usable in All Page-->
     {!! HTML::script('js/vendor.js') !!}
-    <!--Import Custom JS-->
+    <!--Import Initialize Js Components-->
     @include('layouts.ajax')
-    {{-- {!! HTML::script('js/login.js') !!} --}}
-    {!! HTML::script('js/search.js') !!}
-    {{-- {!! HTML::script('js/register.js') !!} --}}
-    {!! HTML::script('js/activatefirstlink.js') !!}
-    {{-- {!! HTML::script('js/passwordreset.js') !!} --}}
-
-    <!--Import Google Recaptcha-->
-    @include('layouts.recaptcha')
 
     <!--Custom JS Here!-->
+    {!! HTML::script('js/search.js') !!}
+    {!! HTML::script('js/activatefirstlink.js') !!}
 
-        <!-- Make Sure You add Another Blade that is Below Socket.io.js
-        To Avoid io Being Undefined !-->
-        {!! HTML::script('js/vue.js') !!}
-        {!! HTML::script('js/myvue.js') !!}
+    <!-- Make Sure You add Another Blade that is Below Socket.io.js
+    To Avoid io Being Undefined !-->
+    {!! HTML::script('js/vue.js') !!}
+    {!! HTML::script('js/myvue.js') !!}
 
     </body>
     <!--Custom Script On Desired Page -->

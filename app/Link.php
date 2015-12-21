@@ -86,7 +86,7 @@ class Link extends Model
      *
      * @return [Boolean] [Return The Status]
      */
-    public function spStatus($lid)
+    protected function spStatus($lid)
     {
         $sponsor = self::find($lid);
 
@@ -120,7 +120,7 @@ class Link extends Model
      *
      * @return [int] [Return The Next Sponsor if Not Active]
      */
-    public function leapfrog($lid)
+    protected function leapfrog($lid)
     {
         $sponsor = self::find($lid);
 

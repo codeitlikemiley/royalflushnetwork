@@ -79,17 +79,6 @@ class User extends BaseUser
     {
         $this->attributes['username'] = strtolower($value);
     }
-    public function getCreatedAtAttribute($value)
-    {
-        // or default TZ as set in .env.php
-    // $timezone = ($this->timezone) ?: env('APP_LOCALTZ');
-
-    // use Illuminate\Database\Eloquent\Model;
-        $datetime = $this->asDateTime($value)->toIso8601String();
-
-    // Carbon instance modified with TZ
-        return $datetime;
-    }
 
     /**
      * [links Eloquent Relationship].

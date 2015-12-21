@@ -57,41 +57,4 @@ class LinkController extends Controller
          }
      }
 
-    public function showSponsor()
-    {
-        return view('welcome');
-    }
-
-//    public function showRefLink($link = null)
-//    {
-//
-//        //  // If it has a Sponsor Cookie
-//        if (\Cookie::has('sponsor')) {
-//
-//            return Redirect::to('/');
-//        }
-//        // if it has A Value then Check if it Exist in DB
-//        try {
-//            // if Value Exceed More than 4kb You Cant Create a Cookie
-//            $link = Link::with(['user', 'user.profile'])->where('link', $link)->first();
-//            $link = $link->toJson();
-//
-//
-////            $response = new Response($link);
-//
-//            \Cookie::queue('sponsor', $link, 2628000); // 5 Year Cookie or Forever
-//
-//            return Redirect::to('showsponsor');
-//
-//
-////            return $response->withCookie(\Cookie::forever('sponsor', $link)); // OK Returning 5 years Cookie
-//
-//            // Catch Exception if Not Found!
-//        } catch (ModelNotFoundException $e) {
-//            // Return Back to Home
-//            return Redirect::to('/');
-//        }
-//
-//        // Return With Cookie Response
-//    }
 }

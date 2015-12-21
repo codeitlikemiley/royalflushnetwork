@@ -37,5 +37,7 @@
 @endsection
 
 @section('footer')
-
+<!--Import Google Recaptcha-->
+	{!! HTML::script('js/parsley.min.js') !!}
+    @include('layouts.recaptcha')
 @stop
