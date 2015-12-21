@@ -2,44 +2,38 @@
 <html>
     <head>
         <title>Laravel</title>
-
-        <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
-
-        <style>
-            html, body {
-                height: 100%;
-            }
-
-            body {
-                margin: 0;
-                padding: 0;
-                width: 100%;
-                display: table;
-                font-weight: 100;
-                font-family: 'Lato';
-            }
-
-            .container {
-                text-align: center;
-                display: table-cell;
-                vertical-align: middle;
-            }
-
-            .content {
-                text-align: center;
-                display: inline-block;
-            }
-
-            .title {
-                font-size: 96px;
-            }
-        </style>
     </head>
     <body>
-        <div class="container">
-            <div class="content">
-                <div class="title">Laravel 5</div>
-            </div>
-        </div>
+{{--If Returning Back Load Cookie--}}
+@if(\Cookie::has('sponsor'))
+{{--*/ $cookie = \Cookie::get('sponsor') /*--}}
+Returning Back Load Cookie <br>
+{{ $cookie['id']  }}    <br>
+{{ $cookie['link']  }}  <br>
+{{ $cookie['user_id']  }}   <br>
+{{ $cookie['active']  }}    <br>
+{{ $cookie['user']['profile']['profile_pic']  }}    <br>
+{{ $cookie['user']['profile']['about_me']  }}   <br>
+{{ $cookie['user']['profile']['display_name']  }}   <br>
+{{ $cookie['user']['profile']['contact_no']  }}
+
+
+
+@endif
+
+
+
+@if(! empty($link))
+
+    First Time Loading Use $link Variable<br>
+    {{ $link['id']  }}  <br>
+    {{ $link['link']  }}    <br>
+    {{ $link['user_id']  }}  <br>
+    {{ $link['active']  }}  <br>
+    {{ $link['user']['profile']['profile_pic']  }}  <br>
+    {{ $link['user']['profile']['about_me']  }} <br>
+    {{ $link['user']['profile']['display_name']  }} <br>
+    {{ $link['user']['profile']['contact_no']  }}
+@endif
     </body>
 </html>

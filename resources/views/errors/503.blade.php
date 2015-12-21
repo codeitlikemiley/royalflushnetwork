@@ -40,7 +40,9 @@
     <body>
         <div class="container">
             <div class="content">
-                <div class="title">Be right back.</div>
+                @if($message == !null)
+                <div class="title">{{ $message }}</div>
+                @endif
             </div>
         </div>
     </body>

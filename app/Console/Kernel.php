@@ -14,6 +14,9 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         Commands\Inspire::class,
+        Commands\Booster::class,
+        Commands\RandomBooster::class,
+        Commands\RandomForceCycleBooster::class,
     ];
 
     /**
