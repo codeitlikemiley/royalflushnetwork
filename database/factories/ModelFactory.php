@@ -13,9 +13,49 @@
 
 $factory->define(App\User::class, function (Faker\Generator $faker) {
     return [
-        'name' => $faker->name,
-        'email' => $faker->email,
-        'password' => bcrypt(str_random(10)),
-        'remember_token' => str_random(10),
+        'username'       => str_replace('.', '_', $faker->unique()->userName),
+        'email'          => $faker->freeEmail,
+        'password'       => 'password',
+        'remember_token' => str_random(64),
+        'active'         => 1,
+        'status'         => 1,
+        'created_at'     => \Carbon\Carbon::now(),
+        'updated_at'     => \Carbon\Carbon::now(),
+    ];
+});
+$factory->define(App\Link::class, function (Faker\Generator $faker) {
+    $users = App\User::all()->lists('id')->toArray();
+    $links = App\Link::all()->lists('id')->toArray();
+
+    return [
+        'link'           => str_replace('.', '_', $faker->unique()->userName),
+        'user_id'        => $faker->optional(),
+        'sp_user_id'     => $faker->randomElement($users),
+        'sp_link_id'     => $faker->randomElement($links),
+        'active'         => 0,
+    ];
+});
+$factory->defineAs(App\Link::class, 'active-links', function ($faker) {
+    $users = App\User::all()->lists('id')->toArray();
+    $links = App\Link::all()->lists('id')->toArray();
+
+    return [
+        'link'           => str_replace('.', '_', $faker->unique()->userName),
+        'user_id'        => $faker->optional(),
+        'sp_user_id'     => $faker->randomElement($users),
+        'sp_link_id'     => $faker->randomElement($links),
+        'active'         => 1,
+    ];
+});
+$factory->defineAs(App\Link::class, 'inactive-links', function ($faker) {
+    $users = App\User::all()->lists('id')->toArray();
+    $links = App\Link::all()->lists('id')->toArray();
+
+    return [
+        'link'           => str_replace('.', '_', $faker->unique()->userName),
+        'user_id'        => $faker->optional(),
+        'sp_user_id'     => $faker->randomElement($users),
+        'sp_link_id'     => $faker->randomElement($links),
+        'active'         => 0,
     ];
 });
