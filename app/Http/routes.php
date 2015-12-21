@@ -37,7 +37,7 @@ Route::get('login', ['as' => 'login', 'uses' => 'Auth\AuthController@getLogin'])
 Route::post('login', ['as' => 'postLogin', 'uses' => 'Auth\AuthController@authenticate']);
 
 // Log Out and End Session
-Route::get('logout', ['as' => 'logout', 'uses' => 'Auth\AuthController@getLogout']);
+Route::get('logout', ['as' => 'logout', 'uses' => 'Auth\AuthController@logout']);
 
 //Show Forgot Pass Page
 Route::get('password/email', ['as' => 'password/email', 'uses' => 'Auth\PasswordController@index']);

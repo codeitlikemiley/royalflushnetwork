@@ -117,7 +117,7 @@ class User extends BaseUser
 
     public function verifyEmail()
     {
-        $this->active          = true;
+        $this->active          = 1;
         $this->activation_code = null;
         $this->save();
     }
