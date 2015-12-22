@@ -9,12 +9,15 @@ $.ajaxSetup({headers:{'X-CSRF-TOKEN':
 var doSubmit1 = false;
 var doSubmit2 = false;
 var doSubmit3 = false;
+
 var refresh1 = false;
 var refresh2 = false;
 var refresh3 = false;
+
 var recaptcha1;
 var recaptcha2;
 var recaptcha3;
+
 
 
 function reCaptchaVerify1(response) {
@@ -53,6 +56,7 @@ function reCaptchaVerify3(response) {
     }
 }
 
+
 function reCaptchaExpired1 () {
 
        grecaptcha.reset(recaptcha1);
@@ -74,7 +78,6 @@ function reCaptchaExpired3 () {
        doSubmit3 = false;
        refresh3 = false;
 }
-
 
 
 var CaptchaCallback = function(){
@@ -361,66 +364,5 @@ $('#registration_form').on('submit', function(e){
 
     });
 // ENd Register
-
-
-var base_url = window.location.origin;
-
-function pageloader(v){
-      if(v == 'on'){
-        $('#search_form').css({
-          opacity : 0.2
-        });
-        $('#pageloader').show();
-      }else{
-        $('#search_form').css({
-          opacity : 1
-        });
-        $('#pageloader').hide();
-      }
-    }
-
-
-$('#pass_recovery').on('submit', function(e){
-
-        e.preventDefault();
-
-        var dataPass = $('#pass_recovery').serializeArray();
-        var url = $('#pass_recovery').attr('action');
-        pageloader('on');
-
-        $.ajax({
-            url: url,
-            type: 'POST',
-            dataType: 'json',
-            data: dataPass,
-            success:function(data)
-            {
-                pageloader('off');
-
-                Materialize.toast(data.message, 4000,'',function(){
-                    //
-                });
-
-                authenticated(base_url);
-            },
-            error:function(data)
-            {
-                pageloader('off');
-
-                var errors = data.responseJSON;
-
-                $.each(errors.errors, function(index, error)
-                {
-                    Materialize.toast(error, 4000,'',function(){
-                       //
-                    });
-                });
-
-            }
-            }); // End AjaxCall
-}); // End Password Recovery Form
-
-
-
 
 </script>

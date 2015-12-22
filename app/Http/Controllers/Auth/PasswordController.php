@@ -11,6 +11,7 @@ use App\Http\Requests\EmailRequest;
 use App\Http\Requests\PasswordRequest;
 use App\Traits\CaptchaTrait;
 use App\Http\Controllers\MailController as Mail;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 
 class PasswordController extends Controller
@@ -29,45 +30,38 @@ class PasswordController extends Controller
     use CaptchaTrait;
     public $mail;
 
-    /**
-     * Create a new password controller instance.
-     *
-     * @return void
-     */
+   /**
+    * [__construct Inject Mail and Guest]
+    * @param Mail $mail [Use Mail Controller]
+    */
     public function __construct(Mail $mail)
     {
         $this->middleware('guest');
         $this->mail = $mail;
     }
-    /**
-     * return recovery form.
-     *
-     * @return view
-     */
-    public function index()
-    {
-        return \View::make('auth.password');
-    }
 
     /**
-     * password change form.
+     * After Clicking Link in Email , Return A View of Password Reset
      *
      * @param $email, $token
      *
-     * @return view
+     * @return view with $email and $token
      */
     public function reset($email, $token)
     {
-        $user         = User::where('email', $email)->firstOrFail();
-        $active_token = User::where('activation_code', $token)->firstOrFail();
-
-        return \View::make('auth.reset', compact('token', 'email'));
+        try {
+            $user = User::where('email', $email)->where('activation_code', $token)->firstOrFail();
+            return \View::make('auth.reset', compact('token', 'email'));
+        } catch (ModelNotFoundException $e) {
+            return redirect()->route('/');
+        }
     }
 
     /**
-     * store the new password.
+     * Submit a Post Request To Save a New Password
      *
      * @param $request
+     * @return response
      */
     public function save(Request $request)
     {
@@ -93,9 +87,10 @@ class PasswordController extends Controller
     }
 
     /**
-     * send restore link by email.
+     * Submits Email To Be Recovered by Post method
      *
-     * @return view
+     * @param $request
+     * @return response
      */
     public function sendLink(Request $request)
     {

@@ -51,11 +51,13 @@
         <div class="row">
           <div class="input-field col s11">
             <i class="mdi-action-lock-outline prefix"></i>
-            {!! Form::email('email','',['placeholder' => 'Email', 'required' => '', 'data-parsley-required-message' => 'Type Email You Want To Recover', 'data-parsley-type' => 'email', 'data-parsley-type-message' => 'This is Not A Valid Email!', 'data-parsley-pattern' => '/^[a-z0-9](\.?[a-z0-9]){5,}@g(oogle)?mail\.com$/i' , 'data-parsley-pattern-message' => 'Use Only Google Email Address!', 'data-parsley-trigger' => 'change focusout']) !!}
+            {!! Form::email('email','',['placeholder' => 'Email', 'required' => '', 'data-parsley-required-message' => 'Type Email You Want To Recover', 'data-parsley-type' => 'email', 'data-parsley-type-message' => 'This is Not A Valid Email!', 'data-parsley-pattern' => '/^[a-z0-9](\.?[a-z0-9]){5,}@g(oogle)?mail\.com$/i' , 'data-parsley-pattern-message' => 'Use Only Google Email Address!', 
+              'data-parsley-trigger' => 'change focusout',
+            ]) !!}
           </div>
         </div>
         <div class="row">
-          <div class="g-recaptcha" id="recaptcha2" required="" data-parsley-required-message="Are You A Human?">
+          <div class="g-recaptcha" id="recaptcha2">
 
           </div>
         </div>

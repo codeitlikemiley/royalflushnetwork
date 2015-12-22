@@ -16,7 +16,6 @@ use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Http\Request;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\LoginRequest;
-use App\Http\Requests\EmailRequest;
 use App\Http\Controllers\MailController as Mail;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
@@ -145,28 +144,26 @@ class AuthController extends Controller
         }
     }
 
-    // Method Can be Remove with Route
-    public function sendActivationLink(EmailRequest $request)
-    {
-        $user = User::where('email', $request->email)->firstOrFail();
-
-        $this->mail->registered($user);
-
-        return \View::make('auth.success');
-    }
-
     // Needs a Good Template
     public function resendEmail()
     {
         $user = \Auth::user();
+        try {
+            if (!$user) {
+                throw new \Exception('Please Login As Authenticated User');
+            }
+        } catch (\Exception $e) {
+            return redirect()->route('login');
+        }
         if ($user->resent >= 3) {
             return view('auth.tooManyEmails')
                 ->with('email', $user->email);
         } else {
             $user->incrementResent();
             $this->mail->passwordResend($user);
+            Auth::logout();
 
-            return \View::make('auth.success');
+            return \View::make('auth.resend');
         }
 
         return \View::make('auth.error');
