@@ -2,27 +2,28 @@
     <div class="container">
       <div class="row">
         <div class="col l6 s12">
-          <h5 class="white-text">Company Bio</h5>
-          <p class="grey-text text-lighten-4">We are a team of college students working on this project like it's our full time job. Any amount would help support and continue development on this project and is greatly appreciated.</p>
+          <h5 class="white-text"><span class="rf white-text">RoyalFlush</span><span class="n white-text" style="font-size: medium;">  NETWORK</span></h5>
+          <p class="grey-text text-lighten-4">A System Built From Ground Up By The Networker For the Networker. Designed To Empower and Reward More Affiliates As The Community Grows. As The Community Gets Bigger, You Receive Faster and Bigger Rewards.So What Are You Waiting For? Join Our Community of Widely Respected Networker! </p>
 
 
         </div>
         <div class="col l3 s12">
-          <h5 class="white-text">Settings</h5>
+          <h5 class="white-text">Follow Us On!</h5>
           <ul>
-            <li><a class="white-text" href="#!">Link 1</a></li>
-            <li><a class="white-text" href="#!">Link 2</a></li>
-            <li><a class="white-text" href="#!">Link 3</a></li>
-            <li><a class="white-text" href="#!">Link 4</a></li>
+            <li><a class="white-text" href="#!">Facebook</a></li>
+            <li><a class="white-text" href="#!">Twitter</a></li>
           </ul>
         </div>
         <div class="col l3 s12">
-          <h5 class="white-text">Connect</h5>
+          <h5 class="white-text">Policy</h5>
           <ul>
-            <li><a class="white-text" href="#!">Link 1</a></li>
-            <li><a class="white-text" href="#!">Link 2</a></li>
-            <li><a class="white-text" href="#!">Link 3</a></li>
-            <li><a class="white-text" href="#!">Link 4</a></li>
+            <li><a class="white-text" href="#!">Terms and Condition</a></li>
+            <li><a class="white-text" href="#!">Cookie Usage Policy</a></li>
+            <li><a class="white-text" href="#!">Anti-Spam Policy</a></li>
+            <li><a class="white-text" href="#!">Privacy Policy</a></li>
+            <li><a class="white-text" href="#!">Termination Policy</a></li>
+            <li><a class="white-text" href="#!">Refund Policy</a></li>
+
           </ul>
         </div>
       </div>
