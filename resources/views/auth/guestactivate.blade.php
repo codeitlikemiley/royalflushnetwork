@@ -1,21 +1,24 @@
 @extends('app')
 
 @section('content')
-	<div class="container">
-		<div class="row">
-			<div class="col-md-10 col-md-offset-1">
-				<div class="panel panel-default">
-					<div class="panel-heading">{{ Lang::get('titles.verifymail') }}</div>
+<main>
+    <div class="container main">
+	    <div class="row">
+	        <div class="col l6 offset-l3 m8 offset-m2 s12 ">
 
-					<div class="panel-body">
-						<p>An email was sent to {{ $email }} on {{ $date }}.</p>
+	            <ul class="tabs z-depth-1">
 
-						<p>{{ Lang::get('auth.clickInEmail') }}</p>
+		            <li class="tab col s3">
+		        	    <a class="{{ Session::get('resendEmail') }}" href="#resendEmail">Account's Email is Not Yet Verified</a>
+		            </li>
+	            </ul>
+	    	</div>
 
-						<p><a href='/resendEmail'>{{ Lang::get('auth.clickHereResend') }}</a></p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+	    	<div id="resendEmail" class="col l6 offset-l3 m8 offset-m2 s12 ">
+	    		@include('layouts.forms.resendemail')
+	    	</div>
+	    </div>
+    </div>
+</main>
 @endsection
+

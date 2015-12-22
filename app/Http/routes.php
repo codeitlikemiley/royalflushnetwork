@@ -39,7 +39,7 @@ Route::post('password/reset', ['as' => 'password/postReset', 'uses' => 'Auth\Pas
 Route::get('account/activate/{email}/{activation_code}', 'Auth\AuthController@activate');
 
 //Ask to Resend a Verification Email for Activation
-Route::get('/resendEmail', 'Auth\AuthController@resendEmail');
+Route::get('/resendEmail', ['as' => 'resendEmail', 'uses' => 'Auth\AuthController@resendEmail']);
 
 // Register A New User
 Route::post('signup', ['as' => 'signup', 'uses' => 'Auth\AuthController@create']);
