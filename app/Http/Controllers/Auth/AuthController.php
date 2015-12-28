@@ -147,13 +147,17 @@ class AuthController extends Controller
     // Needs a Good Template
     public function resendEmail()
     {
-        $user = \Auth::user();
+        $user = Auth::user();
         try {
             if (!$user) {
                 throw new \Exception('Please Login As Authenticated User');
             }
         } catch (\Exception $e) {
             return redirect()->route('login');
+        }
+
+        if ($user->active) {
+            return redirect()->route('profile');
         }
         if ($user->resent >= 3) {
             return view('auth.tooManyEmails')
